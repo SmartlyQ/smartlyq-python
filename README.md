@@ -1,0 +1,369 @@
+# SmartlyQ Python SDK
+
+[![PyPI](https://img.shields.io/pypi/v/smartlyq)](https://pypi.org/project/smartlyq/)
+
+The official Python SDK for the [SmartlyQ API](https://docs.smartlyq.com) - social posting and scheduling, AI content generation (articles, images, video, audio, presentations), SEO research, CRM, chatbots, and more, from one API key.
+
+- **Every endpoint covered** - the full API surface, generated from the OpenAPI spec.
+- **One light dependency** - built on `httpx`.
+- **Batteries included** - automatic retries with backoff, idempotency keys, request timeouts, typed errors.
+
+## Installation
+
+```bash
+pip install smartlyq
+```
+
+## Quickstart
+
+```python
+from smartlyq import SmartlyQ
+
+sq = SmartlyQ()  # reads SMARTLYQ_API_KEY, or pass api_key="sqk_live_..."
+
+# Who am I?
+me = sq.account.get_me()
+
+# Generate an image with AI
+image = sq.images.generate({"prompt": "A minimalist product shot of a smart speaker"})
+
+# Publish a social post
+post = sq.social.create_post({
+    "text": "Hello from the SmartlyQ SDK!",
+    "account_ids": ["acc_123"],
+})
+```
+
+Get an API key from your [Developer Dashboard](https://app.smartlyq.com). Keys look like `sqk_live_...` (production) or `sqk_test_...` (sandbox - free simulated responses, no charges).
+
+## Configuration
+
+```python
+sq = SmartlyQ(
+    api_key="sqk_live_...",  # or set SMARTLYQ_API_KEY
+    timeout=60.0,             # per-request timeout in seconds
+    max_retries=2,            # automatic retries on 429/5xx
+)
+```
+
+Per-request options are keyword arguments on every method:
+
+```python
+sq.social.create_post(
+    body,
+    idempotency_key="my-unique-key",  # safe retries for writes
+    profile_id="prof_123",            # act on behalf of a managed Profile
+    timeout=10.0,
+)
+```
+
+## Async jobs
+
+Generation endpoints (articles, images, videos, audio) are asynchronous: they return a job. Poll it until it completes:
+
+```python
+import time
+
+result = sq.videos.generate({"prompt": "A 5s product teaser", "model": "standard"})
+job_id = result["data"]["job_id"]
+
+job = sq.jobs.get(job_id)
+while job["data"]["status"] in ("queued", "processing"):
+    time.sleep(3)
+    job = sq.jobs.get(job_id)
+print(job["data"]["result"])
+```
+
+## Error handling
+
+Every non-2xx response raises `SmartlyQError`:
+
+```python
+from smartlyq import SmartlyQ, SmartlyQError
+
+try:
+    sq.articles.generate({"topic": "AI trends"})
+except SmartlyQError as err:
+    print(err.status_code, err.code, err, err.request_id)
+```
+
+## API Reference
+
+All methods below are available on the client. Full request/response documentation lives at [docs.smartlyq.com](https://docs.smartlyq.com).
+
+<!-- BEGIN GENERATED REFERENCE -->
+
+### Account
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.account.get_me()` | `GET /me` | Get current user profile |
+| `sq.account.get_me_usage(query=None)` | `GET /me/usage` | Get usage summary |
+| `sq.account.get_me_balance()` | `GET /me/balance` | Get wallet balance |
+
+### AI Captain
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.captain.send_message(body)` | `POST /captain/messages` | Send AI Captain message |
+| `sq.captain.list_conversations(query=None)` | `GET /captain/conversations` | List AI Captain conversations |
+| `sq.captain.get_conversation(conversation_id)` | `GET /captain/conversations/{conversation_id}` | Get AI Captain conversation |
+
+### Analytics
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.analytics.get_overview(query=None)` | `GET /analytics/overview` | Get analytics overview |
+| `sq.analytics.get_posts(query=None)` | `GET /analytics/posts` | Get post analytics |
+| `sq.analytics.get_account(account_id, query=None)` | `GET /analytics/accounts/{account_id}` | Get account analytics |
+
+### Articles
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.articles.generate(body)` | `POST /articles/generate` | Generate article |
+| `sq.articles.list(query=None)` | `GET /articles` | List articles |
+| `sq.articles.get(article_id)` | `GET /articles/{article_id}` | Get article |
+| `sq.articles.delete(article_id)` | `DELETE /articles/{article_id}` | Delete article |
+
+### Audio
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.audio.text_to_speech(body)` | `POST /audio/text-to-speech` | Text to speech |
+| `sq.audio.speech_to_text(body)` | `POST /audio/speech-to-text` | Speech to text |
+| `sq.audio.get(audio_id)` | `GET /audio/{audio_id}` | Get audio |
+
+### Chatbot
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.chatbots.list(query=None)` | `GET /chatbots` | List chatbots |
+| `sq.chatbots.create(body)` | `POST /chatbots` | Create chatbot |
+| `sq.chatbots.get(id)` | `GET /chatbots/{id}` | Get chatbot |
+| `sq.chatbots.update(id, body)` | `PATCH /chatbots/{id}` | Update chatbot |
+| `sq.chatbots.delete(id)` | `DELETE /chatbots/{id}` | Delete chatbot |
+| `sq.chatbots.train(id)` | `POST /chatbots/{id}/train` | Start chatbot training |
+| `sq.chatbots.get_train_status(id)` | `GET /chatbots/{id}/train-status` | Get chatbot training status |
+| `sq.chatbots.send_message(id, body)` | `POST /chatbots/{id}/messages` | Send chatbot message |
+| `sq.chatbots.list_conversations(id, query=None)` | `GET /chatbots/{id}/conversations` | List chatbot conversations |
+| `sq.chatbots.get_conversation_messages(id, conv_id)` | `GET /chatbots/{id}/conversations/{conv_id}/messages` | Get conversation messages |
+
+### Comments
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.comments.list(query=None)` | `GET /social/comments` | List comments |
+| `sq.comments.reply_to(comment_id, body)` | `POST /social/comments/{comment_id}/reply` | Reply to a comment |
+| `sq.comments.hide(comment_id)` | `POST /social/comments/{comment_id}/hide` | Hide or unhide a comment |
+| `sq.comments.delete(comment_id)` | `DELETE /social/comments/{comment_id}` | Delete a comment |
+
+### Content
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.content.rewrite(body)` | `POST /content/rewrite` | Rewrite content |
+| `sq.content.generate_caption(body=None)` | `POST /content/caption` | Generate a social caption |
+
+### CRM Contacts
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.contacts.list(query=None)` | `GET /contacts` | List contacts |
+| `sq.contacts.create(body)` | `POST /contacts` | Create or upsert a contact |
+| `sq.contacts.get(id)` | `GET /contacts/{id}` | Get a contact |
+| `sq.contacts.update(id, body)` | `PATCH /contacts/{id}` | Update a contact |
+| `sq.contacts.add_tags(id, body)` | `POST /contacts/{id}/tags` | Add tags to a contact |
+| `sq.contacts.remove_tags(id, body)` | `DELETE /contacts/{id}/tags` | Remove tags from a contact |
+| `sq.contacts.list_notes(id)` | `GET /contacts/{id}/notes` | List contact notes |
+| `sq.contacts.add_note(id, body)` | `POST /contacts/{id}/notes` | Add a note to a contact |
+| `sq.contacts.enroll(id, body)` | `POST /contacts/{id}/enroll` | Enroll a contact in an automation |
+| `sq.contacts.add_message(id, body)` | `POST /contacts/{id}/messages` | Log a message on a contact's timeline |
+
+### CRM Custom Fields
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.custom_fields.list()` | `GET /custom-fields` | List custom fields |
+| `sq.custom_fields.create(body)` | `POST /custom-fields` | Create a custom field |
+| `sq.custom_fields.delete(id)` | `DELETE /custom-fields/{id}` | Delete a custom field |
+
+### CRM Opportunities
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.opportunities.list_pipelines()` | `GET /pipelines` | List pipelines |
+| `sq.opportunities.create_pipeline(body)` | `POST /pipelines` | Create a pipeline |
+| `sq.opportunities.list(query=None)` | `GET /opportunities` | List opportunities |
+| `sq.opportunities.create(body)` | `POST /opportunities` | Create an opportunity |
+| `sq.opportunities.get(id)` | `GET /opportunities/{id}` | Get an opportunity |
+| `sq.opportunities.update(id, body)` | `PATCH /opportunities/{id}` | Update an opportunity |
+| `sq.opportunities.delete(id)` | `DELETE /opportunities/{id}` | Delete an opportunity |
+| `sq.opportunities.update_status(id, body)` | `POST /opportunities/{id}/status` | Update opportunity status |
+
+### Direct Messages
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.messages.list_conversations(query=None)` | `GET /social/conversations` | List DM conversations |
+| `sq.messages.list(conversation_id, query=None)` | `GET /social/conversations/{conversation_id}/messages` | List messages in a conversation |
+| `sq.messages.send(conversation_id, body)` | `POST /social/conversations/{conversation_id}/messages` | Send a direct message |
+| `sq.messages.mark_conversation_read(conversation_id)` | `POST /social/conversations/{conversation_id}/read` | Mark a conversation read |
+
+### Images
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.images.generate(body)` | `POST /images/generate` | Generate image |
+| `sq.images.list(query=None)` | `GET /images` | List images |
+| `sq.images.get(image_id)` | `GET /images/{image_id}` | Get image |
+| `sq.images.delete(image_id)` | `DELETE /images/{image_id}` | Delete image |
+
+### Jobs
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.jobs.list(query=None)` | `GET /jobs` | List jobs |
+| `sq.jobs.get(job_id)` | `GET /jobs/{job_id}` | Get job |
+| `sq.jobs.cancel(job_id, body=None)` | `POST /jobs/{job_id}/cancel` | Cancel job |
+
+### Media
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.media.list(query=None)` | `GET /media` | List media |
+| `sq.media.get(media_id)` | `GET /media/{media_id}` | Get media |
+| `sq.media.delete(media_id)` | `DELETE /media/{media_id}` | Delete media |
+| `sq.media.get_upload_url(body)` | `POST /media/upload-url` | Get presigned upload URL |
+
+### Presentations
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.presentations.generate(body)` | `POST /presentations/generate` | Generate presentation |
+| `sq.presentations.list(query=None)` | `GET /presentations` | List presentations |
+| `sq.presentations.get(presentation_id)` | `GET /presentations/{presentation_id}` | Get presentation |
+| `sq.presentations.delete(presentation_id)` | `DELETE /presentations/{presentation_id}` | Delete presentation |
+
+### Profiles
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.profiles.list(query=None)` | `GET /profiles` | List profiles |
+| `sq.profiles.create(body)` | `POST /profiles` | Create a profile |
+| `sq.profiles.get(id)` | `GET /profiles/{id}` | Get a profile |
+| `sq.profiles.delete(id, body)` | `DELETE /profiles/{id}` | Delete a profile |
+| `sq.profiles.list_accounts(id)` | `GET /profiles/{id}/accounts` | List a profile's connected accounts |
+| `sq.profiles.pause(id)` | `POST /profiles/{id}/pause` | Pause a profile |
+| `sq.profiles.resume(id)` | `POST /profiles/{id}/resume` | Resume a profile |
+| `sq.profiles.create_connect_link(id, body=None)` | `POST /profiles/{id}/connect-link` | Create a hosted connect link |
+| `sq.profiles.create_connect_url(id, platform, body=None)` | `POST /profiles/{id}/connect/{platform}` | Get a raw connect URL for one platform |
+| `sq.profiles.get_account_billing()` | `GET /me/account-billing` | Account billing summary |
+
+### SEO
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.seo.keyword_research(body)` | `POST /seo/keyword-research` | Keyword research |
+| `sq.seo.serp(body)` | `POST /seo/serp` | Live SERP lookup |
+| `sq.seo.keyword_difficulty(body)` | `POST /seo/keyword-difficulty` | Keyword difficulty |
+| `sq.seo.ranked_keywords(body)` | `POST /seo/ranked-keywords` | Ranked keywords (rank tracking) |
+| `sq.seo.domain_overview(body)` | `POST /seo/domain-overview` | Domain rank overview |
+| `sq.seo.competitors(body)` | `POST /seo/competitors` | Organic competitors |
+| `sq.seo.backlinks_summary(body)` | `POST /seo/backlinks-summary` | Backlink profile summary |
+| `sq.seo.audit(body)` | `POST /seo/audit` | On-page SEO audit |
+| `sq.seo.backlink_prospects(body)` | `POST /seo/backlink-prospects` | Backlink prospects (link gap) |
+| `sq.seo.referring_domains(body)` | `POST /seo/referring-domains` | Referring domains |
+| `sq.seo.backlink_anchors(body)` | `POST /seo/backlink-anchors` | Backlink anchors |
+| `sq.seo.spam_score(body)` | `POST /seo/spam-score` | Backlink spam score |
+| `sq.seo.rank_history(body)` | `POST /seo/rank-history` | Historical rank overview |
+| `sq.seo.site_audit(body)` | `POST /seo/site-audit` | Deep site audit |
+| `sq.seo.brand_lookup(body)` | `POST /seo/brand-lookup` | AI Visibility: brand lookup |
+| `sq.seo.prompt_explorer(body)` | `POST /seo/prompt-explorer` | AI Visibility: prompt explorer |
+| `sq.seo.ai_audit(body)` | `POST /seo/ai-audit` | AI Visibility Audit (async) |
+
+### Shorts
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.shorts.generate(body=None)` | `POST /shorts/generate` | Generate viral shorts from a long video |
+| `sq.shorts.list(query=None)` | `GET /shorts` | List shorts jobs |
+| `sq.shorts.get(uid)` | `GET /shorts/{uid}` | Get shorts job + clips |
+
+### Social
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.social.list_accounts()` | `GET /social/accounts` | List social accounts |
+| `sq.social.list_posts(query=None)` | `GET /social/posts` | List social posts |
+| `sq.social.create_post(body)` | `POST /social/posts` | Create post (publish immediately) |
+| `sq.social.schedule_post(body)` | `POST /social/posts/schedule` | Schedule post |
+| `sq.social.get_post(post_id)` | `GET /social/posts/{post_id}` | Get social post |
+| `sq.social.update_post(post_id, body)` | `PATCH /social/posts/{post_id}` | Update social post |
+| `sq.social.delete_post(post_id)` | `DELETE /social/posts/{post_id}` | Delete social post |
+| `sq.social.disconnect_account(account_id)` | `DELETE /social/accounts/{account_id}` | Disconnect a social account |
+| `sq.social.get_account_health(account_id)` | `GET /social/accounts/{account_id}/health` | Account health |
+| `sq.social.get_account_reconnect_url(account_id)` | `GET /social/accounts/{account_id}/reconnect-url` | Account reconnect URL |
+| `sq.social.pause_account(account_id)` | `POST /social/accounts/{account_id}/pause` | Pause posting to an account |
+| `sq.social.resume_account(account_id)` | `POST /social/accounts/{account_id}/resume` | Resume posting to an account |
+| `sq.social.retry_post(post_id, body)` | `POST /social/posts/{post_id}/retry` | Retry publishing a post |
+| `sq.social.connect_account_status(platform)` | `GET /social/connect/{platform}` | Poll headless connection status |
+| `sq.social.connect_account(platform, body=None)` | `POST /social/connect/{platform}` | Start headless account connection |
+
+### URLs
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.urls.shorten(body)` | `POST /urls/shorten` | Shorten URL |
+| `sq.urls.list(query=None)` | `GET /urls` | List short URLs |
+| `sq.urls.get(url_id)` | `GET /urls/{url_id}` | Get short URL |
+| `sq.urls.delete(url_id)` | `DELETE /urls/{url_id}` | Delete short URL |
+| `sq.urls.get_stats(url_id)` | `GET /urls/{url_id}/stats` | Get short URL stats |
+
+### Videos
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.videos.list_models()` | `GET /videos/models` | List available video models |
+| `sq.videos.generate(body)` | `POST /videos/generate` | Generate video |
+| `sq.videos.list(query=None)` | `GET /videos` | List videos |
+| `sq.videos.get(video_id)` | `GET /videos/{video_id}` | Get video |
+| `sq.videos.delete(video_id)` | `DELETE /videos/{video_id}` | Delete video |
+| `sq.videos.generate_hook(body=None)` | `POST /videos/hook` | Generate a viral hook line |
+| `sq.videos.suggest_broll(body)` | `POST /videos/broll-suggest` | Suggest B-roll moments |
+| `sq.videos.suggest_emphasis(body)` | `POST /videos/emphasis` | Suggest on-screen emphasis |
+| `sq.videos.generate_viral_thumbnail(body)` | `POST /videos/viral-thumbnail` | Generate a viral thumbnail |
+
+### Webhooks
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.webhooks.list()` | `GET /webhooks` | List webhooks |
+| `sq.webhooks.create(body)` | `POST /webhooks` | Create webhook |
+| `sq.webhooks.delete(id)` | `DELETE /webhooks/{id}` | Delete webhook |
+
+### Workspaces
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.workspaces.list()` | `GET /workspaces` | List workspaces (sub-accounts) |
+| `sq.workspaces.create(body)` | `POST /workspaces` | Create a workspace (sub-account) |
+| `sq.workspaces.bulk_action(body)` | `POST /workspaces/bulk` | Bulk sub-account action |
+| `sq.workspaces.get(id)` | `GET /workspaces/{id}` | Get a workspace (sub-account) |
+| `sq.workspaces.delete(id, body)` | `DELETE /workspaces/{id}` | Delete a workspace (sub-account) |
+| `sq.workspaces.disable_saas(id, body=None)` | `POST /workspaces/{id}/disable-saas` | Disable SaaS mode for a workspace |
+| `sq.workspaces.pause(id)` | `POST /workspaces/{id}/pause` | Pause (suspend) a workspace |
+| `sq.workspaces.resume(id)` | `POST /workspaces/{id}/resume` | Resume a paused workspace |
+| `sq.workspaces.get_subscription(id)` | `GET /workspaces/{id}/subscription` | Get a sub-account's subscription |
+| `sq.workspaces.get_wallet(id)` | `GET /workspaces/{id}/wallet` | Get a sub-account's wallet balance |
+| `sq.workspaces.list_saas_plans()` | `GET /saas/plans` | List SaaS plans |
+| `sq.workspaces.get_saas_plan(id)` | `GET /saas/plans/{id}` | Get a SaaS plan |
+<!-- END GENERATED REFERENCE -->
+
+## Regeneration
+
+This SDK is generated from the [SmartlyQ OpenAPI spec](https://docs.smartlyq.com). When the spec changes, CI regenerates the client, README, and tests, bumps the version, and publishes to PyPI automatically.
+
+## License
+
+MIT

@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+dist/
+*.egg-info/
+.pytest_cache/
+*.log
+.DS_Store
+
+# Never commit local env or key material
+.env
+.env.*
+*.pem
+*.key

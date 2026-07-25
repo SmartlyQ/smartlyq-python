@@ -1,0 +1,141 @@
+name: Regenerate
+
+on:
+  # Fired by the docs repository when openapi.json changes
+  repository_dispatch:
+    types: [openapi-updated]
+  workflow_dispatch:
+    inputs:
+      force_publish:
+        description: 'Bump and publish even if the spec is unchanged'
+        type: boolean
+        default: false
+  schedule:
+    # Daily safety net in case a dispatch is missed
+    - cron: '35 4 * * *'
+
+concurrency:
+  group: regenerate-sdk
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    name: Regenerate from OpenAPI
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      # Lets PyPI verify publishes via Trusted Publishing (OIDC) - no token needed
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install httpx pytest build
+
+      - name: Fetch latest OpenAPI spec
+        run: curl -f --retry 5 --retry-delay 2 --retry-all-errors --max-time 60 -o openapi.json https://docs.smartlyq.com/openapi.json
+
+      - name: Generate SDK
+        run: python scripts/generate_client.py
+
+      - name: Generate README reference
+        run: python scripts/generate_readme.py
+
+      - name: Generate endpoint tests
+        run: python scripts/generate_tests.py
+
+      - name: Run tests
+        run: python -m pytest -q
+
+      - name: Check for changes
+        id: changes
+        run: |
+          git add -A
+          if ! git diff --staged --quiet || [ "${{ inputs.force_publish }}" = "true" ]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Bump version and commit
+        if: steps.changes.outputs.has_changes == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          python - <<'EOF'
+          import re
+          path = "smartlyq/_version.py"
+          src = open(path).read()
+          m = re.search(r'"(\d+)\.(\d+)\.(\d+)"', src)
+          major, minor, patch = map(int, m.groups())
+          open(path, "w").write(f'__version__ = "{major}.{minor}.{patch + 1}"\n')
+          EOF
+
+          NEW_VERSION=$(python -c "import re;print(re.search(r'\"(.+)\"', open('smartlyq/_version.py').read()).group(1))")
+          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+
+          git add -A
+          git commit -m "chore: regenerate from OpenAPI spec
+
+          Auto-generated SDK update (v$NEW_VERSION)"
+
+          # Retry with rebase to survive concurrent dispatches
+          for attempt in 1 2 3; do
+            if git push; then break; fi
+            echo "Push attempt $attempt failed; rebasing and retrying..."
+            git pull --rebase origin main
+            sleep $((attempt * 5))
+          done
+
+      # Runs unconditionally so a version that never reached PyPI publishes on
+      # the next run; already-published versions skip cleanly.
+      - name: Check if version already published
+        id: check_published
+        run: |
+          CURRENT_VERSION=$(python -c "import re;print(re.search(r'\"(.+)\"', open('smartlyq/_version.py').read()).group(1))")
+          echo "version=${CURRENT_VERSION}" >> $GITHUB_OUTPUT
+          if curl -sf "https://pypi.org/pypi/smartlyq/${CURRENT_VERSION}/json" >/dev/null; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+            echo "Version ${CURRENT_VERSION} already on PyPI, skipping publish."
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Build distribution
+        if: steps.check_published.outputs.skip != 'true'
+        run: python -m build
+
+      # Publishes via PyPI Trusted Publishing (OIDC) - no token secret involved.
+      # NOTE: no continue-on-error. A failed publish must fail the run loudly.
+      - name: Publish to PyPI
+        if: steps.check_published.outputs.skip != 'true'
+        uses: pypa/gh-action-pypi-publish@release/v1
+
+      - name: Create GitHub Release
+        if: steps.check_published.outputs.skip != 'true'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.check_published.outputs.version }}
+          name: v${{ steps.check_published.outputs.version }}
+          generate_release_notes: true
+          body: |
+            ## Auto-generated SDK update
+
+            This release was generated from the latest OpenAPI spec.
+
+            ```bash
+            pip install smartlyq==${{ steps.check_published.outputs.version }}
+            ```
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
