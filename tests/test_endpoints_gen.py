@@ -331,10 +331,22 @@ def test_crm_delete_contact(client):
     assert calls[-1] == ("DELETE", "/v1/contacts/test-id")
 
 
+def test_crm_update_custom_field(client):
+    sq, calls = client
+    sq.crm.update_custom_field("test-id", {})
+    assert calls[-1] == ("PATCH", "/v1/custom-fields/test-id")
+
+
 def test_crm_bulk_import_contacts(client):
     sq, calls = client
     sq.crm.bulk_import_contacts({})
     assert calls[-1] == ("POST", "/v1/contacts/bulk")
+
+
+def test_crm_contact_channels(client):
+    sq, calls = client
+    sq.crm.contact_channels("test-id")
+    assert calls[-1] == ("GET", "/v1/contacts/test-id/channels")
 
 
 def test_contacts_list(client):
@@ -1213,6 +1225,12 @@ def test_social_gmb_create_place_action(client):
     assert calls[-1] == ("POST", "/v1/social/accounts/test-id/gmb/place-actions")
 
 
+def test_social_gmb_update_place_action(client):
+    sq, calls = client
+    sq.social.gmb_update_place_action("test-id", {})
+    assert calls[-1] == ("PATCH", "/v1/social/accounts/test-id/gmb/place-actions")
+
+
 def test_social_gmb_delete_place_action(client):
     sq, calls = client
     sq.social.gmb_delete_place_action("test-id", {})
@@ -1229,6 +1247,18 @@ def test_social_gmb_verification_options(client):
     sq, calls = client
     sq.social.gmb_verification_options("test-id", {})
     assert calls[-1] == ("POST", "/v1/social/accounts/test-id/gmb/verifications/options")
+
+
+def test_social_reddit_subreddit_info(client):
+    sq, calls = client
+    sq.social.reddit_subreddit_info("test-id", "test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/reddit/subreddits/test-id")
+
+
+def test_social_x_mentions(client):
+    sq, calls = client
+    sq.social.x_mentions("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/x/mentions")
 
 
 def test_urls_shorten(client):

@@ -284,9 +284,17 @@ class CrmResource:
         """Delete contact `DELETE /contacts/{id}`"""
         return self._client.request("DELETE", f"/contacts/{quote(id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def update_custom_field(self, id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Update custom field `PATCH /custom-fields/{id}`"""
+        return self._client.request("PATCH", f"/custom-fields/{quote(id, safe='')}", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
     def bulk_import_contacts(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Bulk import contacts `POST /contacts/bulk`"""
         return self._client.request("POST", "/contacts/bulk", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def contact_channels(self, id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Contact channels `GET /contacts/{id}/channels`"""
+        return self._client.request("GET", f"/contacts/{quote(id, safe='')}/channels", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
 
 class ContactsResource:
@@ -963,6 +971,10 @@ class SocialResource:
         """Create place-action link `POST /social/accounts/{account_id}/gmb/place-actions`"""
         return self._client.request("POST", f"/social/accounts/{quote(account_id, safe='')}/gmb/place-actions", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def gmb_update_place_action(self, account_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Update place-action link `PATCH /social/accounts/{account_id}/gmb/place-actions`"""
+        return self._client.request("PATCH", f"/social/accounts/{quote(account_id, safe='')}/gmb/place-actions", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
     def gmb_delete_place_action(self, account_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Delete place-action link `DELETE /social/accounts/{account_id}/gmb/place-actions`"""
         return self._client.request("DELETE", f"/social/accounts/{quote(account_id, safe='')}/gmb/place-actions", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
@@ -974,6 +986,14 @@ class SocialResource:
     def gmb_verification_options(self, account_id: str, body: dict | None = None, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Verification options `POST /social/accounts/{account_id}/gmb/verifications/options`"""
         return self._client.request("POST", f"/social/accounts/{quote(account_id, safe='')}/gmb/verifications/options", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def reddit_subreddit_info(self, account_id: str, subreddit: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Subreddit info + eligibility `GET /social/accounts/{account_id}/reddit/subreddits/{subreddit}`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/reddit/subreddits/{quote(subreddit, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def x_mentions(self, account_id: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """X mentions `GET /social/accounts/{account_id}/x/mentions`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/x/mentions", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
 
 class UrlsResource:
