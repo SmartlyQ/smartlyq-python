@@ -995,6 +995,54 @@ class SocialResource:
         """X mentions `GET /social/accounts/{account_id}/x/mentions`"""
         return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/x/mentions", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def send_typing_indicator(self, conversation_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Typing indicator `POST /social/conversations/{conversation_id}/typing`"""
+        return self._client.request("POST", f"/social/conversations/{quote(conversation_id, safe='')}/typing", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def comment_private_reply(self, comment_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Private reply (comment-to-DM) `POST /social/comments/{comment_id}/private-reply`"""
+        return self._client.request("POST", f"/social/comments/{quote(comment_id, safe='')}/private-reply", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def get_messenger_menu(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get Messenger menu `GET /social/accounts/{account_id}/messenger/menu`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/messenger/menu", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def set_messenger_menu(self, account_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Set Messenger menu `PUT /social/accounts/{account_id}/messenger/menu`"""
+        return self._client.request("PUT", f"/social/accounts/{quote(account_id, safe='')}/messenger/menu", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def delete_messenger_menu(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Delete Messenger menu `DELETE /social/accounts/{account_id}/messenger/menu`"""
+        return self._client.request("DELETE", f"/social/accounts/{quote(account_id, safe='')}/messenger/menu", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def get_ice_breakers(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get ice breakers `GET /social/accounts/{account_id}/instagram/ice-breakers`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/instagram/ice-breakers", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def set_ice_breakers(self, account_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Set ice breakers `PUT /social/accounts/{account_id}/instagram/ice-breakers`"""
+        return self._client.request("PUT", f"/social/accounts/{quote(account_id, safe='')}/instagram/ice-breakers", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def delete_ice_breakers(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Delete ice breakers `DELETE /social/accounts/{account_id}/instagram/ice-breakers`"""
+        return self._client.request("DELETE", f"/social/accounts/{quote(account_id, safe='')}/instagram/ice-breakers", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def facebook_page_insights(self, account_id: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Facebook page insights `GET /social/accounts/{account_id}/facebook/page-insights`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/facebook/page-insights", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def instagram_audience(self, account_id: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Instagram audience demographics `GET /social/accounts/{account_id}/instagram/audience`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/instagram/audience", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def connect_options(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Connection target options `GET /social/accounts/{account_id}/connect-options`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/connect-options", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def connect_select(self, account_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Select connection target `POST /social/accounts/{account_id}/connect-select`"""
+        return self._client.request("POST", f"/social/accounts/{quote(account_id, safe='')}/connect-select", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
 
 class UrlsResource:
     """URLs endpoints."""

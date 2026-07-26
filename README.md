@@ -414,6 +414,18 @@ All methods below are available on the client. Full request/response documentati
 | `sq.social.gmb_verification_options(account_id, body=None)` | `POST /social/accounts/{account_id}/gmb/verifications/options` | Verification options |
 | `sq.social.reddit_subreddit_info(account_id, subreddit)` | `GET /social/accounts/{account_id}/reddit/subreddits/{subreddit}` | Subreddit info + eligibility |
 | `sq.social.x_mentions(account_id, query=None)` | `GET /social/accounts/{account_id}/x/mentions` | X mentions |
+| `sq.social.send_typing_indicator(conversation_id)` | `POST /social/conversations/{conversation_id}/typing` | Typing indicator |
+| `sq.social.comment_private_reply(comment_id, body)` | `POST /social/comments/{comment_id}/private-reply` | Private reply (comment-to-DM) |
+| `sq.social.get_messenger_menu(account_id)` | `GET /social/accounts/{account_id}/messenger/menu` | Get Messenger menu |
+| `sq.social.set_messenger_menu(account_id, body)` | `PUT /social/accounts/{account_id}/messenger/menu` | Set Messenger menu |
+| `sq.social.delete_messenger_menu(account_id)` | `DELETE /social/accounts/{account_id}/messenger/menu` | Delete Messenger menu |
+| `sq.social.get_ice_breakers(account_id)` | `GET /social/accounts/{account_id}/instagram/ice-breakers` | Get ice breakers |
+| `sq.social.set_ice_breakers(account_id, body)` | `PUT /social/accounts/{account_id}/instagram/ice-breakers` | Set ice breakers |
+| `sq.social.delete_ice_breakers(account_id)` | `DELETE /social/accounts/{account_id}/instagram/ice-breakers` | Delete ice breakers |
+| `sq.social.facebook_page_insights(account_id, query=None)` | `GET /social/accounts/{account_id}/facebook/page-insights` | Facebook page insights |
+| `sq.social.instagram_audience(account_id, query=None)` | `GET /social/accounts/{account_id}/instagram/audience` | Instagram audience demographics |
+| `sq.social.connect_options(account_id)` | `GET /social/accounts/{account_id}/connect-options` | Connection target options |
+| `sq.social.connect_select(account_id, body)` | `POST /social/accounts/{account_id}/connect-select` | Select connection target |
 
 ### URLs
 

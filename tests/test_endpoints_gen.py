@@ -1261,6 +1261,78 @@ def test_social_x_mentions(client):
     assert calls[-1] == ("GET", "/v1/social/accounts/test-id/x/mentions")
 
 
+def test_social_send_typing_indicator(client):
+    sq, calls = client
+    sq.social.send_typing_indicator("test-id")
+    assert calls[-1] == ("POST", "/v1/social/conversations/test-id/typing")
+
+
+def test_social_comment_private_reply(client):
+    sq, calls = client
+    sq.social.comment_private_reply("test-id", {})
+    assert calls[-1] == ("POST", "/v1/social/comments/test-id/private-reply")
+
+
+def test_social_get_messenger_menu(client):
+    sq, calls = client
+    sq.social.get_messenger_menu("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/messenger/menu")
+
+
+def test_social_set_messenger_menu(client):
+    sq, calls = client
+    sq.social.set_messenger_menu("test-id", {})
+    assert calls[-1] == ("PUT", "/v1/social/accounts/test-id/messenger/menu")
+
+
+def test_social_delete_messenger_menu(client):
+    sq, calls = client
+    sq.social.delete_messenger_menu("test-id")
+    assert calls[-1] == ("DELETE", "/v1/social/accounts/test-id/messenger/menu")
+
+
+def test_social_get_ice_breakers(client):
+    sq, calls = client
+    sq.social.get_ice_breakers("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/instagram/ice-breakers")
+
+
+def test_social_set_ice_breakers(client):
+    sq, calls = client
+    sq.social.set_ice_breakers("test-id", {})
+    assert calls[-1] == ("PUT", "/v1/social/accounts/test-id/instagram/ice-breakers")
+
+
+def test_social_delete_ice_breakers(client):
+    sq, calls = client
+    sq.social.delete_ice_breakers("test-id")
+    assert calls[-1] == ("DELETE", "/v1/social/accounts/test-id/instagram/ice-breakers")
+
+
+def test_social_facebook_page_insights(client):
+    sq, calls = client
+    sq.social.facebook_page_insights("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/facebook/page-insights")
+
+
+def test_social_instagram_audience(client):
+    sq, calls = client
+    sq.social.instagram_audience("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/instagram/audience")
+
+
+def test_social_connect_options(client):
+    sq, calls = client
+    sq.social.connect_options("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/connect-options")
+
+
+def test_social_connect_select(client):
+    sq, calls = client
+    sq.social.connect_select("test-id", {})
+    assert calls[-1] == ("POST", "/v1/social/accounts/test-id/connect-select")
+
+
 def test_urls_shorten(client):
     sq, calls = client
     sq.urls.shorten({})
