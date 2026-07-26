@@ -895,6 +895,86 @@ class SocialResource:
         """Undo retweet `DELETE /social/accounts/{account_id}/x/retweets/{tweet_id}`"""
         return self._client.request("DELETE", f"/social/accounts/{quote(account_id, safe='')}/x/retweets/{quote(tweet_id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def edit_published_post(self, post_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Edit published post `POST /social/posts/{post_id}/edit`"""
+        return self._client.request("POST", f"/social/posts/{quote(post_id, safe='')}/edit", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def update_post_metadata(self, post_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Update YouTube metadata `POST /social/posts/{post_id}/update-metadata`"""
+        return self._client.request("POST", f"/social/posts/{quote(post_id, safe='')}/update-metadata", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def sync_external_posts(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Sync external posts `POST /social/posts/sync-external`"""
+        return self._client.request("POST", "/social/posts/sync-external", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def account_insights(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Live account insights `GET /social/accounts/{account_id}/insights`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/insights", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def gmb_locations(self, account_id: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List Google locations `GET /social/accounts/{account_id}/gmb/locations`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/gmb/locations", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def gmb_location(self, account_id: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get business info `GET /social/accounts/{account_id}/gmb/location`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/gmb/location", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def gmb_update_location(self, account_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Update business info `PATCH /social/accounts/{account_id}/gmb/location`"""
+        return self._client.request("PATCH", f"/social/accounts/{quote(account_id, safe='')}/gmb/location", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def gmb_attributes(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get attributes `GET /social/accounts/{account_id}/gmb/attributes`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/gmb/attributes", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def gmb_update_attributes(self, account_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Update attributes `PUT /social/accounts/{account_id}/gmb/attributes`"""
+        return self._client.request("PUT", f"/social/accounts/{quote(account_id, safe='')}/gmb/attributes", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def gmb_attribute_metadata(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Available attributes `GET /social/accounts/{account_id}/gmb/attributes/metadata`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/gmb/attributes/metadata", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def gmb_media(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List media `GET /social/accounts/{account_id}/gmb/media`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/gmb/media", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def gmb_create_media(self, account_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Add photo `POST /social/accounts/{account_id}/gmb/media`"""
+        return self._client.request("POST", f"/social/accounts/{quote(account_id, safe='')}/gmb/media", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def gmb_delete_media(self, account_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Delete media `DELETE /social/accounts/{account_id}/gmb/media`"""
+        return self._client.request("DELETE", f"/social/accounts/{quote(account_id, safe='')}/gmb/media", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def gmb_food_menus(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get food menus `GET /social/accounts/{account_id}/gmb/food-menus`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/gmb/food-menus", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def gmb_update_food_menus(self, account_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Update food menus `PUT /social/accounts/{account_id}/gmb/food-menus`"""
+        return self._client.request("PUT", f"/social/accounts/{quote(account_id, safe='')}/gmb/food-menus", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def gmb_place_actions(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List place-action links `GET /social/accounts/{account_id}/gmb/place-actions`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/gmb/place-actions", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def gmb_create_place_action(self, account_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Create place-action link `POST /social/accounts/{account_id}/gmb/place-actions`"""
+        return self._client.request("POST", f"/social/accounts/{quote(account_id, safe='')}/gmb/place-actions", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def gmb_delete_place_action(self, account_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Delete place-action link `DELETE /social/accounts/{account_id}/gmb/place-actions`"""
+        return self._client.request("DELETE", f"/social/accounts/{quote(account_id, safe='')}/gmb/place-actions", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def gmb_verifications(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List verifications `GET /social/accounts/{account_id}/gmb/verifications`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/gmb/verifications", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def gmb_verification_options(self, account_id: str, body: dict | None = None, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Verification options `POST /social/accounts/{account_id}/gmb/verifications/options`"""
+        return self._client.request("POST", f"/social/accounts/{quote(account_id, safe='')}/gmb/verifications/options", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
 
 class UrlsResource:
     """URLs endpoints."""

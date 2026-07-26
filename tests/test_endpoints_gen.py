@@ -1111,6 +1111,126 @@ def test_social_x_unretweet(client):
     assert calls[-1] == ("DELETE", "/v1/social/accounts/test-id/x/retweets/test-id")
 
 
+def test_social_edit_published_post(client):
+    sq, calls = client
+    sq.social.edit_published_post("test-id", {})
+    assert calls[-1] == ("POST", "/v1/social/posts/test-id/edit")
+
+
+def test_social_update_post_metadata(client):
+    sq, calls = client
+    sq.social.update_post_metadata("test-id", {})
+    assert calls[-1] == ("POST", "/v1/social/posts/test-id/update-metadata")
+
+
+def test_social_sync_external_posts(client):
+    sq, calls = client
+    sq.social.sync_external_posts({})
+    assert calls[-1] == ("POST", "/v1/social/posts/sync-external")
+
+
+def test_social_account_insights(client):
+    sq, calls = client
+    sq.social.account_insights("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/insights")
+
+
+def test_social_gmb_locations(client):
+    sq, calls = client
+    sq.social.gmb_locations("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/gmb/locations")
+
+
+def test_social_gmb_location(client):
+    sq, calls = client
+    sq.social.gmb_location("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/gmb/location")
+
+
+def test_social_gmb_update_location(client):
+    sq, calls = client
+    sq.social.gmb_update_location("test-id", {})
+    assert calls[-1] == ("PATCH", "/v1/social/accounts/test-id/gmb/location")
+
+
+def test_social_gmb_attributes(client):
+    sq, calls = client
+    sq.social.gmb_attributes("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/gmb/attributes")
+
+
+def test_social_gmb_update_attributes(client):
+    sq, calls = client
+    sq.social.gmb_update_attributes("test-id", {})
+    assert calls[-1] == ("PUT", "/v1/social/accounts/test-id/gmb/attributes")
+
+
+def test_social_gmb_attribute_metadata(client):
+    sq, calls = client
+    sq.social.gmb_attribute_metadata("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/gmb/attributes/metadata")
+
+
+def test_social_gmb_media(client):
+    sq, calls = client
+    sq.social.gmb_media("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/gmb/media")
+
+
+def test_social_gmb_create_media(client):
+    sq, calls = client
+    sq.social.gmb_create_media("test-id", {})
+    assert calls[-1] == ("POST", "/v1/social/accounts/test-id/gmb/media")
+
+
+def test_social_gmb_delete_media(client):
+    sq, calls = client
+    sq.social.gmb_delete_media("test-id", {})
+    assert calls[-1] == ("DELETE", "/v1/social/accounts/test-id/gmb/media")
+
+
+def test_social_gmb_food_menus(client):
+    sq, calls = client
+    sq.social.gmb_food_menus("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/gmb/food-menus")
+
+
+def test_social_gmb_update_food_menus(client):
+    sq, calls = client
+    sq.social.gmb_update_food_menus("test-id", {})
+    assert calls[-1] == ("PUT", "/v1/social/accounts/test-id/gmb/food-menus")
+
+
+def test_social_gmb_place_actions(client):
+    sq, calls = client
+    sq.social.gmb_place_actions("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/gmb/place-actions")
+
+
+def test_social_gmb_create_place_action(client):
+    sq, calls = client
+    sq.social.gmb_create_place_action("test-id", {})
+    assert calls[-1] == ("POST", "/v1/social/accounts/test-id/gmb/place-actions")
+
+
+def test_social_gmb_delete_place_action(client):
+    sq, calls = client
+    sq.social.gmb_delete_place_action("test-id", {})
+    assert calls[-1] == ("DELETE", "/v1/social/accounts/test-id/gmb/place-actions")
+
+
+def test_social_gmb_verifications(client):
+    sq, calls = client
+    sq.social.gmb_verifications("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/gmb/verifications")
+
+
+def test_social_gmb_verification_options(client):
+    sq, calls = client
+    sq.social.gmb_verification_options("test-id", {})
+    assert calls[-1] == ("POST", "/v1/social/accounts/test-id/gmb/verifications/options")
+
+
 def test_urls_shorten(client):
     sq, calls = client
     sq.urls.shorten({})
