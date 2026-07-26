@@ -301,7 +301,7 @@ All methods below are available on the client. Full request/response documentati
 | `sq.social.get_post(post_id)` | `GET /social/posts/{post_id}` | Get social post |
 | `sq.social.update_post(post_id, body)` | `PATCH /social/posts/{post_id}` | Update social post |
 | `sq.social.delete_post(post_id)` | `DELETE /social/posts/{post_id}` | Delete social post |
-| `sq.social.disconnect_account(account_id)` | `DELETE /social/accounts/{account_id}` | Disconnect a social account |
+| `sq.social.update_account(account_id, body)` | `PATCH /social/accounts/{account_id}` | Rename account |
 | `sq.social.get_account_health(account_id)` | `GET /social/accounts/{account_id}/health` | Account health |
 | `sq.social.get_account_reconnect_url(account_id)` | `GET /social/accounts/{account_id}/reconnect-url` | Account reconnect URL |
 | `sq.social.pause_account(account_id)` | `POST /social/accounts/{account_id}/pause` | Pause posting to an account |
@@ -309,6 +309,28 @@ All methods below are available on the client. Full request/response documentati
 | `sq.social.retry_post(post_id, body)` | `POST /social/posts/{post_id}/retry` | Retry publishing a post |
 | `sq.social.connect_account_status(platform)` | `GET /social/connect/{platform}` | Poll headless connection status |
 | `sq.social.connect_account(platform, body=None)` | `POST /social/connect/{platform}` | Start headless account connection |
+| `sq.social.list_queues()` | `GET /social/queues` | List queues |
+| `sq.social.create_queue(body)` | `POST /social/queues` | Create queue |
+| `sq.social.get_queue(queue_id)` | `GET /social/queues/{queue_id}` | Get queue |
+| `sq.social.update_queue(queue_id, body)` | `PUT /social/queues/{queue_id}` | Update queue |
+| `sq.social.delete_queue(queue_id)` | `DELETE /social/queues/{queue_id}` | Delete queue |
+| `sq.social.get_queue_next_slot(queue_id)` | `GET /social/queues/{queue_id}/next-slot` | Get next open slot |
+| `sq.social.preview_queue_slots(queue_id, query=None)` | `GET /social/queues/{queue_id}/preview` | Preview upcoming slots |
+| `sq.social.unpublish_post(post_id, body=None)` | `POST /social/posts/{post_id}/unpublish` | Unpublish post |
+| `sq.social.validate_post(body)` | `POST /social/validate/post` | Validate post content |
+| `sq.social.validate_media(body)` | `POST /social/validate/media` | Validate media URL |
+| `sq.social.stop_post_recycle(post_id)` | `DELETE /social/posts/{post_id}/recycle` | Stop recycling |
+| `sq.social.bulk_schedule_posts(body)` | `POST /social/posts/bulk` | Bulk schedule posts |
+| `sq.social.validate_bulk_batch(body)` | `POST /social/posts/bulk/validate` | Validate a bulk batch |
+| `sq.social.bulk_account_health()` | `GET /social/accounts/health` | Bulk account health |
+| `sq.social.account_follower_stats(query=None)` | `GET /social/accounts/follower-stats` | Follower stats |
+| `sq.social.tiktok_creator_info(account_id)` | `GET /social/accounts/{account_id}/tiktok/creator-info` | TikTok creator info |
+| `sq.social.move_account(account_id, body)` | `POST /social/accounts/{account_id}/move` | Move account to profile |
+| `sq.social.list_account_groups()` | `GET /social/account-groups` | List account groups |
+| `sq.social.create_account_group(body)` | `POST /social/account-groups` | Create account group |
+| `sq.social.get_account_group(group_id)` | `GET /social/account-groups/{group_id}` | Get account group |
+| `sq.social.update_account_group(group_id, body)` | `PUT /social/account-groups/{group_id}` | Update account group |
+| `sq.social.delete_account_group(group_id)` | `DELETE /social/account-groups/{group_id}` | Delete account group |
 
 ### URLs
 
@@ -340,7 +362,10 @@ All methods below are available on the client. Full request/response documentati
 | --- | --- | --- |
 | `sq.webhooks.list()` | `GET /webhooks` | List webhooks |
 | `sq.webhooks.create(body)` | `POST /webhooks` | Create webhook |
+| `sq.webhooks.update(id, body)` | `PUT /webhooks/{id}` | Update webhook |
 | `sq.webhooks.delete(id)` | `DELETE /webhooks/{id}` | Delete webhook |
+| `sq.webhooks.list_logs(query=None)` | `GET /webhooks/logs` | List webhook delivery logs |
+| `sq.webhooks.test(id)` | `POST /webhooks/{id}/test` | Send test webhook |
 
 ### Workspaces
 

@@ -673,10 +673,10 @@ def test_social_delete_post(client):
     assert calls[-1] == ("DELETE", "/v1/social/posts/test-id")
 
 
-def test_social_disconnect_account(client):
+def test_social_update_account(client):
     sq, calls = client
-    sq.social.disconnect_account("test-id")
-    assert calls[-1] == ("DELETE", "/v1/social/accounts/test-id")
+    sq.social.update_account("test-id", {})
+    assert calls[-1] == ("PATCH", "/v1/social/accounts/test-id")
 
 
 def test_social_get_account_health(client):
@@ -719,6 +719,138 @@ def test_social_connect_account(client):
     sq, calls = client
     sq.social.connect_account("test-id", {})
     assert calls[-1] == ("POST", "/v1/social/connect/test-id")
+
+
+def test_social_list_queues(client):
+    sq, calls = client
+    sq.social.list_queues()
+    assert calls[-1] == ("GET", "/v1/social/queues")
+
+
+def test_social_create_queue(client):
+    sq, calls = client
+    sq.social.create_queue({})
+    assert calls[-1] == ("POST", "/v1/social/queues")
+
+
+def test_social_get_queue(client):
+    sq, calls = client
+    sq.social.get_queue("test-id")
+    assert calls[-1] == ("GET", "/v1/social/queues/test-id")
+
+
+def test_social_update_queue(client):
+    sq, calls = client
+    sq.social.update_queue("test-id", {})
+    assert calls[-1] == ("PUT", "/v1/social/queues/test-id")
+
+
+def test_social_delete_queue(client):
+    sq, calls = client
+    sq.social.delete_queue("test-id")
+    assert calls[-1] == ("DELETE", "/v1/social/queues/test-id")
+
+
+def test_social_get_queue_next_slot(client):
+    sq, calls = client
+    sq.social.get_queue_next_slot("test-id")
+    assert calls[-1] == ("GET", "/v1/social/queues/test-id/next-slot")
+
+
+def test_social_preview_queue_slots(client):
+    sq, calls = client
+    sq.social.preview_queue_slots("test-id")
+    assert calls[-1] == ("GET", "/v1/social/queues/test-id/preview")
+
+
+def test_social_unpublish_post(client):
+    sq, calls = client
+    sq.social.unpublish_post("test-id", {})
+    assert calls[-1] == ("POST", "/v1/social/posts/test-id/unpublish")
+
+
+def test_social_validate_post(client):
+    sq, calls = client
+    sq.social.validate_post({})
+    assert calls[-1] == ("POST", "/v1/social/validate/post")
+
+
+def test_social_validate_media(client):
+    sq, calls = client
+    sq.social.validate_media({})
+    assert calls[-1] == ("POST", "/v1/social/validate/media")
+
+
+def test_social_stop_post_recycle(client):
+    sq, calls = client
+    sq.social.stop_post_recycle("test-id")
+    assert calls[-1] == ("DELETE", "/v1/social/posts/test-id/recycle")
+
+
+def test_social_bulk_schedule_posts(client):
+    sq, calls = client
+    sq.social.bulk_schedule_posts({})
+    assert calls[-1] == ("POST", "/v1/social/posts/bulk")
+
+
+def test_social_validate_bulk_batch(client):
+    sq, calls = client
+    sq.social.validate_bulk_batch({})
+    assert calls[-1] == ("POST", "/v1/social/posts/bulk/validate")
+
+
+def test_social_bulk_account_health(client):
+    sq, calls = client
+    sq.social.bulk_account_health()
+    assert calls[-1] == ("GET", "/v1/social/accounts/health")
+
+
+def test_social_account_follower_stats(client):
+    sq, calls = client
+    sq.social.account_follower_stats()
+    assert calls[-1] == ("GET", "/v1/social/accounts/follower-stats")
+
+
+def test_social_tiktok_creator_info(client):
+    sq, calls = client
+    sq.social.tiktok_creator_info("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/tiktok/creator-info")
+
+
+def test_social_move_account(client):
+    sq, calls = client
+    sq.social.move_account("test-id", {})
+    assert calls[-1] == ("POST", "/v1/social/accounts/test-id/move")
+
+
+def test_social_list_account_groups(client):
+    sq, calls = client
+    sq.social.list_account_groups()
+    assert calls[-1] == ("GET", "/v1/social/account-groups")
+
+
+def test_social_create_account_group(client):
+    sq, calls = client
+    sq.social.create_account_group({})
+    assert calls[-1] == ("POST", "/v1/social/account-groups")
+
+
+def test_social_get_account_group(client):
+    sq, calls = client
+    sq.social.get_account_group("test-id")
+    assert calls[-1] == ("GET", "/v1/social/account-groups/test-id")
+
+
+def test_social_update_account_group(client):
+    sq, calls = client
+    sq.social.update_account_group("test-id", {})
+    assert calls[-1] == ("PUT", "/v1/social/account-groups/test-id")
+
+
+def test_social_delete_account_group(client):
+    sq, calls = client
+    sq.social.delete_account_group("test-id")
+    assert calls[-1] == ("DELETE", "/v1/social/account-groups/test-id")
 
 
 def test_urls_shorten(client):
@@ -817,10 +949,28 @@ def test_webhooks_create(client):
     assert calls[-1] == ("POST", "/v1/webhooks")
 
 
+def test_webhooks_update(client):
+    sq, calls = client
+    sq.webhooks.update("test-id", {})
+    assert calls[-1] == ("PUT", "/v1/webhooks/test-id")
+
+
 def test_webhooks_delete(client):
     sq, calls = client
     sq.webhooks.delete("test-id")
     assert calls[-1] == ("DELETE", "/v1/webhooks/test-id")
+
+
+def test_webhooks_list_logs(client):
+    sq, calls = client
+    sq.webhooks.list_logs()
+    assert calls[-1] == ("GET", "/v1/webhooks/logs")
+
+
+def test_webhooks_test(client):
+    sq, calls = client
+    sq.webhooks.test("test-id")
+    assert calls[-1] == ("POST", "/v1/webhooks/test-id/test")
 
 
 def test_workspaces_list(client):

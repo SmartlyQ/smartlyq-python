@@ -582,9 +582,9 @@ class SocialResource:
         """Delete social post `DELETE /social/posts/{post_id}`"""
         return self._client.request("DELETE", f"/social/posts/{quote(post_id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
-    def disconnect_account(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
-        """Disconnect a social account `DELETE /social/accounts/{account_id}`"""
-        return self._client.request("DELETE", f"/social/accounts/{quote(account_id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+    def update_account(self, account_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Rename account `PATCH /social/accounts/{account_id}`"""
+        return self._client.request("PATCH", f"/social/accounts/{quote(account_id, safe='')}", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
     def get_account_health(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Account health `GET /social/accounts/{account_id}/health`"""
@@ -613,6 +613,94 @@ class SocialResource:
     def connect_account(self, platform: str, body: dict | None = None, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Start headless account connection `POST /social/connect/{platform}`"""
         return self._client.request("POST", f"/social/connect/{quote(platform, safe='')}", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def list_queues(self, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List queues `GET /social/queues`"""
+        return self._client.request("GET", "/social/queues", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def create_queue(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Create queue `POST /social/queues`"""
+        return self._client.request("POST", "/social/queues", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def get_queue(self, queue_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get queue `GET /social/queues/{queue_id}`"""
+        return self._client.request("GET", f"/social/queues/{quote(queue_id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def update_queue(self, queue_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Update queue `PUT /social/queues/{queue_id}`"""
+        return self._client.request("PUT", f"/social/queues/{quote(queue_id, safe='')}", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def delete_queue(self, queue_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Delete queue `DELETE /social/queues/{queue_id}`"""
+        return self._client.request("DELETE", f"/social/queues/{quote(queue_id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def get_queue_next_slot(self, queue_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get next open slot `GET /social/queues/{queue_id}/next-slot`"""
+        return self._client.request("GET", f"/social/queues/{quote(queue_id, safe='')}/next-slot", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def preview_queue_slots(self, queue_id: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Preview upcoming slots `GET /social/queues/{queue_id}/preview`"""
+        return self._client.request("GET", f"/social/queues/{quote(queue_id, safe='')}/preview", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def unpublish_post(self, post_id: str, body: dict | None = None, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Unpublish post `POST /social/posts/{post_id}/unpublish`"""
+        return self._client.request("POST", f"/social/posts/{quote(post_id, safe='')}/unpublish", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def validate_post(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Validate post content `POST /social/validate/post`"""
+        return self._client.request("POST", "/social/validate/post", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def validate_media(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Validate media URL `POST /social/validate/media`"""
+        return self._client.request("POST", "/social/validate/media", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def stop_post_recycle(self, post_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Stop recycling `DELETE /social/posts/{post_id}/recycle`"""
+        return self._client.request("DELETE", f"/social/posts/{quote(post_id, safe='')}/recycle", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def bulk_schedule_posts(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Bulk schedule posts `POST /social/posts/bulk`"""
+        return self._client.request("POST", "/social/posts/bulk", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def validate_bulk_batch(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Validate a bulk batch `POST /social/posts/bulk/validate`"""
+        return self._client.request("POST", "/social/posts/bulk/validate", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def bulk_account_health(self, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Bulk account health `GET /social/accounts/health`"""
+        return self._client.request("GET", "/social/accounts/health", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def account_follower_stats(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Follower stats `GET /social/accounts/follower-stats`"""
+        return self._client.request("GET", "/social/accounts/follower-stats", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def tiktok_creator_info(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """TikTok creator info `GET /social/accounts/{account_id}/tiktok/creator-info`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/tiktok/creator-info", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def move_account(self, account_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Move account to profile `POST /social/accounts/{account_id}/move`"""
+        return self._client.request("POST", f"/social/accounts/{quote(account_id, safe='')}/move", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def list_account_groups(self, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List account groups `GET /social/account-groups`"""
+        return self._client.request("GET", "/social/account-groups", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def create_account_group(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Create account group `POST /social/account-groups`"""
+        return self._client.request("POST", "/social/account-groups", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def get_account_group(self, group_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get account group `GET /social/account-groups/{group_id}`"""
+        return self._client.request("GET", f"/social/account-groups/{quote(group_id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def update_account_group(self, group_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Update account group `PUT /social/account-groups/{group_id}`"""
+        return self._client.request("PUT", f"/social/account-groups/{quote(group_id, safe='')}", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def delete_account_group(self, group_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Delete account group `DELETE /social/account-groups/{group_id}`"""
+        return self._client.request("DELETE", f"/social/account-groups/{quote(group_id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
 
 class UrlsResource:
@@ -699,9 +787,21 @@ class WebhooksResource:
         """Create webhook `POST /webhooks`"""
         return self._client.request("POST", "/webhooks", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def update(self, id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Update webhook `PUT /webhooks/{id}`"""
+        return self._client.request("PUT", f"/webhooks/{quote(id, safe='')}", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
     def delete(self, id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Delete webhook `DELETE /webhooks/{id}`"""
         return self._client.request("DELETE", f"/webhooks/{quote(id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def list_logs(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List webhook delivery logs `GET /webhooks/logs`"""
+        return self._client.request("GET", "/webhooks/logs", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def test(self, id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Send test webhook `POST /webhooks/{id}/test`"""
+        return self._client.request("POST", f"/webhooks/{quote(id, safe='')}/test", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
 
 class WorkspacesResource:
