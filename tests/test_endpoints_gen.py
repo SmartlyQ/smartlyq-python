@@ -1021,6 +1021,72 @@ def test_social_search_conversations(client):
     assert calls[-1] == ("GET", "/v1/social/conversations/search")
 
 
+def test_social_pinterest_boards(client):
+    sq, calls = client
+    sq.social.pinterest_boards("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/pinterest/boards")
+
+
+def test_social_youtube_playlists(client):
+    sq, calls = client
+    sq.social.youtube_playlists("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/youtube/playlists")
+
+
+def test_social_instagram_publishing_limit(client):
+    sq, calls = client
+    sq.social.instagram_publishing_limit("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/instagram/publishing-limit")
+
+
+def test_social_gmb_performance(client):
+    sq, calls = client
+    sq.social.gmb_performance("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/gmb/performance")
+
+
+def test_social_gmb_search_keywords(client):
+    sq, calls = client
+    sq.social.gmb_search_keywords("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/gmb/search-keywords")
+
+
+def test_social_reddit_search(client):
+    sq, calls = client
+    sq.social.reddit_search("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/reddit/search")
+
+
+def test_social_reddit_feed(client):
+    sq, calls = client
+    sq.social.reddit_feed("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/reddit/feed")
+
+
+def test_social_reddit_subreddits(client):
+    sq, calls = client
+    sq.social.reddit_subreddits("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/reddit/subreddits")
+
+
+def test_social_reddit_subreddit_rules(client):
+    sq, calls = client
+    sq.social.reddit_subreddit_rules("test-id", "test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/reddit/subreddits/test-id/rules")
+
+
+def test_social_instagram_stories(client):
+    sq, calls = client
+    sq.social.instagram_stories("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/instagram/stories")
+
+
+def test_social_facebook_post_reactions(client):
+    sq, calls = client
+    sq.social.facebook_post_reactions("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/facebook/post-reactions")
+
+
 def test_urls_shorten(client):
     sq, calls = client
     sq.urls.shorten({})

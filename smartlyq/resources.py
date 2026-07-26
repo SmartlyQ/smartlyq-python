@@ -835,6 +835,50 @@ class SocialResource:
         """Search conversations `GET /social/conversations/search`"""
         return self._client.request("GET", "/social/conversations/search", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def pinterest_boards(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Pinterest boards `GET /social/accounts/{account_id}/pinterest/boards`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/pinterest/boards", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def youtube_playlists(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """YouTube playlists `GET /social/accounts/{account_id}/youtube/playlists`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/youtube/playlists", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def instagram_publishing_limit(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Instagram publishing limit `GET /social/accounts/{account_id}/instagram/publishing-limit`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/instagram/publishing-limit", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def gmb_performance(self, account_id: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Google Business performance `GET /social/accounts/{account_id}/gmb/performance`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/gmb/performance", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def gmb_search_keywords(self, account_id: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Google Business search keywords `GET /social/accounts/{account_id}/gmb/search-keywords`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/gmb/search-keywords", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def reddit_search(self, account_id: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Reddit search `GET /social/accounts/{account_id}/reddit/search`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/reddit/search", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def reddit_feed(self, account_id: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Reddit feed `GET /social/accounts/{account_id}/reddit/feed`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/reddit/feed", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def reddit_subreddits(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Subscribed subreddits `GET /social/accounts/{account_id}/reddit/subreddits`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/reddit/subreddits", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def reddit_subreddit_rules(self, account_id: str, subreddit: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Subreddit rules `GET /social/accounts/{account_id}/reddit/subreddits/{subreddit}/rules`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/reddit/subreddits/{quote(subreddit, safe='')}/rules", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def instagram_stories(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Instagram stories `GET /social/accounts/{account_id}/instagram/stories`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/instagram/stories", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def facebook_post_reactions(self, account_id: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Facebook post reactions `GET /social/accounts/{account_id}/facebook/post-reactions`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/facebook/post-reactions", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
 
 class UrlsResource:
     """URLs endpoints."""
