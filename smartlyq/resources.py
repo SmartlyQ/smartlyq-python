@@ -63,6 +63,26 @@ class AnalyticsResource:
         """Get account analytics `GET /analytics/accounts/{account_id}`"""
         return self._client.request("GET", f"/analytics/accounts/{quote(account_id, safe='')}", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def daily_metrics(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Daily metrics `GET /analytics/daily-metrics`"""
+        return self._client.request("GET", "/analytics/daily-metrics", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def best_time(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Best time to post `GET /analytics/best-time`"""
+        return self._client.request("GET", "/analytics/best-time", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def content_decay(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Content decay `GET /analytics/content-decay`"""
+        return self._client.request("GET", "/analytics/content-decay", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def posting_frequency(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Posting frequency vs engagement `GET /analytics/posting-frequency`"""
+        return self._client.request("GET", "/analytics/posting-frequency", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def post_timeline(self, post_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Post metric timeline `GET /analytics/posts/{post_id}/timeline`"""
+        return self._client.request("GET", f"/analytics/posts/{quote(post_id, safe='')}/timeline", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
 
 class ArticlesResource:
     """Articles endpoints."""

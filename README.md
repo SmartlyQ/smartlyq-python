@@ -116,6 +116,11 @@ All methods below are available on the client. Full request/response documentati
 | `sq.analytics.get_overview(query=None)` | `GET /analytics/overview` | Get analytics overview |
 | `sq.analytics.get_posts(query=None)` | `GET /analytics/posts` | Get post analytics |
 | `sq.analytics.get_account(account_id, query=None)` | `GET /analytics/accounts/{account_id}` | Get account analytics |
+| `sq.analytics.daily_metrics(query=None)` | `GET /analytics/daily-metrics` | Daily metrics |
+| `sq.analytics.best_time(query=None)` | `GET /analytics/best-time` | Best time to post |
+| `sq.analytics.content_decay(query=None)` | `GET /analytics/content-decay` | Content decay |
+| `sq.analytics.posting_frequency(query=None)` | `GET /analytics/posting-frequency` | Posting frequency vs engagement |
+| `sq.analytics.post_timeline(post_id)` | `GET /analytics/posts/{post_id}/timeline` | Post metric timeline |
 
 ### Articles
 

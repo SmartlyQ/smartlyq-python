@@ -73,6 +73,36 @@ def test_analytics_get_account(client):
     assert calls[-1] == ("GET", "/v1/analytics/accounts/test-id")
 
 
+def test_analytics_daily_metrics(client):
+    sq, calls = client
+    sq.analytics.daily_metrics()
+    assert calls[-1] == ("GET", "/v1/analytics/daily-metrics")
+
+
+def test_analytics_best_time(client):
+    sq, calls = client
+    sq.analytics.best_time()
+    assert calls[-1] == ("GET", "/v1/analytics/best-time")
+
+
+def test_analytics_content_decay(client):
+    sq, calls = client
+    sq.analytics.content_decay()
+    assert calls[-1] == ("GET", "/v1/analytics/content-decay")
+
+
+def test_analytics_posting_frequency(client):
+    sq, calls = client
+    sq.analytics.posting_frequency()
+    assert calls[-1] == ("GET", "/v1/analytics/posting-frequency")
+
+
+def test_analytics_post_timeline(client):
+    sq, calls = client
+    sq.analytics.post_timeline("test-id")
+    assert calls[-1] == ("GET", "/v1/analytics/posts/test-id/timeline")
+
+
 def test_articles_generate(client):
     sq, calls = client
     sq.articles.generate({})
