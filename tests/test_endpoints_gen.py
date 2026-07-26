@@ -103,6 +103,48 @@ def test_analytics_post_timeline(client):
     assert calls[-1] == ("GET", "/v1/analytics/posts/test-id/timeline")
 
 
+def test_analytics_inbox_volume(client):
+    sq, calls = client
+    sq.analytics.inbox_volume()
+    assert calls[-1] == ("GET", "/v1/analytics/inbox/volume")
+
+
+def test_analytics_inbox_heatmap(client):
+    sq, calls = client
+    sq.analytics.inbox_heatmap()
+    assert calls[-1] == ("GET", "/v1/analytics/inbox/heatmap")
+
+
+def test_analytics_inbox_source_breakdown(client):
+    sq, calls = client
+    sq.analytics.inbox_source_breakdown()
+    assert calls[-1] == ("GET", "/v1/analytics/inbox/source-breakdown")
+
+
+def test_analytics_inbox_response_time(client):
+    sq, calls = client
+    sq.analytics.inbox_response_time()
+    assert calls[-1] == ("GET", "/v1/analytics/inbox/response-time")
+
+
+def test_analytics_inbox_top_accounts(client):
+    sq, calls = client
+    sq.analytics.inbox_top_accounts()
+    assert calls[-1] == ("GET", "/v1/analytics/inbox/top-accounts")
+
+
+def test_analytics_inbox_conversations(client):
+    sq, calls = client
+    sq.analytics.inbox_conversations()
+    assert calls[-1] == ("GET", "/v1/analytics/inbox/conversations")
+
+
+def test_analytics_inbox_conversation_detail(client):
+    sq, calls = client
+    sq.analytics.inbox_conversation_detail("test-id")
+    assert calls[-1] == ("GET", "/v1/analytics/inbox/conversations/test-id")
+
+
 def test_articles_generate(client):
     sq, calls = client
     sq.articles.generate({})
@@ -143,6 +185,48 @@ def test_audio_get(client):
     sq, calls = client
     sq.audio.get("test-id")
     assert calls[-1] == ("GET", "/v1/audio/test-id")
+
+
+def test_automations_list(client):
+    sq, calls = client
+    sq.automations.list()
+    assert calls[-1] == ("GET", "/v1/automations")
+
+
+def test_automations_get(client):
+    sq, calls = client
+    sq.automations.get("test-id")
+    assert calls[-1] == ("GET", "/v1/automations/test-id")
+
+
+def test_automations_activate(client):
+    sq, calls = client
+    sq.automations.activate("test-id")
+    assert calls[-1] == ("POST", "/v1/automations/test-id/activate")
+
+
+def test_automations_deactivate(client):
+    sq, calls = client
+    sq.automations.deactivate("test-id")
+    assert calls[-1] == ("POST", "/v1/automations/test-id/deactivate")
+
+
+def test_automations_trigger(client):
+    sq, calls = client
+    sq.automations.trigger("test-id", {})
+    assert calls[-1] == ("POST", "/v1/automations/test-id/trigger")
+
+
+def test_automations_list_runs(client):
+    sq, calls = client
+    sq.automations.list_runs("test-id")
+    assert calls[-1] == ("GET", "/v1/automations/test-id/runs")
+
+
+def test_automations_get_run(client):
+    sq, calls = client
+    sq.automations.get_run("test-id", "test-id")
+    assert calls[-1] == ("GET", "/v1/automations/test-id/runs/test-id")
 
 
 def test_chatbots_list(client):
@@ -239,6 +323,18 @@ def test_content_generate_caption(client):
     sq, calls = client
     sq.content.generate_caption({})
     assert calls[-1] == ("POST", "/v1/content/caption")
+
+
+def test_crm_delete_contact(client):
+    sq, calls = client
+    sq.crm.delete_contact("test-id")
+    assert calls[-1] == ("DELETE", "/v1/contacts/test-id")
+
+
+def test_crm_bulk_import_contacts(client):
+    sq, calls = client
+    sq.crm.bulk_import_contacts({})
+    assert calls[-1] == ("POST", "/v1/contacts/bulk")
 
 
 def test_contacts_list(client):
@@ -541,6 +637,24 @@ def test_profiles_get_account_billing(client):
     assert calls[-1] == ("GET", "/v1/me/account-billing")
 
 
+def test_reviews_list(client):
+    sq, calls = client
+    sq.reviews.list()
+    assert calls[-1] == ("GET", "/v1/reviews")
+
+
+def test_reviews_reply_to(client):
+    sq, calls = client
+    sq.reviews.reply_to("test-id", {})
+    assert calls[-1] == ("POST", "/v1/reviews/test-id/reply")
+
+
+def test_reviews_sync(client):
+    sq, calls = client
+    sq.reviews.sync({})
+    assert calls[-1] == ("POST", "/v1/reviews/sync")
+
+
 def test_seo_keyword_research(client):
     sq, calls = client
     sq.seo.keyword_research({})
@@ -707,6 +821,12 @@ def test_social_update_account(client):
     sq, calls = client
     sq.social.update_account("test-id", {})
     assert calls[-1] == ("PATCH", "/v1/social/accounts/test-id")
+
+
+def test_social_disconnect_account(client):
+    sq, calls = client
+    sq.social.disconnect_account("test-id")
+    assert calls[-1] == ("DELETE", "/v1/social/accounts/test-id")
 
 
 def test_social_get_account_health(client):
@@ -881,6 +1001,24 @@ def test_social_delete_account_group(client):
     sq, calls = client
     sq.social.delete_account_group("test-id")
     assert calls[-1] == ("DELETE", "/v1/social/account-groups/test-id")
+
+
+def test_social_get_conversation(client):
+    sq, calls = client
+    sq.social.get_conversation("test-id")
+    assert calls[-1] == ("GET", "/v1/social/conversations/test-id")
+
+
+def test_social_update_conversation(client):
+    sq, calls = client
+    sq.social.update_conversation("test-id", {})
+    assert calls[-1] == ("PATCH", "/v1/social/conversations/test-id")
+
+
+def test_social_search_conversations(client):
+    sq, calls = client
+    sq.social.search_conversations()
+    assert calls[-1] == ("GET", "/v1/social/conversations/search")
 
 
 def test_urls_shorten(client):

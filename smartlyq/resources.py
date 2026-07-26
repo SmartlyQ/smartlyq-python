@@ -83,6 +83,34 @@ class AnalyticsResource:
         """Post metric timeline `GET /analytics/posts/{post_id}/timeline`"""
         return self._client.request("GET", f"/analytics/posts/{quote(post_id, safe='')}/timeline", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def inbox_volume(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Inbox volume `GET /analytics/inbox/volume`"""
+        return self._client.request("GET", "/analytics/inbox/volume", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def inbox_heatmap(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Inbox heatmap `GET /analytics/inbox/heatmap`"""
+        return self._client.request("GET", "/analytics/inbox/heatmap", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def inbox_source_breakdown(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Inbox source breakdown `GET /analytics/inbox/source-breakdown`"""
+        return self._client.request("GET", "/analytics/inbox/source-breakdown", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def inbox_response_time(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Inbox response time `GET /analytics/inbox/response-time`"""
+        return self._client.request("GET", "/analytics/inbox/response-time", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def inbox_top_accounts(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Inbox top accounts `GET /analytics/inbox/top-accounts`"""
+        return self._client.request("GET", "/analytics/inbox/top-accounts", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def inbox_conversations(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Inbox conversation stats `GET /analytics/inbox/conversations`"""
+        return self._client.request("GET", "/analytics/inbox/conversations", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def inbox_conversation_detail(self, conversation_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Conversation analytics `GET /analytics/inbox/conversations/{conversation_id}`"""
+        return self._client.request("GET", f"/analytics/inbox/conversations/{quote(conversation_id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
 
 class ArticlesResource:
     """Articles endpoints."""
@@ -124,6 +152,41 @@ class AudioResource:
     def get(self, audio_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Get audio `GET /audio/{audio_id}`"""
         return self._client.request("GET", f"/audio/{quote(audio_id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+
+class AutomationsResource:
+    """Automations endpoints."""
+
+    def __init__(self, client: CoreClient):
+        self._client = client
+
+    def list(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List automations `GET /automations`"""
+        return self._client.request("GET", "/automations", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def get(self, automation_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get automation `GET /automations/{automation_id}`"""
+        return self._client.request("GET", f"/automations/{quote(automation_id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def activate(self, automation_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Activate automation `POST /automations/{automation_id}/activate`"""
+        return self._client.request("POST", f"/automations/{quote(automation_id, safe='')}/activate", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def deactivate(self, automation_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Pause automation `POST /automations/{automation_id}/deactivate`"""
+        return self._client.request("POST", f"/automations/{quote(automation_id, safe='')}/deactivate", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def trigger(self, automation_id: str, body: dict | None = None, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Trigger automation `POST /automations/{automation_id}/trigger`"""
+        return self._client.request("POST", f"/automations/{quote(automation_id, safe='')}/trigger", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def list_runs(self, automation_id: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List runs `GET /automations/{automation_id}/runs`"""
+        return self._client.request("GET", f"/automations/{quote(automation_id, safe='')}/runs", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def get_run(self, automation_id: str, run_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get run `GET /automations/{automation_id}/runs/{run_id}`"""
+        return self._client.request("GET", f"/automations/{quote(automation_id, safe='')}/runs/{quote(run_id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
 
 class ChatbotsResource:
@@ -209,6 +272,21 @@ class ContentResource:
     def generate_caption(self, body: dict | None = None, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Generate a social caption `POST /content/caption`"""
         return self._client.request("POST", "/content/caption", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+
+class CrmResource:
+    """CRM endpoints."""
+
+    def __init__(self, client: CoreClient):
+        self._client = client
+
+    def delete_contact(self, id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Delete contact `DELETE /contacts/{id}`"""
+        return self._client.request("DELETE", f"/contacts/{quote(id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def bulk_import_contacts(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Bulk import contacts `POST /contacts/bulk`"""
+        return self._client.request("POST", "/contacts/bulk", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
 
 class ContactsResource:
@@ -474,6 +552,25 @@ class ProfilesResource:
         return self._client.request("GET", "/me/account-billing", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
 
+class ReviewsResource:
+    """Reviews endpoints."""
+
+    def __init__(self, client: CoreClient):
+        self._client = client
+
+    def list(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List reviews `GET /reviews`"""
+        return self._client.request("GET", "/reviews", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def reply_to(self, review_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Reply to review `POST /reviews/{review_id}/reply`"""
+        return self._client.request("POST", f"/reviews/{quote(review_id, safe='')}/reply", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def sync(self, body: dict | None = None, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Sync reviews `POST /reviews/sync`"""
+        return self._client.request("POST", "/reviews/sync", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+
 class SeoResource:
     """SEO endpoints."""
 
@@ -606,6 +703,10 @@ class SocialResource:
         """Rename account `PATCH /social/accounts/{account_id}`"""
         return self._client.request("PATCH", f"/social/accounts/{quote(account_id, safe='')}", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def disconnect_account(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Disconnect a social account `DELETE /social/accounts/{account_id}`"""
+        return self._client.request("DELETE", f"/social/accounts/{quote(account_id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
     def get_account_health(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Account health `GET /social/accounts/{account_id}/health`"""
         return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/health", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
@@ -721,6 +822,18 @@ class SocialResource:
     def delete_account_group(self, group_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Delete account group `DELETE /social/account-groups/{group_id}`"""
         return self._client.request("DELETE", f"/social/account-groups/{quote(group_id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def get_conversation(self, conversation_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get conversation `GET /social/conversations/{conversation_id}`"""
+        return self._client.request("GET", f"/social/conversations/{quote(conversation_id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def update_conversation(self, conversation_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Archive / reopen conversation `PATCH /social/conversations/{conversation_id}`"""
+        return self._client.request("PATCH", f"/social/conversations/{quote(conversation_id, safe='')}", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def search_conversations(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Search conversations `GET /social/conversations/search`"""
+        return self._client.request("GET", "/social/conversations/search", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
 
 class UrlsResource:
@@ -886,9 +999,11 @@ def create_resources(client: CoreClient) -> dict[str, Any]:
         "analytics": AnalyticsResource(client),
         "articles": ArticlesResource(client),
         "audio": AudioResource(client),
+        "automations": AutomationsResource(client),
         "chatbots": ChatbotsResource(client),
         "comments": CommentsResource(client),
         "content": ContentResource(client),
+        "crm": CrmResource(client),
         "contacts": ContactsResource(client),
         "custom_fields": CustomFieldsResource(client),
         "opportunities": OpportunitiesResource(client),
@@ -898,6 +1013,7 @@ def create_resources(client: CoreClient) -> dict[str, Any]:
         "media": MediaResource(client),
         "presentations": PresentationsResource(client),
         "profiles": ProfilesResource(client),
+        "reviews": ReviewsResource(client),
         "seo": SeoResource(client),
         "shorts": ShortsResource(client),
         "social": SocialResource(client),

@@ -121,6 +121,13 @@ All methods below are available on the client. Full request/response documentati
 | `sq.analytics.content_decay(query=None)` | `GET /analytics/content-decay` | Content decay |
 | `sq.analytics.posting_frequency(query=None)` | `GET /analytics/posting-frequency` | Posting frequency vs engagement |
 | `sq.analytics.post_timeline(post_id)` | `GET /analytics/posts/{post_id}/timeline` | Post metric timeline |
+| `sq.analytics.inbox_volume(query=None)` | `GET /analytics/inbox/volume` | Inbox volume |
+| `sq.analytics.inbox_heatmap(query=None)` | `GET /analytics/inbox/heatmap` | Inbox heatmap |
+| `sq.analytics.inbox_source_breakdown(query=None)` | `GET /analytics/inbox/source-breakdown` | Inbox source breakdown |
+| `sq.analytics.inbox_response_time(query=None)` | `GET /analytics/inbox/response-time` | Inbox response time |
+| `sq.analytics.inbox_top_accounts(query=None)` | `GET /analytics/inbox/top-accounts` | Inbox top accounts |
+| `sq.analytics.inbox_conversations(query=None)` | `GET /analytics/inbox/conversations` | Inbox conversation stats |
+| `sq.analytics.inbox_conversation_detail(conversation_id)` | `GET /analytics/inbox/conversations/{conversation_id}` | Conversation analytics |
 
 ### Articles
 
@@ -138,6 +145,18 @@ All methods below are available on the client. Full request/response documentati
 | `sq.audio.text_to_speech(body)` | `POST /audio/text-to-speech` | Text to speech |
 | `sq.audio.speech_to_text(body)` | `POST /audio/speech-to-text` | Speech to text |
 | `sq.audio.get(audio_id)` | `GET /audio/{audio_id}` | Get audio |
+
+### Automations
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.automations.list(query=None)` | `GET /automations` | List automations |
+| `sq.automations.get(automation_id)` | `GET /automations/{automation_id}` | Get automation |
+| `sq.automations.activate(automation_id)` | `POST /automations/{automation_id}/activate` | Activate automation |
+| `sq.automations.deactivate(automation_id)` | `POST /automations/{automation_id}/deactivate` | Pause automation |
+| `sq.automations.trigger(automation_id, body=None)` | `POST /automations/{automation_id}/trigger` | Trigger automation |
+| `sq.automations.list_runs(automation_id, query=None)` | `GET /automations/{automation_id}/runs` | List runs |
+| `sq.automations.get_run(automation_id, run_id)` | `GET /automations/{automation_id}/runs/{run_id}` | Get run |
 
 ### Chatbot
 
@@ -169,6 +188,13 @@ All methods below are available on the client. Full request/response documentati
 | --- | --- | --- |
 | `sq.content.rewrite(body)` | `POST /content/rewrite` | Rewrite content |
 | `sq.content.generate_caption(body=None)` | `POST /content/caption` | Generate a social caption |
+
+### CRM
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.crm.delete_contact(id)` | `DELETE /contacts/{id}` | Delete contact |
+| `sq.crm.bulk_import_contacts(body)` | `POST /contacts/bulk` | Bulk import contacts |
 
 ### CRM Contacts
 
@@ -265,6 +291,14 @@ All methods below are available on the client. Full request/response documentati
 | `sq.profiles.create_connect_url(id, platform, body=None)` | `POST /profiles/{id}/connect/{platform}` | Get a raw connect URL for one platform |
 | `sq.profiles.get_account_billing()` | `GET /me/account-billing` | Account billing summary |
 
+### Reviews
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.reviews.list(query=None)` | `GET /reviews` | List reviews |
+| `sq.reviews.reply_to(review_id, body)` | `POST /reviews/{review_id}/reply` | Reply to review |
+| `sq.reviews.sync(body=None)` | `POST /reviews/sync` | Sync reviews |
+
 ### SEO
 
 | Method | Endpoint | Description |
@@ -307,6 +341,7 @@ All methods below are available on the client. Full request/response documentati
 | `sq.social.update_post(post_id, body)` | `PATCH /social/posts/{post_id}` | Update social post |
 | `sq.social.delete_post(post_id)` | `DELETE /social/posts/{post_id}` | Delete social post |
 | `sq.social.update_account(account_id, body)` | `PATCH /social/accounts/{account_id}` | Rename account |
+| `sq.social.disconnect_account(account_id)` | `DELETE /social/accounts/{account_id}` | Disconnect a social account |
 | `sq.social.get_account_health(account_id)` | `GET /social/accounts/{account_id}/health` | Account health |
 | `sq.social.get_account_reconnect_url(account_id)` | `GET /social/accounts/{account_id}/reconnect-url` | Account reconnect URL |
 | `sq.social.pause_account(account_id)` | `POST /social/accounts/{account_id}/pause` | Pause posting to an account |
@@ -336,6 +371,9 @@ All methods below are available on the client. Full request/response documentati
 | `sq.social.get_account_group(group_id)` | `GET /social/account-groups/{group_id}` | Get account group |
 | `sq.social.update_account_group(group_id, body)` | `PUT /social/account-groups/{group_id}` | Update account group |
 | `sq.social.delete_account_group(group_id)` | `DELETE /social/account-groups/{group_id}` | Delete account group |
+| `sq.social.get_conversation(conversation_id)` | `GET /social/conversations/{conversation_id}` | Get conversation |
+| `sq.social.update_conversation(conversation_id, body)` | `PATCH /social/conversations/{conversation_id}` | Archive / reopen conversation |
+| `sq.social.search_conversations(query=None)` | `GET /social/conversations/search` | Search conversations |
 
 ### URLs
 
