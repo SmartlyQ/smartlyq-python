@@ -566,6 +566,10 @@ class ReviewsResource:
         """Reply to review `POST /reviews/{review_id}/reply`"""
         return self._client.request("POST", f"/reviews/{quote(review_id, safe='')}/reply", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def delete_reply(self, review_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Delete review reply `DELETE /reviews/{review_id}/reply`"""
+        return self._client.request("DELETE", f"/reviews/{quote(review_id, safe='')}/reply", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
     def sync(self, body: dict | None = None, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Sync reviews `POST /reviews/sync`"""
         return self._client.request("POST", "/reviews/sync", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
@@ -878,6 +882,18 @@ class SocialResource:
     def facebook_post_reactions(self, account_id: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Facebook post reactions `GET /social/accounts/{account_id}/facebook/post-reactions`"""
         return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/facebook/post-reactions", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def instagram_story_insights(self, account_id: str, story_id: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Instagram story insights `GET /social/accounts/{account_id}/instagram/stories/{story_id}/insights`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/instagram/stories/{quote(story_id, safe='')}/insights", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def x_retweet(self, account_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Retweet on X `POST /social/accounts/{account_id}/x/retweets`"""
+        return self._client.request("POST", f"/social/accounts/{quote(account_id, safe='')}/x/retweets", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def x_unretweet(self, account_id: str, tweet_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Undo retweet `DELETE /social/accounts/{account_id}/x/retweets/{tweet_id}`"""
+        return self._client.request("DELETE", f"/social/accounts/{quote(account_id, safe='')}/x/retweets/{quote(tweet_id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
 
 class UrlsResource:

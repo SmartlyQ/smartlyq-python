@@ -297,6 +297,7 @@ All methods below are available on the client. Full request/response documentati
 | --- | --- | --- |
 | `sq.reviews.list(query=None)` | `GET /reviews` | List reviews |
 | `sq.reviews.reply_to(review_id, body)` | `POST /reviews/{review_id}/reply` | Reply to review |
+| `sq.reviews.delete_reply(review_id)` | `DELETE /reviews/{review_id}/reply` | Delete review reply |
 | `sq.reviews.sync(body=None)` | `POST /reviews/sync` | Sync reviews |
 
 ### SEO
@@ -385,6 +386,9 @@ All methods below are available on the client. Full request/response documentati
 | `sq.social.reddit_subreddit_rules(account_id, subreddit)` | `GET /social/accounts/{account_id}/reddit/subreddits/{subreddit}/rules` | Subreddit rules |
 | `sq.social.instagram_stories(account_id)` | `GET /social/accounts/{account_id}/instagram/stories` | Instagram stories |
 | `sq.social.facebook_post_reactions(account_id, query=None)` | `GET /social/accounts/{account_id}/facebook/post-reactions` | Facebook post reactions |
+| `sq.social.instagram_story_insights(account_id, story_id, query=None)` | `GET /social/accounts/{account_id}/instagram/stories/{story_id}/insights` | Instagram story insights |
+| `sq.social.x_retweet(account_id, body)` | `POST /social/accounts/{account_id}/x/retweets` | Retweet on X |
+| `sq.social.x_unretweet(account_id, tweet_id)` | `DELETE /social/accounts/{account_id}/x/retweets/{tweet_id}` | Undo retweet |
 
 ### URLs
 

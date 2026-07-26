@@ -649,6 +649,12 @@ def test_reviews_reply_to(client):
     assert calls[-1] == ("POST", "/v1/reviews/test-id/reply")
 
 
+def test_reviews_delete_reply(client):
+    sq, calls = client
+    sq.reviews.delete_reply("test-id")
+    assert calls[-1] == ("DELETE", "/v1/reviews/test-id/reply")
+
+
 def test_reviews_sync(client):
     sq, calls = client
     sq.reviews.sync({})
@@ -1085,6 +1091,24 @@ def test_social_facebook_post_reactions(client):
     sq, calls = client
     sq.social.facebook_post_reactions("test-id")
     assert calls[-1] == ("GET", "/v1/social/accounts/test-id/facebook/post-reactions")
+
+
+def test_social_instagram_story_insights(client):
+    sq, calls = client
+    sq.social.instagram_story_insights("test-id", "test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/instagram/stories/test-id/insights")
+
+
+def test_social_x_retweet(client):
+    sq, calls = client
+    sq.social.x_retweet("test-id", {})
+    assert calls[-1] == ("POST", "/v1/social/accounts/test-id/x/retweets")
+
+
+def test_social_x_unretweet(client):
+    sq, calls = client
+    sq.social.x_unretweet("test-id", "test-id")
+    assert calls[-1] == ("DELETE", "/v1/social/accounts/test-id/x/retweets/test-id")
 
 
 def test_urls_shorten(client):
