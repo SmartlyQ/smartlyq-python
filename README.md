@@ -468,6 +468,17 @@ All methods below are available on the client. Full request/response documentati
 | `sq.webhooks.list_logs(query=None)` | `GET /webhooks/logs` | List webhook delivery logs |
 | `sq.webhooks.test(id)` | `POST /webhooks/{id}/test` | Send test webhook |
 
+### WhatsApp
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.whats_app.send_whats_app_message(body)` | `POST /whatsapp/messages` | Send a WhatsApp message |
+| `sq.whats_app.list_whats_app_templates(query=None)` | `GET /whatsapp/templates` | List message templates |
+| `sq.whats_app.create_whats_app_template(body)` | `POST /whatsapp/templates` | Create a message template |
+| `sq.whats_app.get_whats_app_business_profile(query=None)` | `GET /whatsapp/business-profile` | Get business profile |
+| `sq.whats_app.update_whats_app_business_profile(body)` | `PATCH /whatsapp/business-profile` | Update business profile |
+| `sq.whats_app.list_whats_app_phone_numbers(query=None)` | `GET /whatsapp/phone-numbers` | List phone numbers |
+
 ### Workspaces
 
 | Method | Endpoint | Description |

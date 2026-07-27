@@ -1169,6 +1169,37 @@ class WebhooksResource:
         return self._client.request("POST", f"/webhooks/{quote(id, safe='')}/test", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
 
+class WhatsAppResource:
+    """WhatsApp endpoints."""
+
+    def __init__(self, client: CoreClient):
+        self._client = client
+
+    def send_whats_app_message(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Send a WhatsApp message `POST /whatsapp/messages`"""
+        return self._client.request("POST", "/whatsapp/messages", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def list_whats_app_templates(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List message templates `GET /whatsapp/templates`"""
+        return self._client.request("GET", "/whatsapp/templates", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def create_whats_app_template(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Create a message template `POST /whatsapp/templates`"""
+        return self._client.request("POST", "/whatsapp/templates", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def get_whats_app_business_profile(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get business profile `GET /whatsapp/business-profile`"""
+        return self._client.request("GET", "/whatsapp/business-profile", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def update_whats_app_business_profile(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Update business profile `PATCH /whatsapp/business-profile`"""
+        return self._client.request("PATCH", "/whatsapp/business-profile", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def list_whats_app_phone_numbers(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List phone numbers `GET /whatsapp/phone-numbers`"""
+        return self._client.request("GET", "/whatsapp/phone-numbers", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+
 class WorkspacesResource:
     """Workspaces endpoints."""
 
@@ -1252,5 +1283,6 @@ def create_resources(client: CoreClient) -> dict[str, Any]:
         "urls": UrlsResource(client),
         "videos": VideosResource(client),
         "webhooks": WebhooksResource(client),
+        "whats_app": WhatsAppResource(client),
         "workspaces": WorkspacesResource(client),
     }

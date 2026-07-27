@@ -1489,6 +1489,42 @@ def test_webhooks_test(client):
     assert calls[-1] == ("POST", "/v1/webhooks/test-id/test")
 
 
+def test_whats_app_send_whats_app_message(client):
+    sq, calls = client
+    sq.whats_app.send_whats_app_message({})
+    assert calls[-1] == ("POST", "/v1/whatsapp/messages")
+
+
+def test_whats_app_list_whats_app_templates(client):
+    sq, calls = client
+    sq.whats_app.list_whats_app_templates()
+    assert calls[-1] == ("GET", "/v1/whatsapp/templates")
+
+
+def test_whats_app_create_whats_app_template(client):
+    sq, calls = client
+    sq.whats_app.create_whats_app_template({})
+    assert calls[-1] == ("POST", "/v1/whatsapp/templates")
+
+
+def test_whats_app_get_whats_app_business_profile(client):
+    sq, calls = client
+    sq.whats_app.get_whats_app_business_profile()
+    assert calls[-1] == ("GET", "/v1/whatsapp/business-profile")
+
+
+def test_whats_app_update_whats_app_business_profile(client):
+    sq, calls = client
+    sq.whats_app.update_whats_app_business_profile({})
+    assert calls[-1] == ("PATCH", "/v1/whatsapp/business-profile")
+
+
+def test_whats_app_list_whats_app_phone_numbers(client):
+    sq, calls = client
+    sq.whats_app.list_whats_app_phone_numbers()
+    assert calls[-1] == ("GET", "/v1/whatsapp/phone-numbers")
+
+
 def test_workspaces_list(client):
     sq, calls = client
     sq.workspaces.list()
