@@ -489,6 +489,10 @@ class MediaResource:
         """Get presigned upload URL `POST /media/upload-url`"""
         return self._client.request("POST", "/media/upload-url", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def upload_direct(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Upload a file directly `POST /media/upload-direct`"""
+        return self._client.request("POST", "/media/upload-direct", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
 
 class PresentationsResource:
     """Presentations endpoints."""
@@ -530,6 +534,10 @@ class ProfilesResource:
     def get(self, id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Get a profile `GET /profiles/{id}`"""
         return self._client.request("GET", f"/profiles/{quote(id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def update(self, id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Update a profile `PATCH /profiles/{id}`"""
+        return self._client.request("PATCH", f"/profiles/{quote(id, safe='')}", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
     def delete(self, id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Delete a profile `DELETE /profiles/{id}`"""

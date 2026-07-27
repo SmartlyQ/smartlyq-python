@@ -565,6 +565,12 @@ def test_media_get_upload_url(client):
     assert calls[-1] == ("POST", "/v1/media/upload-url")
 
 
+def test_media_upload_direct(client):
+    sq, calls = client
+    sq.media.upload_direct({})
+    assert calls[-1] == ("POST", "/v1/media/upload-direct")
+
+
 def test_presentations_generate(client):
     sq, calls = client
     sq.presentations.generate({})
@@ -605,6 +611,12 @@ def test_profiles_get(client):
     sq, calls = client
     sq.profiles.get("test-id")
     assert calls[-1] == ("GET", "/v1/profiles/test-id")
+
+
+def test_profiles_update(client):
+    sq, calls = client
+    sq.profiles.update("test-id", {})
+    assert calls[-1] == ("PATCH", "/v1/profiles/test-id")
 
 
 def test_profiles_delete(client):
