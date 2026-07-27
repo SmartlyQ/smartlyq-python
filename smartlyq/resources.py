@@ -25,6 +25,10 @@ class AccountResource:
         """Get wallet balance `GET /me/balance`"""
         return self._client.request("GET", "/me/balance", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def get_billing(self, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Billing overview `GET /me/billing`"""
+        return self._client.request("GET", "/me/billing", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
 
 class CaptainResource:
     """AI Captain endpoints."""
@@ -258,6 +262,10 @@ class CommentsResource:
         """Delete a comment `DELETE /social/comments/{comment_id}`"""
         return self._client.request("DELETE", f"/social/comments/{quote(comment_id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def get_post(self, post_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get one post's comments (threaded) `GET /social/comments/{post_id}`"""
+        return self._client.request("GET", f"/social/comments/{quote(post_id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
 
 class ContentResource:
     """Content endpoints."""
@@ -342,6 +350,14 @@ class ContactsResource:
     def add_message(self, id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Log a message on a contact's timeline `POST /contacts/{id}/messages`"""
         return self._client.request("POST", f"/contacts/{quote(id, safe='')}/messages", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def set_field(self, id: str, slug: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Set one custom field `PUT /contacts/{id}/fields/{slug}`"""
+        return self._client.request("PUT", f"/contacts/{quote(id, safe='')}/fields/{quote(slug, safe='')}", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def clear_field(self, id: str, slug: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Clear one custom field `DELETE /contacts/{id}/fields/{slug}`"""
+        return self._client.request("DELETE", f"/contacts/{quote(id, safe='')}/fields/{quote(slug, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
 
 class CustomFieldsResource:

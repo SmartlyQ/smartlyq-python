@@ -100,6 +100,7 @@ All methods below are available on the client. Full request/response documentati
 | `sq.account.get_me()` | `GET /me` | Get current user profile |
 | `sq.account.get_me_usage(query=None)` | `GET /me/usage` | Get usage summary |
 | `sq.account.get_me_balance()` | `GET /me/balance` | Get wallet balance |
+| `sq.account.get_billing()` | `GET /me/billing` | Billing overview |
 
 ### AI Captain
 
@@ -181,6 +182,7 @@ All methods below are available on the client. Full request/response documentati
 | `sq.comments.reply_to(comment_id, body)` | `POST /social/comments/{comment_id}/reply` | Reply to a comment |
 | `sq.comments.hide(comment_id)` | `POST /social/comments/{comment_id}/hide` | Hide or unhide a comment |
 | `sq.comments.delete(comment_id)` | `DELETE /social/comments/{comment_id}` | Delete a comment |
+| `sq.comments.get_post(post_id)` | `GET /social/comments/{post_id}` | Get one post's comments (threaded) |
 
 ### Content
 
@@ -212,6 +214,8 @@ All methods below are available on the client. Full request/response documentati
 | `sq.contacts.add_note(id, body)` | `POST /contacts/{id}/notes` | Add a note to a contact |
 | `sq.contacts.enroll(id, body)` | `POST /contacts/{id}/enroll` | Enroll a contact in an automation |
 | `sq.contacts.add_message(id, body)` | `POST /contacts/{id}/messages` | Log a message on a contact's timeline |
+| `sq.contacts.set_field(id, slug, body)` | `PUT /contacts/{id}/fields/{slug}` | Set one custom field |
+| `sq.contacts.clear_field(id, slug)` | `DELETE /contacts/{id}/fields/{slug}` | Clear one custom field |
 
 ### CRM Custom Fields
 

@@ -37,6 +37,12 @@ def test_account_get_me_balance(client):
     assert calls[-1] == ("GET", "/v1/me/balance")
 
 
+def test_account_get_billing(client):
+    sq, calls = client
+    sq.account.get_billing()
+    assert calls[-1] == ("GET", "/v1/me/billing")
+
+
 def test_captain_send_message(client):
     sq, calls = client
     sq.captain.send_message({})
@@ -313,6 +319,12 @@ def test_comments_delete(client):
     assert calls[-1] == ("DELETE", "/v1/social/comments/test-id")
 
 
+def test_comments_get_post(client):
+    sq, calls = client
+    sq.comments.get_post("test-id")
+    assert calls[-1] == ("GET", "/v1/social/comments/test-id")
+
+
 def test_content_rewrite(client):
     sq, calls = client
     sq.content.rewrite({})
@@ -407,6 +419,18 @@ def test_contacts_add_message(client):
     sq, calls = client
     sq.contacts.add_message("test-id", {})
     assert calls[-1] == ("POST", "/v1/contacts/test-id/messages")
+
+
+def test_contacts_set_field(client):
+    sq, calls = client
+    sq.contacts.set_field("test-id", "test-id", {})
+    assert calls[-1] == ("PUT", "/v1/contacts/test-id/fields/test-id")
+
+
+def test_contacts_clear_field(client):
+    sq, calls = client
+    sq.contacts.clear_field("test-id", "test-id")
+    assert calls[-1] == ("DELETE", "/v1/contacts/test-id/fields/test-id")
 
 
 def test_custom_fields_list(client):
