@@ -910,6 +910,10 @@ class SocialResource:
         """Pinterest boards `GET /social/accounts/{account_id}/pinterest/boards`"""
         return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/pinterest/boards", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def create_pinterest_board(self, account_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Create a Pinterest board `POST /social/accounts/{account_id}/pinterest/boards`"""
+        return self._client.request("POST", f"/social/accounts/{quote(account_id, safe='')}/pinterest/boards", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
     def youtube_playlists(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """YouTube playlists `GET /social/accounts/{account_id}/youtube/playlists`"""
         return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/youtube/playlists", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
@@ -1102,6 +1106,30 @@ class SocialResource:
         """Select connection target `POST /social/accounts/{account_id}/connect-select`"""
         return self._client.request("POST", f"/social/accounts/{quote(account_id, safe='')}/connect-select", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def get_facebook_page(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get Facebook page details `GET /social/accounts/{account_id}/facebook/page`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/facebook/page", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def update_facebook_page(self, account_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Update Facebook page details `PATCH /social/accounts/{account_id}/facebook/page`"""
+        return self._client.request("PATCH", f"/social/accounts/{quote(account_id, safe='')}/facebook/page", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def update_youtube_playlist(self, account_id: str, playlist_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Update a YouTube playlist `PATCH /social/accounts/{account_id}/youtube/playlists/{playlist_id}`"""
+        return self._client.request("PATCH", f"/social/accounts/{quote(account_id, safe='')}/youtube/playlists/{quote(playlist_id, safe='')}", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def list_mentions(self, account_id: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List mentions `GET /social/accounts/{account_id}/mentions`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/mentions", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def reply_to_mention(self, account_id: str, mention_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Reply to a mention `POST /social/accounts/{account_id}/mentions/{mention_id}/reply`"""
+        return self._client.request("POST", f"/social/accounts/{quote(account_id, safe='')}/mentions/{quote(mention_id, safe='')}/reply", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def list_reddit_flairs(self, account_id: str, subreddit: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List subreddit post flairs `GET /social/accounts/{account_id}/reddit/subreddits/{subreddit}/flairs`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/reddit/subreddits/{quote(subreddit, safe='')}/flairs", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
 
 class UrlsResource:
     """URLs endpoints."""
@@ -1265,6 +1293,14 @@ class WhatsAppResource:
     def update_display_name(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Request a WhatsApp display-name change `POST /whatsapp/business-profile/display-name`"""
         return self._client.request("POST", "/whatsapp/business-profile/display-name", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def list_template_library(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Browse the shared template library `GET /whatsapp/template-library`"""
+        return self._client.request("GET", "/whatsapp/template-library", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def create_template_from_library(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Adopt a library template `POST /whatsapp/templates/from-library`"""
+        return self._client.request("POST", "/whatsapp/templates/from-library", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
 
 class WorkspacesResource:

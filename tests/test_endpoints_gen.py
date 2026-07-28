@@ -1123,6 +1123,12 @@ def test_social_pinterest_boards(client):
     assert calls[-1] == ("GET", "/v1/social/accounts/test-id/pinterest/boards")
 
 
+def test_social_create_pinterest_board(client):
+    sq, calls = client
+    sq.social.create_pinterest_board("test-id", {})
+    assert calls[-1] == ("POST", "/v1/social/accounts/test-id/pinterest/boards")
+
+
 def test_social_youtube_playlists(client):
     sq, calls = client
     sq.social.youtube_playlists("test-id")
@@ -1411,6 +1417,42 @@ def test_social_connect_select(client):
     assert calls[-1] == ("POST", "/v1/social/accounts/test-id/connect-select")
 
 
+def test_social_get_facebook_page(client):
+    sq, calls = client
+    sq.social.get_facebook_page("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/facebook/page")
+
+
+def test_social_update_facebook_page(client):
+    sq, calls = client
+    sq.social.update_facebook_page("test-id", {})
+    assert calls[-1] == ("PATCH", "/v1/social/accounts/test-id/facebook/page")
+
+
+def test_social_update_youtube_playlist(client):
+    sq, calls = client
+    sq.social.update_youtube_playlist("test-id", "test-id", {})
+    assert calls[-1] == ("PATCH", "/v1/social/accounts/test-id/youtube/playlists/test-id")
+
+
+def test_social_list_mentions(client):
+    sq, calls = client
+    sq.social.list_mentions("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/mentions")
+
+
+def test_social_reply_to_mention(client):
+    sq, calls = client
+    sq.social.reply_to_mention("test-id", "test-id", {})
+    assert calls[-1] == ("POST", "/v1/social/accounts/test-id/mentions/test-id/reply")
+
+
+def test_social_list_reddit_flairs(client):
+    sq, calls = client
+    sq.social.list_reddit_flairs("test-id", "test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/reddit/subreddits/test-id/flairs")
+
+
 def test_urls_shorten(client):
     sq, calls = client
     sq.urls.shorten({})
@@ -1613,6 +1655,18 @@ def test_whats_app_update_display_name(client):
     sq, calls = client
     sq.whats_app.update_display_name({})
     assert calls[-1] == ("POST", "/v1/whatsapp/business-profile/display-name")
+
+
+def test_whats_app_list_template_library(client):
+    sq, calls = client
+    sq.whats_app.list_template_library()
+    assert calls[-1] == ("GET", "/v1/whatsapp/template-library")
+
+
+def test_whats_app_create_template_from_library(client):
+    sq, calls = client
+    sq.whats_app.create_template_from_library({})
+    assert calls[-1] == ("POST", "/v1/whatsapp/templates/from-library")
 
 
 def test_workspaces_list(client):
