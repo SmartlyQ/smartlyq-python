@@ -151,6 +151,30 @@ def test_analytics_inbox_conversation_detail(client):
     assert calls[-1] == ("GET", "/v1/analytics/inbox/conversations/test-id")
 
 
+def test_analytics_get_youtube_channel_insights(client):
+    sq, calls = client
+    sq.analytics.get_youtube_channel_insights()
+    assert calls[-1] == ("GET", "/v1/analytics/youtube/channel-insights")
+
+
+def test_analytics_get_youtube_daily_views(client):
+    sq, calls = client
+    sq.analytics.get_youtube_daily_views()
+    assert calls[-1] == ("GET", "/v1/analytics/youtube/daily-views")
+
+
+def test_analytics_get_youtube_video_retention(client):
+    sq, calls = client
+    sq.analytics.get_youtube_video_retention()
+    assert calls[-1] == ("GET", "/v1/analytics/youtube/video-retention")
+
+
+def test_analytics_get_youtube_demographics(client):
+    sq, calls = client
+    sq.analytics.get_youtube_demographics()
+    assert calls[-1] == ("GET", "/v1/analytics/youtube/demographics")
+
+
 def test_articles_generate(client):
     sq, calls = client
     sq.articles.generate({})
@@ -523,6 +547,18 @@ def test_messages_mark_conversation_read(client):
     assert calls[-1] == ("POST", "/v1/social/conversations/test-id/read")
 
 
+def test_messages_react_to(client):
+    sq, calls = client
+    sq.messages.react_to("test-id", "test-id", {})
+    assert calls[-1] == ("POST", "/v1/social/conversations/test-id/messages/test-id/reactions")
+
+
+def test_messages_remove_reaction(client):
+    sq, calls = client
+    sq.messages.remove_reaction("test-id", "test-id")
+    assert calls[-1] == ("DELETE", "/v1/social/conversations/test-id/messages/test-id/reactions")
+
+
 def test_images_generate(client):
     sq, calls = client
     sq.images.generate({})
@@ -563,6 +599,12 @@ def test_jobs_cancel(client):
     sq, calls = client
     sq.jobs.cancel("test-id", {})
     assert calls[-1] == ("POST", "/v1/jobs/test-id/cancel")
+
+
+def test_logs_list(client):
+    sq, calls = client
+    sq.logs.list()
+    assert calls[-1] == ("GET", "/v1/logs")
 
 
 def test_media_list(client):
@@ -1399,6 +1441,12 @@ def test_urls_get_stats(client):
     assert calls[-1] == ("GET", "/v1/urls/test-id/stats")
 
 
+def test_urls_update_short(client):
+    sq, calls = client
+    sq.urls.update_short("test-id", {})
+    assert calls[-1] == ("PATCH", "/v1/urls/test-id")
+
+
 def test_videos_list_models(client):
     sq, calls = client
     sq.videos.list_models()
@@ -1489,6 +1537,12 @@ def test_webhooks_test(client):
     assert calls[-1] == ("POST", "/v1/webhooks/test-id/test")
 
 
+def test_webhooks_replay_delivery(client):
+    sq, calls = client
+    sq.webhooks.replay_delivery("test-id")
+    assert calls[-1] == ("POST", "/v1/webhooks/deliveries/test-id/replay")
+
+
 def test_whats_app_send_whats_app_message(client):
     sq, calls = client
     sq.whats_app.send_whats_app_message({})
@@ -1523,6 +1577,42 @@ def test_whats_app_list_whats_app_phone_numbers(client):
     sq, calls = client
     sq.whats_app.list_whats_app_phone_numbers()
     assert calls[-1] == ("GET", "/v1/whatsapp/phone-numbers")
+
+
+def test_whats_app_get_template(client):
+    sq, calls = client
+    sq.whats_app.get_template("test-id")
+    assert calls[-1] == ("GET", "/v1/whatsapp/templates/test-id")
+
+
+def test_whats_app_update_template(client):
+    sq, calls = client
+    sq.whats_app.update_template("test-id", {})
+    assert calls[-1] == ("PATCH", "/v1/whatsapp/templates/test-id")
+
+
+def test_whats_app_delete_template(client):
+    sq, calls = client
+    sq.whats_app.delete_template("test-id")
+    assert calls[-1] == ("DELETE", "/v1/whatsapp/templates/test-id")
+
+
+def test_whats_app_update_profile_photo(client):
+    sq, calls = client
+    sq.whats_app.update_profile_photo({})
+    assert calls[-1] == ("POST", "/v1/whatsapp/business-profile/photo")
+
+
+def test_whats_app_get_display_name(client):
+    sq, calls = client
+    sq.whats_app.get_display_name()
+    assert calls[-1] == ("GET", "/v1/whatsapp/business-profile/display-name")
+
+
+def test_whats_app_update_display_name(client):
+    sq, calls = client
+    sq.whats_app.update_display_name({})
+    assert calls[-1] == ("POST", "/v1/whatsapp/business-profile/display-name")
 
 
 def test_workspaces_list(client):

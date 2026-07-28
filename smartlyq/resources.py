@@ -115,6 +115,22 @@ class AnalyticsResource:
         """Conversation analytics `GET /analytics/inbox/conversations/{conversation_id}`"""
         return self._client.request("GET", f"/analytics/inbox/conversations/{quote(conversation_id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def get_youtube_channel_insights(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """YouTube channel insights `GET /analytics/youtube/channel-insights`"""
+        return self._client.request("GET", "/analytics/youtube/channel-insights", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def get_youtube_daily_views(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """YouTube daily views `GET /analytics/youtube/daily-views`"""
+        return self._client.request("GET", "/analytics/youtube/daily-views", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def get_youtube_video_retention(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """YouTube audience retention `GET /analytics/youtube/video-retention`"""
+        return self._client.request("GET", "/analytics/youtube/video-retention", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def get_youtube_demographics(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """YouTube viewer demographics `GET /analytics/youtube/demographics`"""
+        return self._client.request("GET", "/analytics/youtube/demographics", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
 
 class ArticlesResource:
     """Articles endpoints."""
@@ -440,6 +456,14 @@ class MessagesResource:
         """Mark a conversation read `POST /social/conversations/{conversation_id}/read`"""
         return self._client.request("POST", f"/social/conversations/{quote(conversation_id, safe='')}/read", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def react_to(self, conversation_id: str, message_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """React to a message `POST /social/conversations/{conversation_id}/messages/{message_id}/reactions`"""
+        return self._client.request("POST", f"/social/conversations/{quote(conversation_id, safe='')}/messages/{quote(message_id, safe='')}/reactions", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def remove_reaction(self, conversation_id: str, message_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Remove a message reaction `DELETE /social/conversations/{conversation_id}/messages/{message_id}/reactions`"""
+        return self._client.request("DELETE", f"/social/conversations/{quote(conversation_id, safe='')}/messages/{quote(message_id, safe='')}/reactions", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
 
 class ImagesResource:
     """Images endpoints."""
@@ -481,6 +505,17 @@ class JobsResource:
     def cancel(self, job_id: str, body: dict | None = None, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Cancel job `POST /jobs/{job_id}/cancel`"""
         return self._client.request("POST", f"/jobs/{quote(job_id, safe='')}/cancel", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+
+class LogsResource:
+    """Logs endpoints."""
+
+    def __init__(self, client: CoreClient):
+        self._client = client
+
+    def list(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List developer logs `GET /logs`"""
+        return self._client.request("GET", "/logs", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
 
 class MediaResource:
@@ -1094,6 +1129,10 @@ class UrlsResource:
         """Get short URL stats `GET /urls/{url_id}/stats`"""
         return self._client.request("GET", f"/urls/{quote(url_id, safe='')}/stats", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def update_short(self, id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Update a short URL `PATCH /urls/{id}`"""
+        return self._client.request("PATCH", f"/urls/{quote(id, safe='')}", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
 
 class VideosResource:
     """Videos endpoints."""
@@ -1168,6 +1207,10 @@ class WebhooksResource:
         """Send test webhook `POST /webhooks/{id}/test`"""
         return self._client.request("POST", f"/webhooks/{quote(id, safe='')}/test", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def replay_delivery(self, id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Replay a webhook delivery `POST /webhooks/deliveries/{id}/replay`"""
+        return self._client.request("POST", f"/webhooks/deliveries/{quote(id, safe='')}/replay", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
 
 class WhatsAppResource:
     """WhatsApp endpoints."""
@@ -1198,6 +1241,30 @@ class WhatsAppResource:
     def list_whats_app_phone_numbers(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """List phone numbers `GET /whatsapp/phone-numbers`"""
         return self._client.request("GET", "/whatsapp/phone-numbers", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def get_template(self, name: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get a WhatsApp template `GET /whatsapp/templates/{name}`"""
+        return self._client.request("GET", f"/whatsapp/templates/{quote(name, safe='')}", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def update_template(self, name: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Update a WhatsApp template `PATCH /whatsapp/templates/{name}`"""
+        return self._client.request("PATCH", f"/whatsapp/templates/{quote(name, safe='')}", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def delete_template(self, name: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Delete a WhatsApp template `DELETE /whatsapp/templates/{name}`"""
+        return self._client.request("DELETE", f"/whatsapp/templates/{quote(name, safe='')}", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def update_profile_photo(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Set the WhatsApp profile photo `POST /whatsapp/business-profile/photo`"""
+        return self._client.request("POST", "/whatsapp/business-profile/photo", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def get_display_name(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get the WhatsApp display name `GET /whatsapp/business-profile/display-name`"""
+        return self._client.request("GET", "/whatsapp/business-profile/display-name", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def update_display_name(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Request a WhatsApp display-name change `POST /whatsapp/business-profile/display-name`"""
+        return self._client.request("POST", "/whatsapp/business-profile/display-name", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
 
 class WorkspacesResource:
@@ -1273,6 +1340,7 @@ def create_resources(client: CoreClient) -> dict[str, Any]:
         "messages": MessagesResource(client),
         "images": ImagesResource(client),
         "jobs": JobsResource(client),
+        "logs": LogsResource(client),
         "media": MediaResource(client),
         "presentations": PresentationsResource(client),
         "profiles": ProfilesResource(client),

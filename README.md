@@ -129,6 +129,10 @@ All methods below are available on the client. Full request/response documentati
 | `sq.analytics.inbox_top_accounts(query=None)` | `GET /analytics/inbox/top-accounts` | Inbox top accounts |
 | `sq.analytics.inbox_conversations(query=None)` | `GET /analytics/inbox/conversations` | Inbox conversation stats |
 | `sq.analytics.inbox_conversation_detail(conversation_id)` | `GET /analytics/inbox/conversations/{conversation_id}` | Conversation analytics |
+| `sq.analytics.get_youtube_channel_insights(query=None)` | `GET /analytics/youtube/channel-insights` | YouTube channel insights |
+| `sq.analytics.get_youtube_daily_views(query=None)` | `GET /analytics/youtube/daily-views` | YouTube daily views |
+| `sq.analytics.get_youtube_video_retention(query=None)` | `GET /analytics/youtube/video-retention` | YouTube audience retention |
+| `sq.analytics.get_youtube_demographics(query=None)` | `GET /analytics/youtube/demographics` | YouTube viewer demographics |
 
 ### Articles
 
@@ -246,6 +250,8 @@ All methods below are available on the client. Full request/response documentati
 | `sq.messages.list(conversation_id, query=None)` | `GET /social/conversations/{conversation_id}/messages` | List messages in a conversation |
 | `sq.messages.send(conversation_id, body)` | `POST /social/conversations/{conversation_id}/messages` | Send a direct message |
 | `sq.messages.mark_conversation_read(conversation_id)` | `POST /social/conversations/{conversation_id}/read` | Mark a conversation read |
+| `sq.messages.react_to(conversation_id, message_id, body)` | `POST /social/conversations/{conversation_id}/messages/{message_id}/reactions` | React to a message |
+| `sq.messages.remove_reaction(conversation_id, message_id)` | `DELETE /social/conversations/{conversation_id}/messages/{message_id}/reactions` | Remove a message reaction |
 
 ### Images
 
@@ -263,6 +269,12 @@ All methods below are available on the client. Full request/response documentati
 | `sq.jobs.list(query=None)` | `GET /jobs` | List jobs |
 | `sq.jobs.get(job_id)` | `GET /jobs/{job_id}` | Get job |
 | `sq.jobs.cancel(job_id, body=None)` | `POST /jobs/{job_id}/cancel` | Cancel job |
+
+### Logs
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.logs.list(query=None)` | `GET /logs` | List developer logs |
 
 ### Media
 
@@ -442,6 +454,7 @@ All methods below are available on the client. Full request/response documentati
 | `sq.urls.get(url_id)` | `GET /urls/{url_id}` | Get short URL |
 | `sq.urls.delete(url_id)` | `DELETE /urls/{url_id}` | Delete short URL |
 | `sq.urls.get_stats(url_id)` | `GET /urls/{url_id}/stats` | Get short URL stats |
+| `sq.urls.update_short(id, body)` | `PATCH /urls/{id}` | Update a short URL |
 
 ### Videos
 
@@ -467,6 +480,7 @@ All methods below are available on the client. Full request/response documentati
 | `sq.webhooks.delete(id)` | `DELETE /webhooks/{id}` | Delete webhook |
 | `sq.webhooks.list_logs(query=None)` | `GET /webhooks/logs` | List webhook delivery logs |
 | `sq.webhooks.test(id)` | `POST /webhooks/{id}/test` | Send test webhook |
+| `sq.webhooks.replay_delivery(id)` | `POST /webhooks/deliveries/{id}/replay` | Replay a webhook delivery |
 
 ### WhatsApp
 
@@ -478,6 +492,12 @@ All methods below are available on the client. Full request/response documentati
 | `sq.whats_app.get_whats_app_business_profile(query=None)` | `GET /whatsapp/business-profile` | Get business profile |
 | `sq.whats_app.update_whats_app_business_profile(body)` | `PATCH /whatsapp/business-profile` | Update business profile |
 | `sq.whats_app.list_whats_app_phone_numbers(query=None)` | `GET /whatsapp/phone-numbers` | List phone numbers |
+| `sq.whats_app.get_template(name, query=None)` | `GET /whatsapp/templates/{name}` | Get a WhatsApp template |
+| `sq.whats_app.update_template(name, body)` | `PATCH /whatsapp/templates/{name}` | Update a WhatsApp template |
+| `sq.whats_app.delete_template(name, query=None)` | `DELETE /whatsapp/templates/{name}` | Delete a WhatsApp template |
+| `sq.whats_app.update_profile_photo(body)` | `POST /whatsapp/business-profile/photo` | Set the WhatsApp profile photo |
+| `sq.whats_app.get_display_name(query=None)` | `GET /whatsapp/business-profile/display-name` | Get the WhatsApp display name |
+| `sq.whats_app.update_display_name(body)` | `POST /whatsapp/business-profile/display-name` | Request a WhatsApp display-name change |
 
 ### Workspaces
 
