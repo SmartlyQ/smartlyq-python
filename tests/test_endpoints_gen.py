@@ -247,6 +247,30 @@ def test_automations_trigger(client):
     assert calls[-1] == ("POST", "/v1/automations/test-id/trigger")
 
 
+def test_automations_duplicate(client):
+    sq, calls = client
+    sq.automations.duplicate("test-id")
+    assert calls[-1] == ("POST", "/v1/automations/test-id/duplicate")
+
+
+def test_automations_list_versions(client):
+    sq, calls = client
+    sq.automations.list_versions("test-id")
+    assert calls[-1] == ("GET", "/v1/automations/test-id/versions")
+
+
+def test_automations_get_version(client):
+    sq, calls = client
+    sq.automations.get_version("test-id", "test-id")
+    assert calls[-1] == ("GET", "/v1/automations/test-id/versions/test-id")
+
+
+def test_automations_restore_version(client):
+    sq, calls = client
+    sq.automations.restore_version("test-id", "test-id")
+    assert calls[-1] == ("POST", "/v1/automations/test-id/versions/test-id/restore")
+
+
 def test_automations_list_runs(client):
     sq, calls = client
     sq.automations.list_runs("test-id")
@@ -335,6 +359,24 @@ def test_comments_hide(client):
     sq, calls = client
     sq.comments.hide("test-id")
     assert calls[-1] == ("POST", "/v1/social/comments/test-id/hide")
+
+
+def test_comments_moderate(client):
+    sq, calls = client
+    sq.comments.moderate("test-id", {})
+    assert calls[-1] == ("POST", "/v1/social/comments/test-id/moderate")
+
+
+def test_comments_like(client):
+    sq, calls = client
+    sq.comments.like("test-id")
+    assert calls[-1] == ("POST", "/v1/social/comments/test-id/like")
+
+
+def test_comments_unlike(client):
+    sq, calls = client
+    sq.comments.unlike("test-id")
+    assert calls[-1] == ("DELETE", "/v1/social/comments/test-id/like")
 
 
 def test_comments_delete(client):
@@ -545,6 +587,12 @@ def test_messages_mark_conversation_read(client):
     sq, calls = client
     sq.messages.mark_conversation_read("test-id")
     assert calls[-1] == ("POST", "/v1/social/conversations/test-id/read")
+
+
+def test_messages_delete(client):
+    sq, calls = client
+    sq.messages.delete("test-id", "test-id")
+    assert calls[-1] == ("DELETE", "/v1/social/conversations/test-id/messages/test-id")
 
 
 def test_messages_react_to(client):

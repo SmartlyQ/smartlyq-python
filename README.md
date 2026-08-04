@@ -160,6 +160,10 @@ All methods below are available on the client. Full request/response documentati
 | `sq.automations.activate(automation_id)` | `POST /automations/{automation_id}/activate` | Activate automation |
 | `sq.automations.deactivate(automation_id)` | `POST /automations/{automation_id}/deactivate` | Pause automation |
 | `sq.automations.trigger(automation_id, body=None)` | `POST /automations/{automation_id}/trigger` | Trigger automation |
+| `sq.automations.duplicate(automation_id)` | `POST /automations/{automation_id}/duplicate` | Duplicate an automation |
+| `sq.automations.list_versions(automation_id)` | `GET /automations/{automation_id}/versions` | List automation versions |
+| `sq.automations.get_version(automation_id, version)` | `GET /automations/{automation_id}/versions/{version}` | Get one automation version |
+| `sq.automations.restore_version(automation_id, version)` | `POST /automations/{automation_id}/versions/{version}/restore` | Restore an automation version |
 | `sq.automations.list_runs(automation_id, query=None)` | `GET /automations/{automation_id}/runs` | List runs |
 | `sq.automations.get_run(automation_id, run_id)` | `GET /automations/{automation_id}/runs/{run_id}` | Get run |
 
@@ -185,6 +189,9 @@ All methods below are available on the client. Full request/response documentati
 | `sq.comments.list(query=None)` | `GET /social/comments` | List comments |
 | `sq.comments.reply_to(comment_id, body)` | `POST /social/comments/{comment_id}/reply` | Reply to a comment |
 | `sq.comments.hide(comment_id)` | `POST /social/comments/{comment_id}/hide` | Hide or unhide a comment |
+| `sq.comments.moderate(comment_id, body)` | `POST /social/comments/{comment_id}/moderate` | Approve or reject a comment |
+| `sq.comments.like(comment_id)` | `POST /social/comments/{comment_id}/like` | Like a comment |
+| `sq.comments.unlike(comment_id)` | `DELETE /social/comments/{comment_id}/like` | Unlike a comment |
 | `sq.comments.delete(comment_id)` | `DELETE /social/comments/{comment_id}` | Delete a comment |
 | `sq.comments.get_post(post_id)` | `GET /social/comments/{post_id}` | Get one post's comments (threaded) |
 
@@ -250,6 +257,7 @@ All methods below are available on the client. Full request/response documentati
 | `sq.messages.list(conversation_id, query=None)` | `GET /social/conversations/{conversation_id}/messages` | List messages in a conversation |
 | `sq.messages.send(conversation_id, body)` | `POST /social/conversations/{conversation_id}/messages` | Send a direct message |
 | `sq.messages.mark_conversation_read(conversation_id)` | `POST /social/conversations/{conversation_id}/read` | Mark a conversation read |
+| `sq.messages.delete(conversation_id, message_id)` | `DELETE /social/conversations/{conversation_id}/messages/{message_id}` | Delete a sent message |
 | `sq.messages.react_to(conversation_id, message_id, body)` | `POST /social/conversations/{conversation_id}/messages/{message_id}/reactions` | React to a message |
 | `sq.messages.remove_reaction(conversation_id, message_id)` | `DELETE /social/conversations/{conversation_id}/messages/{message_id}/reactions` | Remove a message reaction |
 

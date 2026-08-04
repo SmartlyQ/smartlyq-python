@@ -200,6 +200,22 @@ class AutomationsResource:
         """Trigger automation `POST /automations/{automation_id}/trigger`"""
         return self._client.request("POST", f"/automations/{quote(automation_id, safe='')}/trigger", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def duplicate(self, automation_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Duplicate an automation `POST /automations/{automation_id}/duplicate`"""
+        return self._client.request("POST", f"/automations/{quote(automation_id, safe='')}/duplicate", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def list_versions(self, automation_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List automation versions `GET /automations/{automation_id}/versions`"""
+        return self._client.request("GET", f"/automations/{quote(automation_id, safe='')}/versions", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def get_version(self, automation_id: str, version: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get one automation version `GET /automations/{automation_id}/versions/{version}`"""
+        return self._client.request("GET", f"/automations/{quote(automation_id, safe='')}/versions/{quote(version, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def restore_version(self, automation_id: str, version: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Restore an automation version `POST /automations/{automation_id}/versions/{version}/restore`"""
+        return self._client.request("POST", f"/automations/{quote(automation_id, safe='')}/versions/{quote(version, safe='')}/restore", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
     def list_runs(self, automation_id: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """List runs `GET /automations/{automation_id}/runs`"""
         return self._client.request("GET", f"/automations/{quote(automation_id, safe='')}/runs", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
@@ -273,6 +289,18 @@ class CommentsResource:
     def hide(self, comment_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Hide or unhide a comment `POST /social/comments/{comment_id}/hide`"""
         return self._client.request("POST", f"/social/comments/{quote(comment_id, safe='')}/hide", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def moderate(self, comment_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Approve or reject a comment `POST /social/comments/{comment_id}/moderate`"""
+        return self._client.request("POST", f"/social/comments/{quote(comment_id, safe='')}/moderate", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def like(self, comment_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Like a comment `POST /social/comments/{comment_id}/like`"""
+        return self._client.request("POST", f"/social/comments/{quote(comment_id, safe='')}/like", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def unlike(self, comment_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Unlike a comment `DELETE /social/comments/{comment_id}/like`"""
+        return self._client.request("DELETE", f"/social/comments/{quote(comment_id, safe='')}/like", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
     def delete(self, comment_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Delete a comment `DELETE /social/comments/{comment_id}`"""
@@ -455,6 +483,10 @@ class MessagesResource:
     def mark_conversation_read(self, conversation_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Mark a conversation read `POST /social/conversations/{conversation_id}/read`"""
         return self._client.request("POST", f"/social/conversations/{quote(conversation_id, safe='')}/read", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def delete(self, conversation_id: str, message_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Delete a sent message `DELETE /social/conversations/{conversation_id}/messages/{message_id}`"""
+        return self._client.request("DELETE", f"/social/conversations/{quote(conversation_id, safe='')}/messages/{quote(message_id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
     def react_to(self, conversation_id: str, message_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """React to a message `POST /social/conversations/{conversation_id}/messages/{message_id}/reactions`"""
