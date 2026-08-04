@@ -1669,6 +1669,84 @@ def test_whats_app_list_whats_app_phone_numbers(client):
     assert calls[-1] == ("GET", "/v1/whatsapp/phone-numbers")
 
 
+def test_whats_app_list_whats_app_flows(client):
+    sq, calls = client
+    sq.whats_app.list_whats_app_flows()
+    assert calls[-1] == ("GET", "/v1/whatsapp/flows")
+
+
+def test_whats_app_create_whats_app_flow(client):
+    sq, calls = client
+    sq.whats_app.create_whats_app_flow({})
+    assert calls[-1] == ("POST", "/v1/whatsapp/flows")
+
+
+def test_whats_app_get_whats_app_flow(client):
+    sq, calls = client
+    sq.whats_app.get_whats_app_flow("test-id")
+    assert calls[-1] == ("GET", "/v1/whatsapp/flows/test-id")
+
+
+def test_whats_app_update_whats_app_flow(client):
+    sq, calls = client
+    sq.whats_app.update_whats_app_flow("test-id", {})
+    assert calls[-1] == ("PATCH", "/v1/whatsapp/flows/test-id")
+
+
+def test_whats_app_delete_whats_app_flow(client):
+    sq, calls = client
+    sq.whats_app.delete_whats_app_flow("test-id")
+    assert calls[-1] == ("DELETE", "/v1/whatsapp/flows/test-id")
+
+
+def test_whats_app_get_whats_app_flow_json(client):
+    sq, calls = client
+    sq.whats_app.get_whats_app_flow_json("test-id")
+    assert calls[-1] == ("GET", "/v1/whatsapp/flows/test-id/json")
+
+
+def test_whats_app_upload_whats_app_flow_json(client):
+    sq, calls = client
+    sq.whats_app.upload_whats_app_flow_json("test-id", {})
+    assert calls[-1] == ("PUT", "/v1/whatsapp/flows/test-id/json")
+
+
+def test_whats_app_get_whats_app_flow_preview(client):
+    sq, calls = client
+    sq.whats_app.get_whats_app_flow_preview("test-id")
+    assert calls[-1] == ("GET", "/v1/whatsapp/flows/test-id/preview")
+
+
+def test_whats_app_publish_whats_app_flow(client):
+    sq, calls = client
+    sq.whats_app.publish_whats_app_flow("test-id", {})
+    assert calls[-1] == ("POST", "/v1/whatsapp/flows/test-id/publish")
+
+
+def test_whats_app_deprecate_whats_app_flow(client):
+    sq, calls = client
+    sq.whats_app.deprecate_whats_app_flow("test-id", {})
+    assert calls[-1] == ("POST", "/v1/whatsapp/flows/test-id/deprecate")
+
+
+def test_whats_app_get_whats_app_blocked_users(client):
+    sq, calls = client
+    sq.whats_app.get_whats_app_blocked_users()
+    assert calls[-1] == ("GET", "/v1/whatsapp/block-users")
+
+
+def test_whats_app_block_whats_app_users(client):
+    sq, calls = client
+    sq.whats_app.block_whats_app_users({})
+    assert calls[-1] == ("POST", "/v1/whatsapp/block-users")
+
+
+def test_whats_app_unblock_whats_app_users(client):
+    sq, calls = client
+    sq.whats_app.unblock_whats_app_users({})
+    assert calls[-1] == ("DELETE", "/v1/whatsapp/block-users")
+
+
 def test_whats_app_get_template(client):
     sq, calls = client
     sq.whats_app.get_template("test-id")

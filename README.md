@@ -507,6 +507,19 @@ All methods below are available on the client. Full request/response documentati
 | `sq.whats_app.get_whats_app_business_profile(query=None)` | `GET /whatsapp/business-profile` | Get business profile |
 | `sq.whats_app.update_whats_app_business_profile(body)` | `PATCH /whatsapp/business-profile` | Update business profile |
 | `sq.whats_app.list_whats_app_phone_numbers(query=None)` | `GET /whatsapp/phone-numbers` | List phone numbers |
+| `sq.whats_app.list_whats_app_flows(query=None)` | `GET /whatsapp/flows` | List flows |
+| `sq.whats_app.create_whats_app_flow(body)` | `POST /whatsapp/flows` | Create a flow |
+| `sq.whats_app.get_whats_app_flow(flow_id, query=None)` | `GET /whatsapp/flows/{flow_id}` | Get flow |
+| `sq.whats_app.update_whats_app_flow(flow_id, body)` | `PATCH /whatsapp/flows/{flow_id}` | Update flow |
+| `sq.whats_app.delete_whats_app_flow(flow_id, query=None)` | `DELETE /whatsapp/flows/{flow_id}` | Delete flow |
+| `sq.whats_app.get_whats_app_flow_json(flow_id, query=None)` | `GET /whatsapp/flows/{flow_id}/json` | Get flow JSON asset |
+| `sq.whats_app.upload_whats_app_flow_json(flow_id, body)` | `PUT /whatsapp/flows/{flow_id}/json` | Upload flow JSON |
+| `sq.whats_app.get_whats_app_flow_preview(flow_id, query=None)` | `GET /whatsapp/flows/{flow_id}/preview` | Get flow preview URL |
+| `sq.whats_app.publish_whats_app_flow(flow_id, body)` | `POST /whatsapp/flows/{flow_id}/publish` | Publish flow |
+| `sq.whats_app.deprecate_whats_app_flow(flow_id, body)` | `POST /whatsapp/flows/{flow_id}/deprecate` | Deprecate flow |
+| `sq.whats_app.get_whats_app_blocked_users(query=None)` | `GET /whatsapp/block-users` | List blocked users |
+| `sq.whats_app.block_whats_app_users(body)` | `POST /whatsapp/block-users` | Block users |
+| `sq.whats_app.unblock_whats_app_users(body)` | `DELETE /whatsapp/block-users` | Unblock users |
 | `sq.whats_app.get_template(name, query=None)` | `GET /whatsapp/templates/{name}` | Get a WhatsApp template |
 | `sq.whats_app.update_template(name, body)` | `PATCH /whatsapp/templates/{name}` | Update a WhatsApp template |
 | `sq.whats_app.delete_template(name, query=None)` | `DELETE /whatsapp/templates/{name}` | Delete a WhatsApp template |

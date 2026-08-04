@@ -1302,6 +1302,58 @@ class WhatsAppResource:
         """List phone numbers `GET /whatsapp/phone-numbers`"""
         return self._client.request("GET", "/whatsapp/phone-numbers", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def list_whats_app_flows(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List flows `GET /whatsapp/flows`"""
+        return self._client.request("GET", "/whatsapp/flows", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def create_whats_app_flow(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Create a flow `POST /whatsapp/flows`"""
+        return self._client.request("POST", "/whatsapp/flows", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def get_whats_app_flow(self, flow_id: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get flow `GET /whatsapp/flows/{flow_id}`"""
+        return self._client.request("GET", f"/whatsapp/flows/{quote(flow_id, safe='')}", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def update_whats_app_flow(self, flow_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Update flow `PATCH /whatsapp/flows/{flow_id}`"""
+        return self._client.request("PATCH", f"/whatsapp/flows/{quote(flow_id, safe='')}", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def delete_whats_app_flow(self, flow_id: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Delete flow `DELETE /whatsapp/flows/{flow_id}`"""
+        return self._client.request("DELETE", f"/whatsapp/flows/{quote(flow_id, safe='')}", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def get_whats_app_flow_json(self, flow_id: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get flow JSON asset `GET /whatsapp/flows/{flow_id}/json`"""
+        return self._client.request("GET", f"/whatsapp/flows/{quote(flow_id, safe='')}/json", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def upload_whats_app_flow_json(self, flow_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Upload flow JSON `PUT /whatsapp/flows/{flow_id}/json`"""
+        return self._client.request("PUT", f"/whatsapp/flows/{quote(flow_id, safe='')}/json", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def get_whats_app_flow_preview(self, flow_id: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get flow preview URL `GET /whatsapp/flows/{flow_id}/preview`"""
+        return self._client.request("GET", f"/whatsapp/flows/{quote(flow_id, safe='')}/preview", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def publish_whats_app_flow(self, flow_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Publish flow `POST /whatsapp/flows/{flow_id}/publish`"""
+        return self._client.request("POST", f"/whatsapp/flows/{quote(flow_id, safe='')}/publish", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def deprecate_whats_app_flow(self, flow_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Deprecate flow `POST /whatsapp/flows/{flow_id}/deprecate`"""
+        return self._client.request("POST", f"/whatsapp/flows/{quote(flow_id, safe='')}/deprecate", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def get_whats_app_blocked_users(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List blocked users `GET /whatsapp/block-users`"""
+        return self._client.request("GET", "/whatsapp/block-users", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def block_whats_app_users(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Block users `POST /whatsapp/block-users`"""
+        return self._client.request("POST", "/whatsapp/block-users", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def unblock_whats_app_users(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Unblock users `DELETE /whatsapp/block-users`"""
+        return self._client.request("DELETE", "/whatsapp/block-users", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
     def get_template(self, name: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Get a WhatsApp template `GET /whatsapp/templates/{name}`"""
         return self._client.request("GET", f"/whatsapp/templates/{quote(name, safe='')}", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
