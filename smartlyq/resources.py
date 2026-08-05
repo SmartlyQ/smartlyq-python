@@ -1354,6 +1354,38 @@ class WhatsAppResource:
         """Unblock users `DELETE /whatsapp/block-users`"""
         return self._client.request("DELETE", "/whatsapp/block-users", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def list_whats_app_sandbox_sessions(self, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List your sandbox sessions `GET /whatsapp/sandbox/sessions`"""
+        return self._client.request("GET", "/whatsapp/sandbox/sessions", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def create_whats_app_sandbox_session(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Start a sandbox activation `POST /whatsapp/sandbox/sessions`"""
+        return self._client.request("POST", "/whatsapp/sandbox/sessions", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def delete_whats_app_sandbox_session(self, session_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Revoke a sandbox session `DELETE /whatsapp/sandbox/sessions/{session_id}`"""
+        return self._client.request("DELETE", f"/whatsapp/sandbox/sessions/{quote(session_id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def send_whats_app_sandbox_message(self, session_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Send the sandbox template `POST /whatsapp/sandbox/sessions/{session_id}/send`"""
+        return self._client.request("POST", f"/whatsapp/sandbox/sessions/{quote(session_id, safe='')}/send", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def get_whats_app_number_bridge_status(self, sender_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Bridge status `GET /whatsapp/numbers/{sender_id}/bridge`"""
+        return self._client.request("GET", f"/whatsapp/numbers/{quote(sender_id, safe='')}/bridge", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def start_whats_app_number_bridge(self, sender_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Bridge an owned number onto WhatsApp `POST /whatsapp/numbers/{sender_id}/bridge`"""
+        return self._client.request("POST", f"/whatsapp/numbers/{quote(sender_id, safe='')}/bridge", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def request_whats_app_number_bridge_code(self, sender_id: str, body: dict | None = None, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Request a verification code `POST /whatsapp/numbers/{sender_id}/bridge/request-code`"""
+        return self._client.request("POST", f"/whatsapp/numbers/{quote(sender_id, safe='')}/bridge/request-code", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def verify_whats_app_number_bridge(self, sender_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Submit the verification code `POST /whatsapp/numbers/{sender_id}/bridge/verify`"""
+        return self._client.request("POST", f"/whatsapp/numbers/{quote(sender_id, safe='')}/bridge/verify", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
     def get_template(self, name: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Get a WhatsApp template `GET /whatsapp/templates/{name}`"""
         return self._client.request("GET", f"/whatsapp/templates/{quote(name, safe='')}", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)

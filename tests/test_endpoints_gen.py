@@ -1747,6 +1747,54 @@ def test_whats_app_unblock_whats_app_users(client):
     assert calls[-1] == ("DELETE", "/v1/whatsapp/block-users")
 
 
+def test_whats_app_list_whats_app_sandbox_sessions(client):
+    sq, calls = client
+    sq.whats_app.list_whats_app_sandbox_sessions()
+    assert calls[-1] == ("GET", "/v1/whatsapp/sandbox/sessions")
+
+
+def test_whats_app_create_whats_app_sandbox_session(client):
+    sq, calls = client
+    sq.whats_app.create_whats_app_sandbox_session({})
+    assert calls[-1] == ("POST", "/v1/whatsapp/sandbox/sessions")
+
+
+def test_whats_app_delete_whats_app_sandbox_session(client):
+    sq, calls = client
+    sq.whats_app.delete_whats_app_sandbox_session("test-id")
+    assert calls[-1] == ("DELETE", "/v1/whatsapp/sandbox/sessions/test-id")
+
+
+def test_whats_app_send_whats_app_sandbox_message(client):
+    sq, calls = client
+    sq.whats_app.send_whats_app_sandbox_message("test-id")
+    assert calls[-1] == ("POST", "/v1/whatsapp/sandbox/sessions/test-id/send")
+
+
+def test_whats_app_get_whats_app_number_bridge_status(client):
+    sq, calls = client
+    sq.whats_app.get_whats_app_number_bridge_status("test-id")
+    assert calls[-1] == ("GET", "/v1/whatsapp/numbers/test-id/bridge")
+
+
+def test_whats_app_start_whats_app_number_bridge(client):
+    sq, calls = client
+    sq.whats_app.start_whats_app_number_bridge("test-id")
+    assert calls[-1] == ("POST", "/v1/whatsapp/numbers/test-id/bridge")
+
+
+def test_whats_app_request_whats_app_number_bridge_code(client):
+    sq, calls = client
+    sq.whats_app.request_whats_app_number_bridge_code("test-id", {})
+    assert calls[-1] == ("POST", "/v1/whatsapp/numbers/test-id/bridge/request-code")
+
+
+def test_whats_app_verify_whats_app_number_bridge(client):
+    sq, calls = client
+    sq.whats_app.verify_whats_app_number_bridge("test-id", {})
+    assert calls[-1] == ("POST", "/v1/whatsapp/numbers/test-id/bridge/verify")
+
+
 def test_whats_app_get_template(client):
     sq, calls = client
     sq.whats_app.get_template("test-id")
