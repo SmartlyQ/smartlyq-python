@@ -679,6 +679,12 @@ def test_media_get_upload_url(client):
     assert calls[-1] == ("POST", "/v1/media/upload-url")
 
 
+def test_media_confirm_upload(client):
+    sq, calls = client
+    sq.media.confirm_upload("test-id")
+    assert calls[-1] == ("POST", "/v1/media/test-id/confirm")
+
+
 def test_media_upload_direct(client):
     sq, calls = client
     sq.media.upload_direct({})

@@ -572,6 +572,10 @@ class MediaResource:
         """Get presigned upload URL `POST /media/upload-url`"""
         return self._client.request("POST", "/media/upload-url", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def confirm_upload(self, media_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Confirm a presigned upload `POST /media/{media_id}/confirm`"""
+        return self._client.request("POST", f"/media/{quote(media_id, safe='')}/confirm", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
     def upload_direct(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Upload a file directly `POST /media/upload-direct`"""
         return self._client.request("POST", "/media/upload-direct", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
