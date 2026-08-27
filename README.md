@@ -102,6 +102,48 @@ All methods below are available on the client. Full request/response documentati
 | `sq.account.get_me_balance()` | `GET /me/balance` | Get wallet balance |
 | `sq.account.get_billing()` | `GET /me/billing` | Billing overview |
 
+### Ads
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.ads.list_campaigns(query=None)` | `GET /ads/campaigns` | List campaigns |
+| `sq.ads.create_campaign(body)` | `POST /ads/campaigns` | Create a campaign |
+| `sq.ads.get_campaign(id)` | `GET /ads/campaigns/{id}` | Get a campaign |
+| `sq.ads.update_campaign(id, body)` | `PATCH /ads/campaigns/{id}` | Update a campaign |
+| `sq.ads.delete_campaign(id)` | `DELETE /ads/campaigns/{id}` | Delete a campaign |
+| `sq.ads.pause_campaign(id)` | `POST /ads/campaigns/{id}/pause` | Pause a campaign |
+| `sq.ads.resume_campaign(id)` | `POST /ads/campaigns/{id}/resume` | Resume a campaign |
+| `sq.ads.duplicate_campaign(id)` | `POST /ads/campaigns/{id}/duplicate` | Duplicate a campaign |
+| `sq.ads.archive_campaign(id)` | `POST /ads/campaigns/{id}/archive` | Archive a campaign |
+| `sq.ads.bulk_campaign_status(body)` | `POST /ads/campaigns/bulk-status` | Bulk pause/resume campaigns |
+| `sq.ads.list_sets(query=None)` | `GET /ads/ad-sets` | List ad sets |
+| `sq.ads.get_set(id)` | `GET /ads/ad-sets/{id}` | Get an ad set |
+| `sq.ads.delete_set(id)` | `DELETE /ads/ad-sets/{id}` | Delete an ad set |
+| `sq.ads.pause_set(id)` | `POST /ads/ad-sets/{id}/pause` | Pause an ad set |
+| `sq.ads.resume_set(id)` | `POST /ads/ad-sets/{id}/resume` | Resume an ad set |
+| `sq.ads.duplicate_set(id)` | `POST /ads/ad-sets/{id}/duplicate` | Duplicate an ad set |
+| `sq.ads.archive_set(id)` | `POST /ads/ad-sets/{id}/archive` | Archive an ad set |
+| `sq.ads.list(query=None)` | `GET /ads/ads` | List ads |
+| `sq.ads.get(id)` | `GET /ads/ads/{id}` | Get an ad |
+| `sq.ads.delete(id)` | `DELETE /ads/ads/{id}` | Delete an ad |
+| `sq.ads.pause(id)` | `POST /ads/ads/{id}/pause` | Pause an ad |
+| `sq.ads.resume(id)` | `POST /ads/ads/{id}/resume` | Resume an ad |
+| `sq.ads.duplicate(id)` | `POST /ads/ads/{id}/duplicate` | Duplicate an ad |
+| `sq.ads.archive(id)` | `POST /ads/ads/{id}/archive` | Archive an ad |
+| `sq.ads.list_audiences(query=None)` | `GET /ads/audiences` | List audiences |
+| `sq.ads.list_pixels(query=None)` | `GET /ads/pixels` | List pixels / conversion destinations |
+| `sq.ads.list_lead_forms(query=None)` | `GET /ads/lead-forms` | List lead forms |
+| `sq.ads.create_lead_form(body)` | `POST /ads/lead-forms` | Create a lead form |
+| `sq.ads.list_creatives(query=None)` | `GET /ads/creatives` | List creatives |
+| `sq.ads.create_creative(body)` | `POST /ads/creatives` | Create a creative |
+| `sq.ads.update_creative(id, body)` | `PATCH /ads/creatives/{id}` | Update a creative |
+| `sq.ads.delete_creative(id)` | `DELETE /ads/creatives/{id}` | Delete a creative |
+| `sq.ads.list_accounts()` | `GET /ads/accounts` | List connected ad accounts |
+| `sq.ads.accounts_diagnostics()` | `GET /ads/accounts/diagnostics` | Account health and rate-limit diagnostics |
+| `sq.ads.list_audit_log(query=None)` | `GET /ads/audit-log` | List audit log entries |
+| `sq.ads.audience_estimate(body)` | `POST /ads/estimate` | Audience-size estimate |
+| `sq.ads.sync_accounts()` | `POST /ads/sync` | Trigger an account sync |
+
 ### AI Captain
 
 | Method | Endpoint | Description |

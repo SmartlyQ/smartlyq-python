@@ -43,6 +43,228 @@ def test_account_get_billing(client):
     assert calls[-1] == ("GET", "/v1/me/billing")
 
 
+def test_ads_list_campaigns(client):
+    sq, calls = client
+    sq.ads.list_campaigns()
+    assert calls[-1] == ("GET", "/v1/ads/campaigns")
+
+
+def test_ads_create_campaign(client):
+    sq, calls = client
+    sq.ads.create_campaign({})
+    assert calls[-1] == ("POST", "/v1/ads/campaigns")
+
+
+def test_ads_get_campaign(client):
+    sq, calls = client
+    sq.ads.get_campaign("test-id")
+    assert calls[-1] == ("GET", "/v1/ads/campaigns/test-id")
+
+
+def test_ads_update_campaign(client):
+    sq, calls = client
+    sq.ads.update_campaign("test-id", {})
+    assert calls[-1] == ("PATCH", "/v1/ads/campaigns/test-id")
+
+
+def test_ads_delete_campaign(client):
+    sq, calls = client
+    sq.ads.delete_campaign("test-id")
+    assert calls[-1] == ("DELETE", "/v1/ads/campaigns/test-id")
+
+
+def test_ads_pause_campaign(client):
+    sq, calls = client
+    sq.ads.pause_campaign("test-id")
+    assert calls[-1] == ("POST", "/v1/ads/campaigns/test-id/pause")
+
+
+def test_ads_resume_campaign(client):
+    sq, calls = client
+    sq.ads.resume_campaign("test-id")
+    assert calls[-1] == ("POST", "/v1/ads/campaigns/test-id/resume")
+
+
+def test_ads_duplicate_campaign(client):
+    sq, calls = client
+    sq.ads.duplicate_campaign("test-id")
+    assert calls[-1] == ("POST", "/v1/ads/campaigns/test-id/duplicate")
+
+
+def test_ads_archive_campaign(client):
+    sq, calls = client
+    sq.ads.archive_campaign("test-id")
+    assert calls[-1] == ("POST", "/v1/ads/campaigns/test-id/archive")
+
+
+def test_ads_bulk_campaign_status(client):
+    sq, calls = client
+    sq.ads.bulk_campaign_status({})
+    assert calls[-1] == ("POST", "/v1/ads/campaigns/bulk-status")
+
+
+def test_ads_list_sets(client):
+    sq, calls = client
+    sq.ads.list_sets()
+    assert calls[-1] == ("GET", "/v1/ads/ad-sets")
+
+
+def test_ads_get_set(client):
+    sq, calls = client
+    sq.ads.get_set("test-id")
+    assert calls[-1] == ("GET", "/v1/ads/ad-sets/test-id")
+
+
+def test_ads_delete_set(client):
+    sq, calls = client
+    sq.ads.delete_set("test-id")
+    assert calls[-1] == ("DELETE", "/v1/ads/ad-sets/test-id")
+
+
+def test_ads_pause_set(client):
+    sq, calls = client
+    sq.ads.pause_set("test-id")
+    assert calls[-1] == ("POST", "/v1/ads/ad-sets/test-id/pause")
+
+
+def test_ads_resume_set(client):
+    sq, calls = client
+    sq.ads.resume_set("test-id")
+    assert calls[-1] == ("POST", "/v1/ads/ad-sets/test-id/resume")
+
+
+def test_ads_duplicate_set(client):
+    sq, calls = client
+    sq.ads.duplicate_set("test-id")
+    assert calls[-1] == ("POST", "/v1/ads/ad-sets/test-id/duplicate")
+
+
+def test_ads_archive_set(client):
+    sq, calls = client
+    sq.ads.archive_set("test-id")
+    assert calls[-1] == ("POST", "/v1/ads/ad-sets/test-id/archive")
+
+
+def test_ads_list(client):
+    sq, calls = client
+    sq.ads.list()
+    assert calls[-1] == ("GET", "/v1/ads/ads")
+
+
+def test_ads_get(client):
+    sq, calls = client
+    sq.ads.get("test-id")
+    assert calls[-1] == ("GET", "/v1/ads/ads/test-id")
+
+
+def test_ads_delete(client):
+    sq, calls = client
+    sq.ads.delete("test-id")
+    assert calls[-1] == ("DELETE", "/v1/ads/ads/test-id")
+
+
+def test_ads_pause(client):
+    sq, calls = client
+    sq.ads.pause("test-id")
+    assert calls[-1] == ("POST", "/v1/ads/ads/test-id/pause")
+
+
+def test_ads_resume(client):
+    sq, calls = client
+    sq.ads.resume("test-id")
+    assert calls[-1] == ("POST", "/v1/ads/ads/test-id/resume")
+
+
+def test_ads_duplicate(client):
+    sq, calls = client
+    sq.ads.duplicate("test-id")
+    assert calls[-1] == ("POST", "/v1/ads/ads/test-id/duplicate")
+
+
+def test_ads_archive(client):
+    sq, calls = client
+    sq.ads.archive("test-id")
+    assert calls[-1] == ("POST", "/v1/ads/ads/test-id/archive")
+
+
+def test_ads_list_audiences(client):
+    sq, calls = client
+    sq.ads.list_audiences()
+    assert calls[-1] == ("GET", "/v1/ads/audiences")
+
+
+def test_ads_list_pixels(client):
+    sq, calls = client
+    sq.ads.list_pixels()
+    assert calls[-1] == ("GET", "/v1/ads/pixels")
+
+
+def test_ads_list_lead_forms(client):
+    sq, calls = client
+    sq.ads.list_lead_forms()
+    assert calls[-1] == ("GET", "/v1/ads/lead-forms")
+
+
+def test_ads_create_lead_form(client):
+    sq, calls = client
+    sq.ads.create_lead_form({})
+    assert calls[-1] == ("POST", "/v1/ads/lead-forms")
+
+
+def test_ads_list_creatives(client):
+    sq, calls = client
+    sq.ads.list_creatives()
+    assert calls[-1] == ("GET", "/v1/ads/creatives")
+
+
+def test_ads_create_creative(client):
+    sq, calls = client
+    sq.ads.create_creative({})
+    assert calls[-1] == ("POST", "/v1/ads/creatives")
+
+
+def test_ads_update_creative(client):
+    sq, calls = client
+    sq.ads.update_creative("test-id", {})
+    assert calls[-1] == ("PATCH", "/v1/ads/creatives/test-id")
+
+
+def test_ads_delete_creative(client):
+    sq, calls = client
+    sq.ads.delete_creative("test-id")
+    assert calls[-1] == ("DELETE", "/v1/ads/creatives/test-id")
+
+
+def test_ads_list_accounts(client):
+    sq, calls = client
+    sq.ads.list_accounts()
+    assert calls[-1] == ("GET", "/v1/ads/accounts")
+
+
+def test_ads_accounts_diagnostics(client):
+    sq, calls = client
+    sq.ads.accounts_diagnostics()
+    assert calls[-1] == ("GET", "/v1/ads/accounts/diagnostics")
+
+
+def test_ads_list_audit_log(client):
+    sq, calls = client
+    sq.ads.list_audit_log()
+    assert calls[-1] == ("GET", "/v1/ads/audit-log")
+
+
+def test_ads_audience_estimate(client):
+    sq, calls = client
+    sq.ads.audience_estimate({})
+    assert calls[-1] == ("POST", "/v1/ads/estimate")
+
+
+def test_ads_sync_accounts(client):
+    sq, calls = client
+    sq.ads.sync_accounts()
+    assert calls[-1] == ("POST", "/v1/ads/sync")
+
+
 def test_captain_send_message(client):
     sq, calls = client
     sq.captain.send_message({})
