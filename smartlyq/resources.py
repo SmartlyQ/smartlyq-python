@@ -136,6 +136,10 @@ class AdsResource:
         """List audiences `GET /ads/audiences`"""
         return self._client.request("GET", "/ads/audiences", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def create_audience(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Create an audience `POST /ads/audiences`"""
+        return self._client.request("POST", "/ads/audiences", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
     def list_pixels(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """List pixels / conversion destinations `GET /ads/pixels`"""
         return self._client.request("GET", "/ads/pixels", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
@@ -183,6 +187,18 @@ class AdsResource:
     def sync_accounts(self, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Trigger an account sync `POST /ads/sync`"""
         return self._client.request("POST", "/ads/sync", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def analytics(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Ads performance analytics `GET /ads/analytics`"""
+        return self._client.request("GET", "/ads/analytics", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def targeting_search(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Search Meta interest targeting `GET /ads/targeting-search`"""
+        return self._client.request("GET", "/ads/targeting-search", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def list_page_posts(self, page_id: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List a Page's organic posts `GET /ads/pages/{page_id}/posts`"""
+        return self._client.request("GET", f"/ads/pages/{quote(page_id, safe='')}/posts", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
 
 class CaptainResource:

@@ -131,6 +131,7 @@ All methods below are available on the client. Full request/response documentati
 | `sq.ads.duplicate(id)` | `POST /ads/ads/{id}/duplicate` | Duplicate an ad |
 | `sq.ads.archive(id)` | `POST /ads/ads/{id}/archive` | Archive an ad |
 | `sq.ads.list_audiences(query=None)` | `GET /ads/audiences` | List audiences |
+| `sq.ads.create_audience(body)` | `POST /ads/audiences` | Create an audience |
 | `sq.ads.list_pixels(query=None)` | `GET /ads/pixels` | List pixels / conversion destinations |
 | `sq.ads.list_lead_forms(query=None)` | `GET /ads/lead-forms` | List lead forms |
 | `sq.ads.create_lead_form(body)` | `POST /ads/lead-forms` | Create a lead form |
@@ -143,6 +144,9 @@ All methods below are available on the client. Full request/response documentati
 | `sq.ads.list_audit_log(query=None)` | `GET /ads/audit-log` | List audit log entries |
 | `sq.ads.audience_estimate(body)` | `POST /ads/estimate` | Audience-size estimate |
 | `sq.ads.sync_accounts()` | `POST /ads/sync` | Trigger an account sync |
+| `sq.ads.analytics(query=None)` | `GET /ads/analytics` | Ads performance analytics |
+| `sq.ads.targeting_search(query=None)` | `GET /ads/targeting-search` | Search Meta interest targeting |
+| `sq.ads.list_page_posts(page_id, query=None)` | `GET /ads/pages/{page_id}/posts` | List a Page's organic posts |
 
 ### AI Captain
 

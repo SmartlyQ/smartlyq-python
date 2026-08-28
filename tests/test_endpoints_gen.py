@@ -193,6 +193,12 @@ def test_ads_list_audiences(client):
     assert calls[-1] == ("GET", "/v1/ads/audiences")
 
 
+def test_ads_create_audience(client):
+    sq, calls = client
+    sq.ads.create_audience({})
+    assert calls[-1] == ("POST", "/v1/ads/audiences")
+
+
 def test_ads_list_pixels(client):
     sq, calls = client
     sq.ads.list_pixels()
@@ -263,6 +269,24 @@ def test_ads_sync_accounts(client):
     sq, calls = client
     sq.ads.sync_accounts()
     assert calls[-1] == ("POST", "/v1/ads/sync")
+
+
+def test_ads_analytics(client):
+    sq, calls = client
+    sq.ads.analytics()
+    assert calls[-1] == ("GET", "/v1/ads/analytics")
+
+
+def test_ads_targeting_search(client):
+    sq, calls = client
+    sq.ads.targeting_search()
+    assert calls[-1] == ("GET", "/v1/ads/targeting-search")
+
+
+def test_ads_list_page_posts(client):
+    sq, calls = client
+    sq.ads.list_page_posts("test-id")
+    assert calls[-1] == ("GET", "/v1/ads/pages/test-id/posts")
 
 
 def test_captain_send_message(client):
