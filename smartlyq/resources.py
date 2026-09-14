@@ -396,6 +396,29 @@ class AutomationsResource:
         return self._client.request("GET", f"/automations/{quote(automation_id, safe='')}/runs/{quote(run_id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
 
+class CalendarResource:
+    """Calendar endpoints."""
+
+    def __init__(self, client: CoreClient):
+        self._client = client
+
+    def list_event_types(self, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List booking pages `GET /calendar/event-types`"""
+        return self._client.request("GET", "/calendar/event-types", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def list_slots(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List open slots `GET /calendar/slots`"""
+        return self._client.request("GET", "/calendar/slots", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def create_booking(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Take a booking `POST /calendar/bookings`"""
+        return self._client.request("POST", "/calendar/bookings", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def cancel_booking(self, id: str, body: dict | None = None, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Cancel a booking `POST /calendar/bookings/{id}/cancel`"""
+        return self._client.request("POST", f"/calendar/bookings/{quote(id, safe='')}/cancel", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+
 class ChatbotsResource:
     """Chatbot endpoints."""
 
@@ -520,6 +543,41 @@ class CrmResource:
         return self._client.request("GET", f"/contacts/{quote(id, safe='')}/channels", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
 
+class CrmCompaniesResource:
+    """CRM Companies endpoints."""
+
+    def __init__(self, client: CoreClient):
+        self._client = client
+
+    def list(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List companies `GET /companies`"""
+        return self._client.request("GET", "/companies", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def create(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Create a company `POST /companies`"""
+        return self._client.request("POST", "/companies", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def get(self, id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get a company `GET /companies/{id}`"""
+        return self._client.request("GET", f"/companies/{quote(id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def update(self, id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Update a company `PATCH /companies/{id}`"""
+        return self._client.request("PATCH", f"/companies/{quote(id, safe='')}", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def delete(self, id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Delete a company `DELETE /companies/{id}`"""
+        return self._client.request("DELETE", f"/companies/{quote(id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def link_contact(self, id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Link a contact to a company `POST /companies/{id}/contacts`"""
+        return self._client.request("POST", f"/companies/{quote(id, safe='')}/contacts", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def unlink_contact(self, id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Unlink a contact from a company `DELETE /companies/{id}/contacts`"""
+        return self._client.request("DELETE", f"/companies/{quote(id, safe='')}/contacts", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+
 class ContactsResource:
     """CRM Contacts endpoints."""
 
@@ -631,6 +689,64 @@ class OpportunitiesResource:
     def update_status(self, id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Update opportunity status `POST /opportunities/{id}/status`"""
         return self._client.request("POST", f"/opportunities/{quote(id, safe='')}/status", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+
+class CrmTagsResource:
+    """CRM Tags endpoints."""
+
+    def __init__(self, client: CoreClient):
+        self._client = client
+
+    def list(self, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List tags `GET /tags`"""
+        return self._client.request("GET", "/tags", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def create(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Create a tag `POST /tags`"""
+        return self._client.request("POST", "/tags", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def rename(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Rename a tag `POST /tags/rename`"""
+        return self._client.request("POST", "/tags/rename", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def merge(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Merge tags `POST /tags/merge`"""
+        return self._client.request("POST", "/tags/merge", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def delete(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Delete a tag `POST /tags/delete`"""
+        return self._client.request("POST", "/tags/delete", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+
+class CrmTasksResource:
+    """CRM Tasks endpoints."""
+
+    def __init__(self, client: CoreClient):
+        self._client = client
+
+    def list(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List tasks `GET /tasks`"""
+        return self._client.request("GET", "/tasks", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def create(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Create a task `POST /tasks`"""
+        return self._client.request("POST", "/tasks", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def get(self, id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get a task `GET /tasks/{id}`"""
+        return self._client.request("GET", f"/tasks/{quote(id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def update(self, id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Update a task `PATCH /tasks/{id}`"""
+        return self._client.request("PATCH", f"/tasks/{quote(id, safe='')}", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def delete(self, id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Delete a task `DELETE /tasks/{id}`"""
+        return self._client.request("DELETE", f"/tasks/{quote(id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def log_time(self, id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Log time on a task `POST /tasks/{id}/time`"""
+        return self._client.request("POST", f"/tasks/{quote(id, safe='')}/time", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
 
 class MessagesResource:
@@ -1658,13 +1774,17 @@ def create_resources(client: CoreClient) -> dict[str, Any]:
         "articles": ArticlesResource(client),
         "audio": AudioResource(client),
         "automations": AutomationsResource(client),
+        "calendar": CalendarResource(client),
         "chatbots": ChatbotsResource(client),
         "comments": CommentsResource(client),
         "content": ContentResource(client),
         "crm": CrmResource(client),
+        "crm_companies": CrmCompaniesResource(client),
         "contacts": ContactsResource(client),
         "custom_fields": CustomFieldsResource(client),
         "opportunities": OpportunitiesResource(client),
+        "crm_tags": CrmTagsResource(client),
+        "crm_tasks": CrmTasksResource(client),
         "messages": MessagesResource(client),
         "images": ImagesResource(client),
         "jobs": JobsResource(client),

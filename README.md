@@ -213,6 +213,15 @@ All methods below are available on the client. Full request/response documentati
 | `sq.automations.list_runs(automation_id, query=None)` | `GET /automations/{automation_id}/runs` | List runs |
 | `sq.automations.get_run(automation_id, run_id)` | `GET /automations/{automation_id}/runs/{run_id}` | Get run |
 
+### Calendar
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.calendar.list_event_types()` | `GET /calendar/event-types` | List booking pages |
+| `sq.calendar.list_slots(query=None)` | `GET /calendar/slots` | List open slots |
+| `sq.calendar.create_booking(body)` | `POST /calendar/bookings` | Take a booking |
+| `sq.calendar.cancel_booking(id, body=None)` | `POST /calendar/bookings/{id}/cancel` | Cancel a booking |
+
 ### Chatbot
 
 | Method | Endpoint | Description |
@@ -257,6 +266,18 @@ All methods below are available on the client. Full request/response documentati
 | `sq.crm.bulk_import_contacts(body)` | `POST /contacts/bulk` | Bulk import contacts |
 | `sq.crm.contact_channels(id)` | `GET /contacts/{id}/channels` | Contact channels |
 
+### CRM Companies
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.crm_companies.list(query=None)` | `GET /companies` | List companies |
+| `sq.crm_companies.create(body)` | `POST /companies` | Create a company |
+| `sq.crm_companies.get(id)` | `GET /companies/{id}` | Get a company |
+| `sq.crm_companies.update(id, body)` | `PATCH /companies/{id}` | Update a company |
+| `sq.crm_companies.delete(id)` | `DELETE /companies/{id}` | Delete a company |
+| `sq.crm_companies.link_contact(id, body)` | `POST /companies/{id}/contacts` | Link a contact to a company |
+| `sq.crm_companies.unlink_contact(id, body)` | `DELETE /companies/{id}/contacts` | Unlink a contact from a company |
+
 ### CRM Contacts
 
 | Method | Endpoint | Description |
@@ -294,6 +315,27 @@ All methods below are available on the client. Full request/response documentati
 | `sq.opportunities.update(id, body)` | `PATCH /opportunities/{id}` | Update an opportunity |
 | `sq.opportunities.delete(id)` | `DELETE /opportunities/{id}` | Delete an opportunity |
 | `sq.opportunities.update_status(id, body)` | `POST /opportunities/{id}/status` | Update opportunity status |
+
+### CRM Tags
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.crm_tags.list()` | `GET /tags` | List tags |
+| `sq.crm_tags.create(body)` | `POST /tags` | Create a tag |
+| `sq.crm_tags.rename(body)` | `POST /tags/rename` | Rename a tag |
+| `sq.crm_tags.merge(body)` | `POST /tags/merge` | Merge tags |
+| `sq.crm_tags.delete(body)` | `POST /tags/delete` | Delete a tag |
+
+### CRM Tasks
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `sq.crm_tasks.list(query=None)` | `GET /tasks` | List tasks |
+| `sq.crm_tasks.create(body)` | `POST /tasks` | Create a task |
+| `sq.crm_tasks.get(id)` | `GET /tasks/{id}` | Get a task |
+| `sq.crm_tasks.update(id, body)` | `PATCH /tasks/{id}` | Update a task |
+| `sq.crm_tasks.delete(id)` | `DELETE /tasks/{id}` | Delete a task |
+| `sq.crm_tasks.log_time(id, body)` | `POST /tasks/{id}/time` | Log time on a task |
 
 ### Direct Messages
 

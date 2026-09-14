@@ -529,6 +529,30 @@ def test_automations_get_run(client):
     assert calls[-1] == ("GET", "/v1/automations/test-id/runs/test-id")
 
 
+def test_calendar_list_event_types(client):
+    sq, calls = client
+    sq.calendar.list_event_types()
+    assert calls[-1] == ("GET", "/v1/calendar/event-types")
+
+
+def test_calendar_list_slots(client):
+    sq, calls = client
+    sq.calendar.list_slots()
+    assert calls[-1] == ("GET", "/v1/calendar/slots")
+
+
+def test_calendar_create_booking(client):
+    sq, calls = client
+    sq.calendar.create_booking({})
+    assert calls[-1] == ("POST", "/v1/calendar/bookings")
+
+
+def test_calendar_cancel_booking(client):
+    sq, calls = client
+    sq.calendar.cancel_booking("test-id", {})
+    assert calls[-1] == ("POST", "/v1/calendar/bookings/test-id/cancel")
+
+
 def test_chatbots_list(client):
     sq, calls = client
     sq.chatbots.list()
@@ -673,6 +697,48 @@ def test_crm_contact_channels(client):
     assert calls[-1] == ("GET", "/v1/contacts/test-id/channels")
 
 
+def test_crm_companies_list(client):
+    sq, calls = client
+    sq.crm_companies.list()
+    assert calls[-1] == ("GET", "/v1/companies")
+
+
+def test_crm_companies_create(client):
+    sq, calls = client
+    sq.crm_companies.create({})
+    assert calls[-1] == ("POST", "/v1/companies")
+
+
+def test_crm_companies_get(client):
+    sq, calls = client
+    sq.crm_companies.get("test-id")
+    assert calls[-1] == ("GET", "/v1/companies/test-id")
+
+
+def test_crm_companies_update(client):
+    sq, calls = client
+    sq.crm_companies.update("test-id", {})
+    assert calls[-1] == ("PATCH", "/v1/companies/test-id")
+
+
+def test_crm_companies_delete(client):
+    sq, calls = client
+    sq.crm_companies.delete("test-id")
+    assert calls[-1] == ("DELETE", "/v1/companies/test-id")
+
+
+def test_crm_companies_link_contact(client):
+    sq, calls = client
+    sq.crm_companies.link_contact("test-id", {})
+    assert calls[-1] == ("POST", "/v1/companies/test-id/contacts")
+
+
+def test_crm_companies_unlink_contact(client):
+    sq, calls = client
+    sq.crm_companies.unlink_contact("test-id", {})
+    assert calls[-1] == ("DELETE", "/v1/companies/test-id/contacts")
+
+
 def test_contacts_list(client):
     sq, calls = client
     sq.contacts.list()
@@ -809,6 +875,72 @@ def test_opportunities_update_status(client):
     sq, calls = client
     sq.opportunities.update_status("test-id", {})
     assert calls[-1] == ("POST", "/v1/opportunities/test-id/status")
+
+
+def test_crm_tags_list(client):
+    sq, calls = client
+    sq.crm_tags.list()
+    assert calls[-1] == ("GET", "/v1/tags")
+
+
+def test_crm_tags_create(client):
+    sq, calls = client
+    sq.crm_tags.create({})
+    assert calls[-1] == ("POST", "/v1/tags")
+
+
+def test_crm_tags_rename(client):
+    sq, calls = client
+    sq.crm_tags.rename({})
+    assert calls[-1] == ("POST", "/v1/tags/rename")
+
+
+def test_crm_tags_merge(client):
+    sq, calls = client
+    sq.crm_tags.merge({})
+    assert calls[-1] == ("POST", "/v1/tags/merge")
+
+
+def test_crm_tags_delete(client):
+    sq, calls = client
+    sq.crm_tags.delete({})
+    assert calls[-1] == ("POST", "/v1/tags/delete")
+
+
+def test_crm_tasks_list(client):
+    sq, calls = client
+    sq.crm_tasks.list()
+    assert calls[-1] == ("GET", "/v1/tasks")
+
+
+def test_crm_tasks_create(client):
+    sq, calls = client
+    sq.crm_tasks.create({})
+    assert calls[-1] == ("POST", "/v1/tasks")
+
+
+def test_crm_tasks_get(client):
+    sq, calls = client
+    sq.crm_tasks.get("test-id")
+    assert calls[-1] == ("GET", "/v1/tasks/test-id")
+
+
+def test_crm_tasks_update(client):
+    sq, calls = client
+    sq.crm_tasks.update("test-id", {})
+    assert calls[-1] == ("PATCH", "/v1/tasks/test-id")
+
+
+def test_crm_tasks_delete(client):
+    sq, calls = client
+    sq.crm_tasks.delete("test-id")
+    assert calls[-1] == ("DELETE", "/v1/tasks/test-id")
+
+
+def test_crm_tasks_log_time(client):
+    sq, calls = client
+    sq.crm_tasks.log_time("test-id", {})
+    assert calls[-1] == ("POST", "/v1/tasks/test-id/time")
 
 
 def test_messages_list_conversations(client):
