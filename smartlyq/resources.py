@@ -1437,6 +1437,22 @@ class SocialResource:
         """Update Facebook page details `PATCH /social/accounts/{account_id}/facebook/page`"""
         return self._client.request("PATCH", f"/social/accounts/{quote(account_id, safe='')}/facebook/page", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def get_facebook_page_settings(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get Facebook page settings `GET /social/accounts/{account_id}/facebook/page/settings`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/facebook/page/settings", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def update_facebook_page_settings(self, account_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Update Facebook page settings `PATCH /social/accounts/{account_id}/facebook/page/settings`"""
+        return self._client.request("PATCH", f"/social/accounts/{quote(account_id, safe='')}/facebook/page/settings", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def set_facebook_page_picture(self, account_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Set Facebook page profile picture `POST /social/accounts/{account_id}/facebook/page/picture`"""
+        return self._client.request("POST", f"/social/accounts/{quote(account_id, safe='')}/facebook/page/picture", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def set_facebook_page_cover(self, account_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Set Facebook page cover photo `POST /social/accounts/{account_id}/facebook/page/cover`"""
+        return self._client.request("POST", f"/social/accounts/{quote(account_id, safe='')}/facebook/page/cover", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
     def update_youtube_playlist(self, account_id: str, playlist_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Update a YouTube playlist `PATCH /social/accounts/{account_id}/youtube/playlists/{playlist_id}`"""
         return self._client.request("PATCH", f"/social/accounts/{quote(account_id, safe='')}/youtube/playlists/{quote(playlist_id, safe='')}", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)

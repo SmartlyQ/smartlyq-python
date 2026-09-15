@@ -1861,6 +1861,30 @@ def test_social_update_facebook_page(client):
     assert calls[-1] == ("PATCH", "/v1/social/accounts/test-id/facebook/page")
 
 
+def test_social_get_facebook_page_settings(client):
+    sq, calls = client
+    sq.social.get_facebook_page_settings("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/facebook/page/settings")
+
+
+def test_social_update_facebook_page_settings(client):
+    sq, calls = client
+    sq.social.update_facebook_page_settings("test-id", {})
+    assert calls[-1] == ("PATCH", "/v1/social/accounts/test-id/facebook/page/settings")
+
+
+def test_social_set_facebook_page_picture(client):
+    sq, calls = client
+    sq.social.set_facebook_page_picture("test-id", {})
+    assert calls[-1] == ("POST", "/v1/social/accounts/test-id/facebook/page/picture")
+
+
+def test_social_set_facebook_page_cover(client):
+    sq, calls = client
+    sq.social.set_facebook_page_cover("test-id", {})
+    assert calls[-1] == ("POST", "/v1/social/accounts/test-id/facebook/page/cover")
+
+
 def test_social_update_youtube_playlist(client):
     sq, calls = client
     sq.social.update_youtube_playlist("test-id", "test-id", {})
