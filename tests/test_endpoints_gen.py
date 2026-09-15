@@ -1885,6 +1885,12 @@ def test_social_set_facebook_page_cover(client):
     assert calls[-1] == ("POST", "/v1/social/accounts/test-id/facebook/page/cover")
 
 
+def test_social_get_facebook_reel_limit(client):
+    sq, calls = client
+    sq.social.get_facebook_reel_limit("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/facebook/reel-limit")
+
+
 def test_social_update_youtube_playlist(client):
     sq, calls = client
     sq.social.update_youtube_playlist("test-id", "test-id", {})

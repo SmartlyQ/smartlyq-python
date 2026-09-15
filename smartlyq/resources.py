@@ -1453,6 +1453,10 @@ class SocialResource:
         """Set Facebook page cover photo `POST /social/accounts/{account_id}/facebook/page/cover`"""
         return self._client.request("POST", f"/social/accounts/{quote(account_id, safe='')}/facebook/page/cover", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def get_facebook_reel_limit(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get Facebook Reel limit `GET /social/accounts/{account_id}/facebook/reel-limit`"""
+        return self._client.request("GET", f"/social/accounts/{quote(account_id, safe='')}/facebook/reel-limit", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
     def update_youtube_playlist(self, account_id: str, playlist_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Update a YouTube playlist `PATCH /social/accounts/{account_id}/youtube/playlists/{playlist_id}`"""
         return self._client.request("PATCH", f"/social/accounts/{quote(account_id, safe='')}/youtube/playlists/{quote(playlist_id, safe='')}", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
