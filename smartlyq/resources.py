@@ -616,6 +616,14 @@ class ContactsResource:
         """Add a note to a contact `POST /contacts/{id}/notes`"""
         return self._client.request("POST", f"/contacts/{quote(id, safe='')}/notes", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def update_note(self, id: str, note_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Edit a contact note `PATCH /contacts/{id}/notes/{note_id}`"""
+        return self._client.request("PATCH", f"/contacts/{quote(id, safe='')}/notes/{quote(note_id, safe='')}", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def delete_note(self, id: str, note_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Delete a contact note `DELETE /contacts/{id}/notes/{note_id}`"""
+        return self._client.request("DELETE", f"/contacts/{quote(id, safe='')}/notes/{quote(note_id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
     def enroll(self, id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Enroll a contact in an automation `POST /contacts/{id}/enroll`"""
         return self._client.request("POST", f"/contacts/{quote(id, safe='')}/enroll", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)

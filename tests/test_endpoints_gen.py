@@ -787,6 +787,18 @@ def test_contacts_add_note(client):
     assert calls[-1] == ("POST", "/v1/contacts/test-id/notes")
 
 
+def test_contacts_update_note(client):
+    sq, calls = client
+    sq.contacts.update_note("test-id", "test-id", {})
+    assert calls[-1] == ("PATCH", "/v1/contacts/test-id/notes/test-id")
+
+
+def test_contacts_delete_note(client):
+    sq, calls = client
+    sq.contacts.delete_note("test-id", "test-id")
+    assert calls[-1] == ("DELETE", "/v1/contacts/test-id/notes/test-id")
+
+
 def test_contacts_enroll(client):
     sq, calls = client
     sq.contacts.enroll("test-id", {})

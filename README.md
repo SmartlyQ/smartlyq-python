@@ -290,6 +290,8 @@ All methods below are available on the client. Full request/response documentati
 | `sq.contacts.remove_tags(id, body)` | `DELETE /contacts/{id}/tags` | Remove tags from a contact |
 | `sq.contacts.list_notes(id)` | `GET /contacts/{id}/notes` | List contact notes |
 | `sq.contacts.add_note(id, body)` | `POST /contacts/{id}/notes` | Add a note to a contact |
+| `sq.contacts.update_note(id, note_id, body)` | `PATCH /contacts/{id}/notes/{note_id}` | Edit a contact note |
+| `sq.contacts.delete_note(id, note_id)` | `DELETE /contacts/{id}/notes/{note_id}` | Delete a contact note |
 | `sq.contacts.enroll(id, body)` | `POST /contacts/{id}/enroll` | Enroll a contact in an automation |
 | `sq.contacts.add_message(id, body)` | `POST /contacts/{id}/messages` | Log a message on a contact's timeline |
 | `sq.contacts.set_field(id, slug, body)` | `PUT /contacts/{id}/fields/{slug}` | Set one custom field |
