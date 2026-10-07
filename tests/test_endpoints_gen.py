@@ -1321,6 +1321,12 @@ def test_shorts_get(client):
     assert calls[-1] == ("GET", "/v1/shorts/test-id")
 
 
+def test_shorts_list_languages(client):
+    sq, calls = client
+    sq.shorts.list_languages()
+    assert calls[-1] == ("GET", "/v1/languages")
+
+
 def test_social_list_accounts(client):
     sq, calls = client
     sq.social.list_accounts()

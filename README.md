@@ -449,6 +449,7 @@ All methods below are available on the client. Full request/response documentati
 | `sq.shorts.list(query=None)` | `GET /shorts` | List shorts jobs |
 | `sq.shorts.list_caption_styles()` | `GET /shorts/caption-styles` | List caption styles for shorts |
 | `sq.shorts.get(uid)` | `GET /shorts/{uid}` | Get shorts job + clips |
+| `sq.shorts.list_languages()` | `GET /languages` | List speech languages |
 
 ### Social
 

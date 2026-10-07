@@ -1070,6 +1070,10 @@ class ShortsResource:
         """Get shorts job + clips `GET /shorts/{uid}`"""
         return self._client.request("GET", f"/shorts/{quote(uid, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def list_languages(self, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List speech languages `GET /languages`"""
+        return self._client.request("GET", "/languages", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
 
 class SocialResource:
     """Social endpoints."""
