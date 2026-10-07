@@ -792,6 +792,37 @@ class MessagesResource:
         return self._client.request("DELETE", f"/social/conversations/{quote(conversation_id, safe='')}/messages/{quote(message_id, safe='')}/reactions", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
 
+class EditsResource:
+    """Edits endpoints."""
+
+    def __init__(self, client: CoreClient):
+        self._client = client
+
+    def list(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List video edits `GET /edits`"""
+        return self._client.request("GET", "/edits", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def create(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Create a video edit `POST /edits`"""
+        return self._client.request("POST", "/edits", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def list_options(self, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List edit options `GET /edits/options`"""
+        return self._client.request("GET", "/edits/options", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def get(self, uid: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get a video edit `GET /edits/{uid}`"""
+        return self._client.request("GET", f"/edits/{quote(uid, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def update(self, uid: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Update a video edit `PATCH /edits/{uid}`"""
+        return self._client.request("PATCH", f"/edits/{quote(uid, safe='')}", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def export(self, uid: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Export a video edit `POST /edits/{uid}/export`"""
+        return self._client.request("POST", f"/edits/{quote(uid, safe='')}/export", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+
 class ImagesResource:
     """Images endpoints."""
 
@@ -1822,6 +1853,7 @@ def create_resources(client: CoreClient) -> dict[str, Any]:
         "crm_tags": CrmTagsResource(client),
         "crm_tasks": CrmTasksResource(client),
         "messages": MessagesResource(client),
+        "edits": EditsResource(client),
         "images": ImagesResource(client),
         "jobs": JobsResource(client),
         "logs": LogsResource(client),

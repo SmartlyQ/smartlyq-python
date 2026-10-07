@@ -997,6 +997,42 @@ def test_messages_remove_reaction(client):
     assert calls[-1] == ("DELETE", "/v1/social/conversations/test-id/messages/test-id/reactions")
 
 
+def test_edits_list(client):
+    sq, calls = client
+    sq.edits.list()
+    assert calls[-1] == ("GET", "/v1/edits")
+
+
+def test_edits_create(client):
+    sq, calls = client
+    sq.edits.create({})
+    assert calls[-1] == ("POST", "/v1/edits")
+
+
+def test_edits_list_options(client):
+    sq, calls = client
+    sq.edits.list_options()
+    assert calls[-1] == ("GET", "/v1/edits/options")
+
+
+def test_edits_get(client):
+    sq, calls = client
+    sq.edits.get("test-id")
+    assert calls[-1] == ("GET", "/v1/edits/test-id")
+
+
+def test_edits_update(client):
+    sq, calls = client
+    sq.edits.update("test-id", {})
+    assert calls[-1] == ("PATCH", "/v1/edits/test-id")
+
+
+def test_edits_export(client):
+    sq, calls = client
+    sq.edits.export("test-id")
+    assert calls[-1] == ("POST", "/v1/edits/test-id/export")
+
+
 def test_images_generate(client):
     sq, calls = client
     sq.images.generate({})
