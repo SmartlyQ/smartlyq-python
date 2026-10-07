@@ -1062,6 +1062,10 @@ class ShortsResource:
         """List shorts jobs `GET /shorts`"""
         return self._client.request("GET", "/shorts", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def list_caption_styles(self, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List caption styles for shorts `GET /shorts/caption-styles`"""
+        return self._client.request("GET", "/shorts/caption-styles", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
     def get(self, uid: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Get shorts job + clips `GET /shorts/{uid}`"""
         return self._client.request("GET", f"/shorts/{quote(uid, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)

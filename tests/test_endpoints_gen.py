@@ -1309,6 +1309,12 @@ def test_shorts_list(client):
     assert calls[-1] == ("GET", "/v1/shorts")
 
 
+def test_shorts_list_caption_styles(client):
+    sq, calls = client
+    sq.shorts.list_caption_styles()
+    assert calls[-1] == ("GET", "/v1/shorts/caption-styles")
+
+
 def test_shorts_get(client):
     sq, calls = client
     sq.shorts.get("test-id")
