@@ -674,6 +674,10 @@ class OpportunitiesResource:
         """Create a pipeline `POST /pipelines`"""
         return self._client.request("POST", "/pipelines", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def list_pipeline_stages(self, id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List a pipeline's stages `GET /pipelines/{id}/stages`"""
+        return self._client.request("GET", f"/pipelines/{quote(id, safe='')}/stages", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
     def list(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """List opportunities `GET /opportunities`"""
         return self._client.request("GET", "/opportunities", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)

@@ -853,6 +853,12 @@ def test_opportunities_create_pipeline(client):
     assert calls[-1] == ("POST", "/v1/pipelines")
 
 
+def test_opportunities_list_pipeline_stages(client):
+    sq, calls = client
+    sq.opportunities.list_pipeline_stages("test-id")
+    assert calls[-1] == ("GET", "/v1/pipelines/test-id/stages")
+
+
 def test_opportunities_list(client):
     sq, calls = client
     sq.opportunities.list()

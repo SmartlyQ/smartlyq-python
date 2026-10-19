@@ -311,6 +311,7 @@ All methods below are available on the client. Full request/response documentati
 | --- | --- | --- |
 | `sq.opportunities.list_pipelines()` | `GET /pipelines` | List pipelines |
 | `sq.opportunities.create_pipeline(body)` | `POST /pipelines` | Create a pipeline |
+| `sq.opportunities.list_pipeline_stages(id)` | `GET /pipelines/{id}/stages` | List a pipeline's stages |
 | `sq.opportunities.list(query=None)` | `GET /opportunities` | List opportunities |
 | `sq.opportunities.create(body)` | `POST /opportunities` | Create an opportunity |
 | `sq.opportunities.get(id)` | `GET /opportunities/{id}` | Get an opportunity |
