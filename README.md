@@ -219,8 +219,23 @@ All methods below are available on the client. Full request/response documentati
 | --- | --- | --- |
 | `sq.calendar.list_event_types()` | `GET /calendar/event-types` | List booking pages |
 | `sq.calendar.list_slots(query=None)` | `GET /calendar/slots` | List open slots |
+| `sq.calendar.list_bookings(query=None)` | `GET /calendar/bookings` | List bookings |
 | `sq.calendar.create_booking(body)` | `POST /calendar/bookings` | Take a booking |
 | `sq.calendar.cancel_booking(id, body=None)` | `POST /calendar/bookings/{id}/cancel` | Cancel a booking |
+| `sq.calendar.get_booking(id)` | `GET /calendar/bookings/{id}` | Get a booking |
+| `sq.calendar.set_booking_status(id, body)` | `POST /calendar/bookings/{id}/status` | Set a booking's status |
+| `sq.calendar.reschedule_booking(id, body)` | `POST /calendar/bookings/{id}/reschedule` | Reschedule a booking |
+| `sq.calendar.list_booking_notes(id)` | `GET /calendar/bookings/{id}/notes` | List booking notes |
+| `sq.calendar.add_booking_note(id, body)` | `POST /calendar/bookings/{id}/notes` | Add a booking note |
+| `sq.calendar.delete_booking_note(id, note_id)` | `DELETE /calendar/bookings/{id}/notes/{note_id}` | Delete a booking note |
+| `sq.calendar.list_blocked_times(query=None)` | `GET /calendar/blocked-times` | List blocked time |
+| `sq.calendar.create_blocked_time(body)` | `POST /calendar/blocked-times` | Block off time |
+| `sq.calendar.delete_blocked_time(id)` | `DELETE /calendar/blocked-times/{id}` | Free blocked time |
+| `sq.calendar.list_availability_schedules()` | `GET /calendar/availability` | List availability schedules |
+| `sq.calendar.create_availability_schedule(body)` | `POST /calendar/availability` | Create an availability schedule |
+| `sq.calendar.update_availability_schedule(id, body=None)` | `PATCH /calendar/availability/{id}` | Update an availability schedule |
+| `sq.calendar.delete_availability_schedule(id)` | `DELETE /calendar/availability/{id}` | Delete an availability schedule |
+| `sq.calendar.list_busy_times(query=None)` | `GET /calendar/busy-times` | List busy times |
 
 ### Chatbot
 

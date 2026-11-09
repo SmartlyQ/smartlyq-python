@@ -541,6 +541,12 @@ def test_calendar_list_slots(client):
     assert calls[-1] == ("GET", "/v1/calendar/slots")
 
 
+def test_calendar_list_bookings(client):
+    sq, calls = client
+    sq.calendar.list_bookings()
+    assert calls[-1] == ("GET", "/v1/calendar/bookings")
+
+
 def test_calendar_create_booking(client):
     sq, calls = client
     sq.calendar.create_booking({})
@@ -551,6 +557,90 @@ def test_calendar_cancel_booking(client):
     sq, calls = client
     sq.calendar.cancel_booking("test-id", {})
     assert calls[-1] == ("POST", "/v1/calendar/bookings/test-id/cancel")
+
+
+def test_calendar_get_booking(client):
+    sq, calls = client
+    sq.calendar.get_booking("test-id")
+    assert calls[-1] == ("GET", "/v1/calendar/bookings/test-id")
+
+
+def test_calendar_set_booking_status(client):
+    sq, calls = client
+    sq.calendar.set_booking_status("test-id", {})
+    assert calls[-1] == ("POST", "/v1/calendar/bookings/test-id/status")
+
+
+def test_calendar_reschedule_booking(client):
+    sq, calls = client
+    sq.calendar.reschedule_booking("test-id", {})
+    assert calls[-1] == ("POST", "/v1/calendar/bookings/test-id/reschedule")
+
+
+def test_calendar_list_booking_notes(client):
+    sq, calls = client
+    sq.calendar.list_booking_notes("test-id")
+    assert calls[-1] == ("GET", "/v1/calendar/bookings/test-id/notes")
+
+
+def test_calendar_add_booking_note(client):
+    sq, calls = client
+    sq.calendar.add_booking_note("test-id", {})
+    assert calls[-1] == ("POST", "/v1/calendar/bookings/test-id/notes")
+
+
+def test_calendar_delete_booking_note(client):
+    sq, calls = client
+    sq.calendar.delete_booking_note("test-id", "test-id")
+    assert calls[-1] == ("DELETE", "/v1/calendar/bookings/test-id/notes/test-id")
+
+
+def test_calendar_list_blocked_times(client):
+    sq, calls = client
+    sq.calendar.list_blocked_times()
+    assert calls[-1] == ("GET", "/v1/calendar/blocked-times")
+
+
+def test_calendar_create_blocked_time(client):
+    sq, calls = client
+    sq.calendar.create_blocked_time({})
+    assert calls[-1] == ("POST", "/v1/calendar/blocked-times")
+
+
+def test_calendar_delete_blocked_time(client):
+    sq, calls = client
+    sq.calendar.delete_blocked_time("test-id")
+    assert calls[-1] == ("DELETE", "/v1/calendar/blocked-times/test-id")
+
+
+def test_calendar_list_availability_schedules(client):
+    sq, calls = client
+    sq.calendar.list_availability_schedules()
+    assert calls[-1] == ("GET", "/v1/calendar/availability")
+
+
+def test_calendar_create_availability_schedule(client):
+    sq, calls = client
+    sq.calendar.create_availability_schedule({})
+    assert calls[-1] == ("POST", "/v1/calendar/availability")
+
+
+def test_calendar_update_availability_schedule(client):
+    sq, calls = client
+    sq.calendar.update_availability_schedule("test-id", {})
+    assert calls[-1] == ("PATCH", "/v1/calendar/availability/test-id")
+
+
+def test_calendar_delete_availability_schedule(client):
+    sq, calls = client
+    sq.calendar.delete_availability_schedule("test-id")
+    assert calls[-1] == ("DELETE", "/v1/calendar/availability/test-id")
+
+
+def test_calendar_list_busy_times(client):
+    sq, calls = client
+    sq.calendar.list_busy_times()
+    assert calls[-1] == ("GET", "/v1/calendar/busy-times")
 
 
 def test_chatbots_list(client):

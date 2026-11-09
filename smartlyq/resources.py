@@ -410,6 +410,10 @@ class CalendarResource:
         """List open slots `GET /calendar/slots`"""
         return self._client.request("GET", "/calendar/slots", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def list_bookings(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List bookings `GET /calendar/bookings`"""
+        return self._client.request("GET", "/calendar/bookings", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
     def create_booking(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Take a booking `POST /calendar/bookings`"""
         return self._client.request("POST", "/calendar/bookings", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
@@ -417,6 +421,62 @@ class CalendarResource:
     def cancel_booking(self, id: str, body: dict | None = None, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Cancel a booking `POST /calendar/bookings/{id}/cancel`"""
         return self._client.request("POST", f"/calendar/bookings/{quote(id, safe='')}/cancel", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def get_booking(self, id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Get a booking `GET /calendar/bookings/{id}`"""
+        return self._client.request("GET", f"/calendar/bookings/{quote(id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def set_booking_status(self, id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Set a booking's status `POST /calendar/bookings/{id}/status`"""
+        return self._client.request("POST", f"/calendar/bookings/{quote(id, safe='')}/status", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def reschedule_booking(self, id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Reschedule a booking `POST /calendar/bookings/{id}/reschedule`"""
+        return self._client.request("POST", f"/calendar/bookings/{quote(id, safe='')}/reschedule", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def list_booking_notes(self, id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List booking notes `GET /calendar/bookings/{id}/notes`"""
+        return self._client.request("GET", f"/calendar/bookings/{quote(id, safe='')}/notes", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def add_booking_note(self, id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Add a booking note `POST /calendar/bookings/{id}/notes`"""
+        return self._client.request("POST", f"/calendar/bookings/{quote(id, safe='')}/notes", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def delete_booking_note(self, id: str, note_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Delete a booking note `DELETE /calendar/bookings/{id}/notes/{note_id}`"""
+        return self._client.request("DELETE", f"/calendar/bookings/{quote(id, safe='')}/notes/{quote(note_id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def list_blocked_times(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List blocked time `GET /calendar/blocked-times`"""
+        return self._client.request("GET", "/calendar/blocked-times", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def create_blocked_time(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Block off time `POST /calendar/blocked-times`"""
+        return self._client.request("POST", "/calendar/blocked-times", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def delete_blocked_time(self, id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Free blocked time `DELETE /calendar/blocked-times/{id}`"""
+        return self._client.request("DELETE", f"/calendar/blocked-times/{quote(id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def list_availability_schedules(self, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List availability schedules `GET /calendar/availability`"""
+        return self._client.request("GET", "/calendar/availability", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def create_availability_schedule(self, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Create an availability schedule `POST /calendar/availability`"""
+        return self._client.request("POST", "/calendar/availability", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def update_availability_schedule(self, id: str, body: dict | None = None, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Update an availability schedule `PATCH /calendar/availability/{id}`"""
+        return self._client.request("PATCH", f"/calendar/availability/{quote(id, safe='')}", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def delete_availability_schedule(self, id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Delete an availability schedule `DELETE /calendar/availability/{id}`"""
+        return self._client.request("DELETE", f"/calendar/availability/{quote(id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def list_busy_times(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """List busy times `GET /calendar/busy-times`"""
+        return self._client.request("GET", "/calendar/busy-times", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
 
 class ChatbotsResource:
