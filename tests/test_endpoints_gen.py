@@ -75,13 +75,13 @@ def test_ads_delete_campaign(client):
 
 def test_ads_pause_campaign(client):
     sq, calls = client
-    sq.ads.pause_campaign("test-id")
+    sq.ads.pause_campaign("test-id", {})
     assert calls[-1] == ("POST", "/v1/ads/campaigns/test-id/pause")
 
 
 def test_ads_resume_campaign(client):
     sq, calls = client
-    sq.ads.resume_campaign("test-id")
+    sq.ads.resume_campaign("test-id", {})
     assert calls[-1] == ("POST", "/v1/ads/campaigns/test-id/resume")
 
 
@@ -123,13 +123,13 @@ def test_ads_delete_set(client):
 
 def test_ads_pause_set(client):
     sq, calls = client
-    sq.ads.pause_set("test-id")
+    sq.ads.pause_set("test-id", {})
     assert calls[-1] == ("POST", "/v1/ads/ad-sets/test-id/pause")
 
 
 def test_ads_resume_set(client):
     sq, calls = client
-    sq.ads.resume_set("test-id")
+    sq.ads.resume_set("test-id", {})
     assert calls[-1] == ("POST", "/v1/ads/ad-sets/test-id/resume")
 
 
@@ -165,13 +165,13 @@ def test_ads_delete(client):
 
 def test_ads_pause(client):
     sq, calls = client
-    sq.ads.pause("test-id")
+    sq.ads.pause("test-id", {})
     assert calls[-1] == ("POST", "/v1/ads/ads/test-id/pause")
 
 
 def test_ads_resume(client):
     sq, calls = client
-    sq.ads.resume("test-id")
+    sq.ads.resume("test-id", {})
     assert calls[-1] == ("POST", "/v1/ads/ads/test-id/resume")
 
 

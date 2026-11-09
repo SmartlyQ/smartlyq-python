@@ -56,13 +56,13 @@ class AdsResource:
         """Delete a campaign `DELETE /ads/campaigns/{id}`"""
         return self._client.request("DELETE", f"/ads/campaigns/{quote(id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
-    def pause_campaign(self, id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+    def pause_campaign(self, id: str, body: dict | None = None, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Pause a campaign `POST /ads/campaigns/{id}/pause`"""
-        return self._client.request("POST", f"/ads/campaigns/{quote(id, safe='')}/pause", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+        return self._client.request("POST", f"/ads/campaigns/{quote(id, safe='')}/pause", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
-    def resume_campaign(self, id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+    def resume_campaign(self, id: str, body: dict | None = None, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Resume a campaign `POST /ads/campaigns/{id}/resume`"""
-        return self._client.request("POST", f"/ads/campaigns/{quote(id, safe='')}/resume", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+        return self._client.request("POST", f"/ads/campaigns/{quote(id, safe='')}/resume", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
     def duplicate_campaign(self, id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Duplicate a campaign `POST /ads/campaigns/{id}/duplicate`"""
@@ -88,13 +88,13 @@ class AdsResource:
         """Delete an ad set `DELETE /ads/ad-sets/{id}`"""
         return self._client.request("DELETE", f"/ads/ad-sets/{quote(id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
-    def pause_set(self, id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+    def pause_set(self, id: str, body: dict | None = None, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Pause an ad set `POST /ads/ad-sets/{id}/pause`"""
-        return self._client.request("POST", f"/ads/ad-sets/{quote(id, safe='')}/pause", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+        return self._client.request("POST", f"/ads/ad-sets/{quote(id, safe='')}/pause", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
-    def resume_set(self, id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+    def resume_set(self, id: str, body: dict | None = None, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Resume an ad set `POST /ads/ad-sets/{id}/resume`"""
-        return self._client.request("POST", f"/ads/ad-sets/{quote(id, safe='')}/resume", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+        return self._client.request("POST", f"/ads/ad-sets/{quote(id, safe='')}/resume", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
     def duplicate_set(self, id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Duplicate an ad set `POST /ads/ad-sets/{id}/duplicate`"""
@@ -116,13 +116,13 @@ class AdsResource:
         """Delete an ad `DELETE /ads/ads/{id}`"""
         return self._client.request("DELETE", f"/ads/ads/{quote(id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
-    def pause(self, id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+    def pause(self, id: str, body: dict | None = None, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Pause an ad `POST /ads/ads/{id}/pause`"""
-        return self._client.request("POST", f"/ads/ads/{quote(id, safe='')}/pause", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+        return self._client.request("POST", f"/ads/ads/{quote(id, safe='')}/pause", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
-    def resume(self, id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+    def resume(self, id: str, body: dict | None = None, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Resume an ad `POST /ads/ads/{id}/resume`"""
-        return self._client.request("POST", f"/ads/ads/{quote(id, safe='')}/resume", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+        return self._client.request("POST", f"/ads/ads/{quote(id, safe='')}/resume", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
     def duplicate(self, id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Duplicate an ad `POST /ads/ads/{id}/duplicate`"""
@@ -234,9 +234,9 @@ class AnalyticsResource:
         """Get post analytics `GET /analytics/posts`"""
         return self._client.request("GET", "/analytics/posts", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
-    def get_account(self, account_id: str, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+    def get_account(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Get account analytics `GET /analytics/accounts/{account_id}`"""
-        return self._client.request("GET", f"/analytics/accounts/{quote(account_id, safe='')}", query=query, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+        return self._client.request("GET", f"/analytics/accounts/{quote(account_id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
     def daily_metrics(self, *, query: dict | None = None, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """Daily metrics `GET /analytics/daily-metrics`"""
