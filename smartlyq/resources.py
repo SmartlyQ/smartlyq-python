@@ -434,6 +434,18 @@ class CalendarResource:
         """Reschedule a booking `POST /calendar/bookings/{id}/reschedule`"""
         return self._client.request("POST", f"/calendar/bookings/{quote(id, safe='')}/reschedule", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
+    def decline_booking(self, id: str, body: dict | None = None, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Decline a booking `POST /calendar/bookings/{id}/decline`"""
+        return self._client.request("POST", f"/calendar/bookings/{quote(id, safe='')}/decline", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def mark_booking_no_show(self, id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Mark who did not come `POST /calendar/bookings/{id}/no-show`"""
+        return self._client.request("POST", f"/calendar/bookings/{quote(id, safe='')}/no-show", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
+    def add_booking_guests(self, id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
+        """Add guests to a booking `POST /calendar/bookings/{id}/guests`"""
+        return self._client.request("POST", f"/calendar/bookings/{quote(id, safe='')}/guests", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
+
     def list_booking_notes(self, id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
         """List booking notes `GET /calendar/bookings/{id}/notes`"""
         return self._client.request("GET", f"/calendar/bookings/{quote(id, safe='')}/notes", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)

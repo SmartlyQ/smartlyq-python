@@ -577,6 +577,24 @@ def test_calendar_reschedule_booking(client):
     assert calls[-1] == ("POST", "/v1/calendar/bookings/test-id/reschedule")
 
 
+def test_calendar_decline_booking(client):
+    sq, calls = client
+    sq.calendar.decline_booking("test-id", {})
+    assert calls[-1] == ("POST", "/v1/calendar/bookings/test-id/decline")
+
+
+def test_calendar_mark_booking_no_show(client):
+    sq, calls = client
+    sq.calendar.mark_booking_no_show("test-id", {})
+    assert calls[-1] == ("POST", "/v1/calendar/bookings/test-id/no-show")
+
+
+def test_calendar_add_booking_guests(client):
+    sq, calls = client
+    sq.calendar.add_booking_guests("test-id", {})
+    assert calls[-1] == ("POST", "/v1/calendar/bookings/test-id/guests")
+
+
 def test_calendar_list_booking_notes(client):
     sq, calls = client
     sq.calendar.list_booking_notes("test-id")
