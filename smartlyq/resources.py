@@ -1217,7 +1217,7 @@ class SocialResource:
         return self._client.request("DELETE", f"/social/posts/{quote(post_id, safe='')}", profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
     def update_account(self, account_id: str, body: dict, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:
-        """Rename account `PATCH /social/accounts/{account_id}`"""
+        """Update account `PATCH /social/accounts/{account_id}`"""
         return self._client.request("PATCH", f"/social/accounts/{quote(account_id, safe='')}", body=body, profile_id=profile_id, idempotency_key=idempotency_key, timeout=timeout)
 
     def disconnect_account(self, account_id: str, *, profile_id: str | None = None, idempotency_key: str | None = None, timeout: float | None = None) -> Any:

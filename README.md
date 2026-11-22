@@ -492,7 +492,7 @@ All methods below are available on the client. Full request/response documentati
 | `sq.social.get_post(post_id)` | `GET /social/posts/{post_id}` | Get social post |
 | `sq.social.update_post(post_id, body)` | `PATCH /social/posts/{post_id}` | Update social post |
 | `sq.social.delete_post(post_id)` | `DELETE /social/posts/{post_id}` | Delete social post |
-| `sq.social.update_account(account_id, body)` | `PATCH /social/accounts/{account_id}` | Rename account |
+| `sq.social.update_account(account_id, body)` | `PATCH /social/accounts/{account_id}` | Update account |
 | `sq.social.disconnect_account(account_id)` | `DELETE /social/accounts/{account_id}` | Disconnect a social account |
 | `sq.social.get_account_health(account_id)` | `GET /social/accounts/{account_id}/health` | Account health |
 | `sq.social.get_account_reconnect_url(account_id)` | `GET /social/accounts/{account_id}/reconnect-url` | Account reconnect URL |
