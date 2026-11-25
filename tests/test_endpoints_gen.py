@@ -2059,6 +2059,18 @@ def test_social_set_facebook_page_cover(client):
     assert calls[-1] == ("POST", "/v1/social/accounts/test-id/facebook/page/cover")
 
 
+def test_social_list_community_authors(client):
+    sq, calls = client
+    sq.social.list_community_authors("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/community/authors")
+
+
+def test_social_get_community_limits(client):
+    sq, calls = client
+    sq.social.get_community_limits("test-id")
+    assert calls[-1] == ("GET", "/v1/social/accounts/test-id/community/limits")
+
+
 def test_social_get_facebook_reel_limit(client):
     sq, calls = client
     sq.social.get_facebook_reel_limit("test-id")
